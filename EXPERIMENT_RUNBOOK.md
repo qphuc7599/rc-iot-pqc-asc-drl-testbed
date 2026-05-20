@@ -1,4 +1,4 @@
-# Q1 Experiment Runbook
+# Experiment Runbook
 
 This repo follows the advisor's original setup:
 
@@ -26,7 +26,7 @@ bash pqc/build.sh
 python3 generate.py
 ```
 
-## 1. N=100 NS-3 Baseline, Required For Q1 Claims
+## 1. N=100 NS-3 Baseline, Required For Paper Claims
 
 Heavy. This produces the clean A/B/C/D/E comparison under NS-3:
 
@@ -124,6 +124,6 @@ python3 analysis/plot_scalability.py
 
 ## Decision Rule
 
-For a Q1 submission, rerun at least Step 1. If time allows, rerun Step 2.
+For a submission artifact, rerun at least Step 1. If time allows, rerun Step 2.
 Step 3 is optional because DRL is a calibrated simulation, not an NS-3 runtime
 measurement.

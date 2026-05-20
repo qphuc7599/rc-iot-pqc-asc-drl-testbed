@@ -17,7 +17,7 @@ tmp/
 
 # Paper/private review workspace
 file_project/
-Q1_CHAT_HANDOFF.md
+*_CHAT_HANDOFF.md
 *.docx
 *.pdf
 *.zip
