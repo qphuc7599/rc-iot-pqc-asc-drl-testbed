@@ -1,0 +1,1415 @@
+version: '3.8'
+services:
+  gateway_node:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+      - ./gateway:/opt/gateway:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  iot_node_1:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=1"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_2:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=2"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_3:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=3"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_4:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=4"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_5:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=5"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_6:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=6"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_7:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=7"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_8:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=8"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_9:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=9"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_10:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=10"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_11:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=11"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_12:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=12"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_13:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=13"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_14:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=14"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_15:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=15"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_16:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=16"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_17:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=17"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_18:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=18"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_19:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=19"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_20:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=20"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_21:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=21"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_22:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=22"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_23:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=23"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_24:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=24"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_25:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32"
+      - "iot.node_id=25"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.050'
+          memory: 32M
+  iot_node_26:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=26"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_27:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=27"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_28:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=28"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_29:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=29"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_30:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=30"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_31:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=31"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_32:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=32"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_33:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=33"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_34:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=34"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_35:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=ESP32-S3"
+      - "iot.node_id=35"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.060'
+          memory: 32M
+  iot_node_36:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=36"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_37:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=37"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_38:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=38"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_39:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=39"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_40:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=40"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_41:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=41"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_42:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=42"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_43:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=43"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_44:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=44"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_45:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=45"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_46:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=46"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_47:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=47"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_48:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=48"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_49:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=49"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_50:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32L4-M4"
+      - "iot.node_id=50"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.030'
+          memory: 32M
+  iot_node_51:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=51"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_52:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=52"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_53:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=53"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_54:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=54"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_55:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=55"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_56:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=56"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_57:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=57"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_58:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=58"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_59:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=59"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_60:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=60"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_61:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=61"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_62:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=62"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_63:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=63"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_64:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=64"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_65:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32F4-M4"
+      - "iot.node_id=65"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.080'
+          memory: 40M
+  iot_node_66:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=66"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_67:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=67"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_68:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=68"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_69:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=69"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_70:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=70"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_71:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=71"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_72:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=72"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_73:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=73"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_74:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=74"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_75:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=STM32H7-M7"
+      - "iot.node_id=75"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.150'
+          memory: 64M
+  iot_node_76:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=76"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_77:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=77"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_78:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=78"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_79:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=79"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_80:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=80"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_81:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=81"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_82:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=82"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_83:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=83"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_84:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=84"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_85:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=nRF52840"
+      - "iot.node_id=85"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.020'
+          memory: 32M
+  iot_node_86:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=86"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_87:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=87"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_88:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=88"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_89:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=89"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_90:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=90"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_91:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=91"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_92:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=92"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_93:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=93"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_94:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=94"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_95:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=95"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_96:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=96"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_97:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=97"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_98:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=98"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_99:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=99"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M
+  iot_node_100:
+    image: ubuntu:22.04
+    command: tail -f /dev/null
+    labels:
+      - "iot.device_type=RP2040"
+      - "iot.node_id=100"
+    volumes:
+      - ./pqc/bin:/opt/pqc:ro
+      - ./results:/opt/results
+    deploy:
+      resources:
+        limits:
+          cpus: '0.040'
+          memory: 32M

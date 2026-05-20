@@ -1,0 +1,80 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+
+# Experiment outputs and temporary artifacts
+results/
+tmp/
+*.log
+*.out
+*.csv
+*.jsonl
+
+# Paper/private review workspace
+file_project/
+Q1_CHAT_HANDOFF.md
+*.docx
+*.pdf
+*.zip
+
+# Development scratch scripts not part of the released experiment artifact
+alive_analysis.py
+analyze_difficulty.py
+audit_*.py
+check_tps_results.py
+convert_shap_report.py
+debug_*.py
+diagnose_*.py
+draw_arch_pptx.py
+extract_benchmarks.py
+md_to_docx.py
+multi_eval.py
+plot_results.py
+profile_training.py
+quick_eval.py
+read_docx.py
+run_full_experiment.py
+run_hellscape_eval.py
+stress_test.py
+sweep-tps-sweetspot.sh
+test_*.py
+verify_*.py
+connect_50_nodes.sh
+run-scalability-test.sh
+analysis/plot-aftershocks.py
+analysis/plot-architecture.py
+analysis/plot-architecture-paper-vector.py
+analysis/plot-disaster-v15.py
+analysis/plot-hellscape.py
+analysis/plot-recovery-phases.py
+analysis/plot-sweetspot.py
+analysis/run_cascading_aftershocks.py
+analysis/run_shap_analysis.py
+analysis/verify_rotation.py
+drl/models/
+drl/models_robust/ppo_final.pt
+
+# Heavy external dependencies/build trees
+liboqs/
+ns-3-dev/
+
+# Build products and binaries
+pqc/bin/
+pqc/tx-generator
+pqc/pqc-benchmark
+pqc/bilinear-benchmark
+*.exe
+*.o
+*.a
+*.so
+
+# IDE/OS files
+.vscode/
+.qodo/
+.DS_Store
+Thumbs.db

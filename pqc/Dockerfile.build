@@ -1,0 +1,76 @@
+# ============================================================
+# Multi-stage build: Compile liboqs + blst + benchmark binaries
+# ============================================================
+FROM alpine:3.18 AS builder
+
+RUN apk add --no-cache cmake gcc g++ musl-dev make git linux-headers perl openssl-dev openssl-libs-static
+
+# Clone liboqs (chi build ML-DSA de nho hon)
+RUN git clone --depth 1 --branch main https://github.com/open-quantum-safe/liboqs.git /liboqs
+
+WORKDIR /liboqs/build
+
+# Build liboqs static library (chi ML-DSA)
+RUN cmake -DBUILD_SHARED_LIBS=OFF \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DOQS_MINIMAL_BUILD="SIG_ml_dsa_44;SIG_ml_dsa_65;SIG_ml_dsa_87" \
+          -DCMAKE_INSTALL_PREFIX=/opt/liboqs \
+          -DOQS_USE_OPENSSL=OFF \
+          -DOQS_BUILD_ONLY_LIB=ON \
+          .. && \
+    make -j$(nproc) && \
+    make install
+
+# Clone and build blst (BLS12-381 pairing library)
+RUN git clone --depth 1 https://github.com/supranational/blst.git /blst
+WORKDIR /blst
+RUN ./build.sh && \
+    cp libblst.a /usr/local/lib/ && \
+    mkdir -p /usr/local/include && \
+    cp bindings/blst.h bindings/blst_aux.h /usr/local/include/
+
+# Compile pqc-benchmark (ML-DSA)
+COPY pqc-benchmark.c /src/pqc-benchmark.c
+COPY tx-generator.c /src/tx-generator.c
+COPY bilinear-benchmark.c /src/bilinear-benchmark.c
+COPY ecdsa-benchmark.c /src/ecdsa-benchmark.c
+
+RUN gcc -static -O2 /src/pqc-benchmark.c \
+    -I/opt/liboqs/include -L/opt/liboqs/lib \
+    -loqs -lm -o /pqc-benchmark && \
+    strip /pqc-benchmark
+
+RUN gcc -static -O2 /src/tx-generator.c \
+    -I/opt/liboqs/include -L/opt/liboqs/lib \
+    -loqs -lssl -lcrypto -lm -o /tx-generator && \
+    strip /tx-generator
+
+# Compile bilinear-benchmark (BLS12-381)
+RUN gcc -static -O2 /src/bilinear-benchmark.c \
+    -I/usr/local/include -L/usr/local/lib \
+    -lblst -lm -o /bilinear-benchmark && \
+    strip /bilinear-benchmark
+
+# Compile ecdsa-benchmark (ECDSA-P256 + Ed25519 via OpenSSL)
+RUN gcc -static -O2 /src/ecdsa-benchmark.c \
+    -lssl -lcrypto -lm -o /ecdsa-benchmark && \
+    strip /ecdsa-benchmark
+
+# Kiem tra size
+RUN ls -lh /pqc-benchmark /tx-generator /bilinear-benchmark /ecdsa-benchmark && \
+    echo "=== Test ML-DSA ===" && \
+    /pqc-benchmark list && \
+    echo "=== Test BLS ===" && \
+    /bilinear-benchmark list && \
+    echo "=== Test ECDSA ===" && \
+    /ecdsa-benchmark list
+
+# ============================================================
+# Output: lay binaries
+# ============================================================
+FROM alpine:3.18
+COPY --from=builder /pqc-benchmark /pqc-benchmark
+COPY --from=builder /tx-generator /tx-generator
+COPY --from=builder /bilinear-benchmark /bilinear-benchmark
+COPY --from=builder /ecdsa-benchmark /ecdsa-benchmark
+CMD ["echo", "binaries ready"]
