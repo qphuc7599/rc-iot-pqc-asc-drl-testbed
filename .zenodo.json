@@ -1,0 +1,35 @@
+{
+  "title": "RC-IoT Post-Quantum ASC-DRL Experimental Testbed",
+  "version": "1.0.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Hoang-Phuc, Quang-Dai"
+    },
+    {
+      "name": "Tran, Tuan-Dung"
+    }
+  ],
+  "description": "Experimental artifact for a relay-chain IoT testbed combining post-quantum ML-DSA threshold-signature experiments, asynchronous state-channel throughput evaluation over Docker and NS-3, and PPO-based DRL committee-selection and disaster-recovery experiments.",
+  "keywords": [
+    "post-quantum cryptography",
+    "ML-DSA",
+    "CRYSTALS-Dilithium",
+    "IoT",
+    "relay chain",
+    "state channels",
+    "Byzantine fault tolerance",
+    "deep reinforcement learning",
+    "NS-3",
+    "Docker"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/qphuc7599/rc-iot-pqc-asc-drl-testbed",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}
