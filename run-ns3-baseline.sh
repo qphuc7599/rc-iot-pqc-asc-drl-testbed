@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Q1-grade NS-3 baseline wrapper.
+# Publication-grade NS-3 baseline wrapper.
 #
 # This script runs the N=100 baseline comparison through the original
 # Docker + NS-3 setup described by the advisor:
@@ -11,7 +11,7 @@
 #
 # Usage in WSL:
 #   cd /mnt/d/DoAnChuyenNganh/rc-iot-testbed
-#   sudo bash run-q1-ns3-baseline.sh 60
+#   sudo bash run-ns3-baseline.sh 60
 #
 
 set -euo pipefail
@@ -61,6 +61,8 @@ cleanup_all() {
     for i in $(seq 0 "$NUM_NODES"); do
         ip link delete "veth${i}" 2>/dev/null || true
         ip link delete "br${i}" 2>/dev/null || true
+        ip link delete "tap${i}" 2>/dev/null || true
+        ip tuntap del dev "tap${i}" mode tap 2>/dev/null || true
     done
     NS3_PID=""
 }
@@ -109,6 +111,12 @@ start_ns3() {
         fi
     done
     sleep 5
+    if ! kill -0 "$NS3_PID" 2>/dev/null; then
+        echo "[ERROR] NS-3 exited while creating tap devices."
+        echo "        This is usually caused by stale tap devices. Cleanup has been updated;"
+        echo "        rerun the wrapper, or manually remove stale tap devices."
+        exit 1
+    fi
 }
 
 connect_ns3_to_docker() {
@@ -180,7 +188,7 @@ run_one_baseline() {
 }
 
 echo "================================================================"
-echo "  Q1 NS-3 BASELINE WRAPPER"
+echo "  NS-3 BASELINE WRAPPER"
 echo "  Duration per mode: ${DURATION}s | Nodes: ${NUM_NODES}"
 echo "================================================================"
 
@@ -190,6 +198,9 @@ BASELINE_MODES=(
     C_offchain_statechannel
     E_offchain_ecdsa
     D_pbft_batched_ecdsa
+    F_simplex_batched_ecdsa
+    G_bullshark_dag_ecdsa
+    H_hydra_ecdsa
 )
 
 for mode in "${BASELINE_MODES[@]}"; do

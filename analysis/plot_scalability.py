@@ -2,7 +2,7 @@
 Publication-Quality Scalability Figures — RQ5
 =============================================
 NS-3 Testbed Results: ASC vs PBFT vs BLS at N = 10, 25, 50, 75, 100
-Target: Q1 Journal (IEEE/ACM format)
+Target: journal-ready two-column manuscript format
 """
 import os, json
 import numpy as np
@@ -23,6 +23,9 @@ PBFT = [20,  17,   15,   16,   18]
 BLS  = [29,  25,   20,   20,   23]
 PBFT_BATCHED = [0, 0, 0, 0, 0]
 ASC_ECDSA = [0, 0, 0, 0, 0]
+SIMPLEX_BATCHED = [0, 0, 0, 0, 0]
+BULLSHARK_DAG = [0, 0, 0, 0, 0]
+HYDRA_ECDSA = [0, 0, 0, 0, 0]
 
 # Try loading from summary.json
 if os.path.exists(f'{SCALE_DIR}/summary.json'):
@@ -35,6 +38,9 @@ if os.path.exists(f'{SCALE_DIR}/summary.json'):
         BLS  = data.get('bls', BLS)
         PBFT_BATCHED = data.get('pbft_batched', PBFT_BATCHED)
         ASC_ECDSA = data.get('asc_ecdsa', ASC_ECDSA)
+        SIMPLEX_BATCHED = data.get('simplex_batched', SIMPLEX_BATCHED)
+        BULLSHARK_DAG = data.get('bullshark_dag', BULLSHARK_DAG)
+        HYDRA_ECDSA = data.get('hydra_ecdsa', HYDRA_ECDSA)
         print(f"Loaded NS-3 results from {SCALE_DIR}/summary.json")
 
 # ── Publication Style ──
@@ -65,14 +71,23 @@ COLORS = {
     'BLS':  '#27ae60',   # Forest green
     'PBFT50': '#8e44ad',
     'ASC_ECDSA': '#d68910',
+    'SIMPLEX': '#795548',
+    'BULLSHARK': '#616161',
+    'HYDRA': '#7b1fa2',
 }
-MARKERS = {'ASC': 'o', 'PBFT': 's', 'BLS': '^', 'PBFT50': 'D', 'ASC_ECDSA': 'P'}
+MARKERS = {
+    'ASC': 'o', 'PBFT': 's', 'BLS': '^', 'PBFT50': 'D', 'ASC_ECDSA': 'P',
+    'SIMPLEX': 'X', 'BULLSHARK': 'v', 'HYDRA': '*'
+}
 LABELS  = {
     'ASC':  'ASC (Off-chain SC + ML-DSA)',
     'PBFT': 'PBFT (On-chain + ECDSA)',
     'BLS':  'BLS (On-chain Aggregate)',
     'PBFT50': 'PBFT Batched (ECDSA, batch=50)',
     'ASC_ECDSA': 'ASC No-PQC (ECDSA, batch=50)',
+    'SIMPLEX': 'Simplex BFT protocol',
+    'BULLSHARK': 'Bullshark DAG-BFT protocol',
+    'HYDRA': 'Hydra Head state-channel protocol',
 }
 
 os.makedirs(SCALE_DIR, exist_ok=True)
@@ -88,10 +103,13 @@ def plot_five_protocols():
         ('ASC', ASC),
         ('PBFT50', PBFT_BATCHED),
         ('ASC_ECDSA', ASC_ECDSA),
+        ('SIMPLEX', SIMPLEX_BATCHED),
+        ('BULLSHARK', BULLSHARK_DAG),
+        ('HYDRA', HYDRA_ECDSA),
     ]
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5.5))
-    fig.suptitle('Scalability Across Five Protocol Configurations',
+    fig.suptitle('Scalability Across Protocol Configurations',
                  fontsize=14, fontweight='bold', y=0.98)
 
     for ax, yscale, panel in [(ax1, 'linear', '(a) Linear Scale'),
@@ -113,7 +131,7 @@ def plot_five_protocols():
         ax.legend(loc='best', framealpha=0.9, edgecolor='#cccccc')
 
     plt.tight_layout(rect=[0, 0, 1, 0.93])
-    out = f'{SCALE_DIR}/fig_scalability_5protocols.png'
+    out = f'{SCALE_DIR}/fig_scalability_protocols.png'
     plt.savefig(out, dpi=300, bbox_inches='tight')
     plt.savefig(out.replace('.png', '.pdf'), bbox_inches='tight')
     print(f'Saved: {out}')
@@ -380,7 +398,7 @@ def plot_combined():
     ax4.set_title('(d) Numerical Summary', fontsize=12, pad=15)
 
     fig.suptitle('Scalability Analysis — NS-3 WiFi 802.11g Testbed\n'
-                 '100 tx/s/node, ML-DSA-44, 3 Protocol Architectures',
+                 '100 tx/s/node, baseline and SOTA protocol emulations',
                  fontsize=15, fontweight='bold', y=1.02)
 
     out = f'{SCALE_DIR}/fig_scalability_combined.png'
@@ -395,15 +413,20 @@ def plot_combined():
 # ═══════════════════════════════════════════════════════════
 if __name__ == '__main__':
     print("=" * 60)
-    print("  SCALABILITY FIGURES — Publication Quality (Q1 Journal)")
+    print("  SCALABILITY FIGURES — Publication Quality")
     print("=" * 60)
     print(f"\n  NS-3 Data:")
-    print(f"  {'N':>5} | {'A PBFT':>8} | {'B BLS':>8} | {'C ASC':>8} | {'D PBFT50':>9} | {'E ASC-E':>8}")
-    print(f"  {'-'*64}")
+    print(
+        f"  {'N':>5} | {'A PBFT':>8} | {'B BLS':>8} | {'C ASC':>8} | "
+        f"{'D PBFT50':>9} | {'E ASC-E':>8} | {'F Simplex':>9} | "
+        f"{'G DAG':>8} | {'H Hydra':>8}"
+    )
+    print(f"  {'-'*100}")
     for i, n in enumerate(N_vals):
         print(
             f"  {n:5d} | {PBFT[i]:8.0f} | {BLS[i]:8.0f} | {ASC[i]:8.0f} | "
-            f"{PBFT_BATCHED[i]:9.0f} | {ASC_ECDSA[i]:8.0f}"
+            f"{PBFT_BATCHED[i]:9.0f} | {ASC_ECDSA[i]:8.0f} | "
+            f"{SIMPLEX_BATCHED[i]:9.0f} | {BULLSHARK_DAG[i]:8.0f} | {HYDRA_ECDSA[i]:8.0f}"
         )
     print()
 

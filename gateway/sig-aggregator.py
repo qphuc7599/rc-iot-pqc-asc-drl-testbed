@@ -29,6 +29,8 @@ import json
 import os
 import math
 
+from protocol_baselines import ProtocolBaselineEngine
+
 # ML-DSA signature sizes (from liboqs)
 SIG_SIZES = {
     "ML-DSA-44": 2420,
@@ -124,10 +126,12 @@ class SignatureAggregator:
     This is the core of the O(1) State Channel architecture.
     """
 
-    def __init__(self, batch_size=50, verify_delay_us=0.0, expected_sig_len=0):
+    def __init__(self, batch_size=50, verify_delay_us=0.0, expected_sig_len=0,
+                 protocol_engine=None):
         self.batch_size = batch_size  # channel updates per on-chain batch
         self.verify_delay_us = verify_delay_us
         self.expected_sig_len = expected_sig_len
+        self.protocol_engine = protocol_engine
         self.pending = []
         self.batches = []
         self.received_txs = 0
@@ -141,6 +145,10 @@ class SignatureAggregator:
         self.gateway_queue_ms = []
         self.settlement_latency_ms = []
         self.transaction_e2e_latency_ms = []
+        self.protocol_service_latency_ms = []
+        self.protocol_finality_latency_ms = []
+        self.protocol_messages = 0
+        self.protocol_bytes = 0
 
     @staticmethod
     def _percentiles(values):
@@ -238,12 +246,38 @@ class SignatureAggregator:
             hasher.update(update.signature)
         aggregated_proof = hasher.hexdigest()
         aggregate_time = time.monotonic() - t1
+
+        protocol_result = None
+        if self.protocol_engine is not None and verified_txs > 0:
+            protocol_result = self.protocol_engine.commit_batch(
+                batch_id=len(self.batches),
+                updates=accepted_updates,
+                verified_updates=verified_updates,
+                verified_txs=verified_txs,
+                proof=aggregated_proof,
+            )
+            self.protocol_service_latency_ms.append(protocol_result.service_delay_s * 1000.0)
+            self.protocol_finality_latency_ms.append(protocol_result.finality_delay_s * 1000.0)
+            self.protocol_messages += protocol_result.messages_total
+            self.protocol_bytes += protocol_result.bytes_total
+            if protocol_result.service_delay_s > 0:
+                time.sleep(protocol_result.service_delay_s)
+
         commit_time = time.monotonic()
+        metric_commit_time = commit_time
+        if protocol_result is not None:
+            # Pipelined protocols need not block the gateway for full finality,
+            # but end-to-end settlement latency should still include it.
+            extra_finality = max(
+                0.0,
+                protocol_result.finality_delay_s - protocol_result.service_delay_s,
+            )
+            metric_commit_time = commit_time + extra_finality
         batch_settlement_ms = []
         batch_tx_e2e_ms = []
         for update in accepted_updates:
             sent_time = update.timestamp_us / 1_000_000.0
-            settlement_s = commit_time - sent_time
+            settlement_s = metric_commit_time - sent_time
             if -1.0 <= settlement_s <= 3600.0:
                 settlement_ms = settlement_s * 1000.0
                 batch_settlement_ms.append(settlement_ms)
@@ -258,7 +292,7 @@ class SignatureAggregator:
                         step = (last_s - first_s) / (update.tx_count - 1)
                         tx_times = (first_s + step * idx for idx in range(update.tx_count))
                     for tx_time in tx_times:
-                        e2e_s = commit_time - tx_time
+                        e2e_s = metric_commit_time - tx_time
                         if -1.0 <= e2e_s <= 3600.0:
                             e2e_ms = e2e_s * 1000.0
                             batch_tx_e2e_ms.append(e2e_ms)
@@ -289,6 +323,17 @@ class SignatureAggregator:
             "settlement_latency_ms_p95": settlement_stats["p95"],
             "transaction_e2e_ms_p50": tx_e2e_stats["p50"],
             "transaction_e2e_ms_p95": tx_e2e_stats["p95"],
+            "protocol_mode": protocol_result.mode if protocol_result else "none",
+            "protocol_service_ms": (
+                protocol_result.service_delay_s * 1000.0 if protocol_result else 0.0
+            ),
+            "protocol_finality_ms": (
+                protocol_result.finality_delay_s * 1000.0 if protocol_result else 0.0
+            ),
+            "protocol_messages": protocol_result.messages_total if protocol_result else 0,
+            "protocol_bytes": protocol_result.bytes_total if protocol_result else 0,
+            "protocol_leader": protocol_result.leader if protocol_result else 0,
+            "protocol_phases": protocol_result.phases if protocol_result else [],
             "proof": aggregated_proof[:16],
             "nodes": list(set(u.node_id for u in batch)),
             "timestamp": time.time(),
@@ -306,12 +351,30 @@ def _fmt_float(value):
 
 def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
                 verify_delay_us=0.0, expected_sig_len=0,
-                include_batches_in_summary=False):
+                include_batches_in_summary=False, protocol_mode="auto",
+                protocol_n=21, protocol_f=-1, protocol_rtt_ms=4.0,
+                protocol_bandwidth_mbps=1000.0, tx_bytes=256,
+                bullshark_round_ms=100.0):
     """Main gateway loop"""
+    if protocol_mode == "auto":
+        protocol_mode = "legacy_pbft" if pbft_delay > 0 else "none"
+    protocol_engine = ProtocolBaselineEngine(
+        mode=protocol_mode,
+        n=protocol_n,
+        f=None if protocol_f < 0 else protocol_f,
+        signature_bytes=expected_sig_len if expected_sig_len > 0 else 72,
+        tx_bytes=tx_bytes,
+        rtt_ms=protocol_rtt_ms,
+        bandwidth_mbps=protocol_bandwidth_mbps,
+        verify_delay_us=verify_delay_us,
+        fixed_delay_s=pbft_delay,
+        bullshark_round_ms=bullshark_round_ms,
+    )
     aggregator = SignatureAggregator(
         batch_size=batch_size,
         verify_delay_us=verify_delay_us,
         expected_sig_len=expected_sig_len,
+        protocol_engine=protocol_engine,
     )
 
     # Setup UDP listener
@@ -327,18 +390,24 @@ def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
         print(f"[GW] Expected signature length: {expected_sig_len}B", file=sys.stderr)
     if verify_delay_us > 0:
         print(f"[GW] Injected verify latency: {verify_delay_us:.1f}us/update", file=sys.stderr)
-    if pbft_delay > 0:
-        print(f"[GW] Mode: ON-CHAIN PBFT | block_time={pbft_delay}s", file=sys.stderr)
-        print(f"[GW] PBFT 3-phase consensus simulated per block", file=sys.stderr)
-    else:
-        print(f"[GW] Mode: State Channel O(1) | instant finality", file=sys.stderr)
+    print(
+        f"[GW] Protocol mode: {protocol_engine.mode} | "
+        f"n={protocol_engine.n}, f={protocol_engine.f}, q={protocol_engine.quorum}, "
+        f"RTT={protocol_rtt_ms}ms, BW={protocol_bandwidth_mbps}Mbps",
+        file=sys.stderr,
+    )
+    if protocol_engine.mode == "legacy_pbft":
+        print(f"[GW] Legacy PBFT calibrated block_time={pbft_delay}s", file=sys.stderr)
+    elif protocol_engine.mode == "none":
+        print(f"[GW] Mode: State Channel O(1) | no validator-side finality delay", file=sys.stderr)
 
     # CSV header
     print("batch_id,batch_size,verified,verify_time_us,aggregate_time_us,"
           "rx_latency_ms_p50,rx_latency_ms_p95,gateway_queue_ms_p50,"
           "gateway_queue_ms_p95,settlement_latency_ms_p50,"
           "settlement_latency_ms_p95,transaction_e2e_ms_p50,"
-          "transaction_e2e_ms_p95,tps_instant,proof")
+          "transaction_e2e_ms_p95,protocol_mode,protocol_service_ms,"
+          "protocol_finality_ms,protocol_messages,protocol_bytes,tps_instant,proof")
 
     start_time = time.monotonic()
     last_stats_time = start_time
@@ -384,6 +453,11 @@ def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
                       f"{_fmt_float(batch['settlement_latency_ms_p95'])},"
                       f"{_fmt_float(batch['transaction_e2e_ms_p50'])},"
                       f"{_fmt_float(batch['transaction_e2e_ms_p95'])},"
+                      f"{batch['protocol_mode']},"
+                      f"{batch['protocol_service_ms']:.3f},"
+                      f"{batch['protocol_finality_ms']:.3f},"
+                      f"{batch['protocol_messages']},"
+                      f"{batch['protocol_bytes']},"
                       f"{tps:.1f},"
                       f"{batch['proof']}")
                 sys.stdout.flush()
@@ -392,11 +466,6 @@ def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
                       f"{batch['verified']} TX from {batch['verified_updates']} channels, "
                       f"TPS={tps:.1f}, proof={batch['proof']}",
                       file=sys.stderr)
-
-                # PBFT consensus simulation: block the gateway for block_time
-                # This simulates Pre-prepare → Prepare → Commit phases
-                if pbft_delay > 0:
-                    time.sleep(pbft_delay)
 
         # Periodic stats (every 5s)
         now = time.monotonic()
@@ -434,11 +503,14 @@ def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
                   f"{_fmt_float(batch['settlement_latency_ms_p95'])},"
                   f"{_fmt_float(batch['transaction_e2e_ms_p50'])},"
                   f"{_fmt_float(batch['transaction_e2e_ms_p95'])},"
+                  f"{batch['protocol_mode']},"
+                  f"{batch['protocol_service_ms']:.3f},"
+                  f"{batch['protocol_finality_ms']:.3f},"
+                  f"{batch['protocol_messages']},"
+                  f"{batch['protocol_bytes']},"
                   f"{tps:.1f},"
                   f"{batch['proof']}")
             sys.stdout.flush()
-            if pbft_delay > 0:
-                time.sleep(pbft_delay)
 
     # Final summary
     elapsed = time.monotonic() - start_time
@@ -478,6 +550,12 @@ def run_gateway(port, batch_size, duration, output_file, pbft_delay=0.0,
             "gateway_queue_ms": aggregator._percentiles(aggregator.gateway_queue_ms),
             "settlement_latency_ms": aggregator._percentiles(aggregator.settlement_latency_ms),
             "transaction_e2e_latency_ms": aggregator._percentiles(aggregator.transaction_e2e_latency_ms),
+            "protocol_mode": protocol_engine.mode,
+            "protocol": protocol_engine.summary(),
+            "protocol_service_latency_ms": aggregator._percentiles(aggregator.protocol_service_latency_ms),
+            "protocol_finality_latency_ms": aggregator._percentiles(aggregator.protocol_finality_latency_ms),
+            "protocol_messages": aggregator.protocol_messages,
+            "protocol_bytes": aggregator.protocol_bytes,
         }
         if include_batches_in_summary:
             summary["batches"] = aggregator.batches
@@ -510,10 +588,27 @@ if __name__ == '__main__':
                         help='Reject packets whose signature length differs (0=disabled)')
     parser.add_argument('--include-batches-in-summary', action='store_true',
                         help='Embed per-batch details in JSON summary. CSV output already contains batch details.')
+    parser.add_argument('--protocol-mode', default='auto',
+                        choices=['auto', 'none', 'legacy_pbft', 'pbft', 'simplex', 'bullshark', 'hydra'],
+                        help='Validator-side finality protocol emulated after packet verification')
+    parser.add_argument('--protocol-n', type=int, default=21,
+                        help='Number of validator/head participants for protocol emulation')
+    parser.add_argument('--protocol-f', type=int, default=-1,
+                        help='Byzantine fault bound; default floor((n-1)/3)')
+    parser.add_argument('--protocol-rtt-ms', type=float, default=4.0,
+                        help='Validator-network RTT used by protocol emulation')
+    parser.add_argument('--protocol-bandwidth-mbps', type=float, default=1000.0,
+                        help='Validator-network bandwidth used for protocol message accounting')
+    parser.add_argument('--tx-bytes', type=int, default=256,
+                        help='Logical transaction payload size in bytes')
+    parser.add_argument('--bullshark-round-ms', type=float, default=100.0,
+                        help='DAG round duration for Bullshark finality emulation')
     args = parser.parse_args()
 
     run_gateway(
         args.port, args.batch_size, args.duration, args.output,
         args.pbft_delay, args.verify_delay_us, args.expected_sig_len,
-        args.include_batches_in_summary
+        args.include_batches_in_summary, args.protocol_mode, args.protocol_n,
+        args.protocol_f, args.protocol_rtt_ms, args.protocol_bandwidth_mbps,
+        args.tx_bytes, args.bullshark_round_ms
     )

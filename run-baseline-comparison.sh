@@ -8,6 +8,9 @@
 #   C) Off-chain state channel + real ML-DSA-44
 #   D) Batched PBFT + ECDSA-sized packets at the same 50 TX/packet granularity
 #   E) Off-chain state channel + ECDSA-sized packets for the "No PQC" ablation
+#   F) Simplex batched BFT protocol emulation with ECDSA-sized packets
+#   G) Bullshark DAG-BFT protocol emulation with ECDSA-sized packets
+#   H) Hydra Head ECDSA state-channel protocol emulation
 #
 # The A/B/D modes emulate classical signature size and signing delay in
 # tx-generator so the network packets actually match the label. Mode C uses
@@ -41,6 +44,14 @@ BLS_SIGN_US=0
 ASC_BATCH_SIZE=50
 PBFT_PER_TX_DELAY=0.055
 PBFT_BATCH50_DELAY=0.0463
+
+# Validator-side protocol emulation for SOTA baselines.  F/G use the active
+# 100-node validator set; H uses a Hydra-head committee by default.
+BFT_VALIDATORS=${BFT_VALIDATORS:-100}
+HYDRA_HEAD_SIZE=${HYDRA_HEAD_SIZE:-21}
+PROTOCOL_RTT_MS=${PROTOCOL_RTT_MS:-4.0}
+PROTOCOL_BANDWIDTH_MBPS=${PROTOCOL_BANDWIDTH_MBPS:-1000.0}
+BULLSHARK_ROUND_MS=${BULLSHARK_ROUND_MS:-100.0}
 
 echo "================================================================"
 echo "  BASELINE COMPARISON"
@@ -82,7 +93,7 @@ require_container() {
     container=$(find_container "$service")
     if [ -z "$container" ]; then
         echo "[ERROR] Container for service '$service' is not running." >&2
-        echo "        Start Docker + NS-3 first, or run run-q1-ns3-baseline.sh." >&2
+        echo "        Start Docker + NS-3 first, or run run-ns3-baseline.sh." >&2
         exit 1
     fi
     printf '%s\n' "$container"
@@ -98,7 +109,7 @@ for i in $(seq 1 "$NUM_NODES"); do
 done
 if [ "$MISSING_NODES" -gt 0 ]; then
     echo "[ERROR] Baseline requires all ${NUM_NODES} IoT containers; missing ${MISSING_NODES}." >&2
-    echo "        Start the full NS-3/Docker wrapper: sudo bash run-q1-ns3-baseline.sh ${DURATION}" >&2
+    echo "        Start the full NS-3/Docker wrapper: sudo bash run-ns3-baseline.sh ${DURATION}" >&2
     exit 1
 fi
 
@@ -124,6 +135,8 @@ run_experiment() {
     local verify_delay_us=$8
     local emulated_sign_us=$9
     local mode_label=${10}
+    local protocol_mode=${11:-auto}
+    local protocol_n=${12:-21}
     local exp_dir="${RESULTS_DIR}/comparison_${exp_name}"
     local summary_file="${RESULTS_DIR}/gateway_summary_${exp_name}.json"
     local batches_file="${RESULTS_DIR}/gateway_batches_${exp_name}.csv"
@@ -133,6 +146,7 @@ run_experiment() {
     echo "------------------------------------------------------------"
     echo "  [${exp_name}] ${mode_label}"
     echo "  port=${exp_port}, rate=${rate}, tx_batch=${tx_batch}, gateway_batch=${gw_batch}, pbft=${pbft_delay}s"
+    echo "  protocol=${protocol_mode}, protocol_n=${protocol_n}, rtt=${PROTOCOL_RTT_MS}ms, bw=${PROTOCOL_BANDWIDTH_MBPS}Mbps"
     echo "  expected_sig=${expected_sig_len}B, verify_delay=${verify_delay_us}us, emulated_sign=${emulated_sign_us}us"
     echo "------------------------------------------------------------"
 
@@ -156,6 +170,11 @@ run_experiment() {
             --pbft-delay $pbft_delay \
             --verify-delay-us $verify_delay_us \
             --expected-sig-len $expected_sig_len \
+            --protocol-mode $protocol_mode \
+            --protocol-n $protocol_n \
+            --protocol-rtt-ms $PROTOCOL_RTT_MS \
+            --protocol-bandwidth-mbps $PROTOCOL_BANDWIDTH_MBPS \
+            --bullshark-round-ms $BULLSHARK_ROUND_MS \
             --output /opt/results/gateway_summary_${exp_name}.json \
             > /opt/results/gateway_batches_${exp_name}.csv \
             2> /opt/results/gateway_log_${exp_name}.txt
@@ -224,6 +243,10 @@ if abs(float(d.get("pbft_delay_s", -999)) - float("${pbft_delay}")) > 1e-6:
     errors.append(f"pbft_delay_s={d.get('pbft_delay_s')} expected ${pbft_delay}")
 if abs(float(d.get("verify_delay_us", -999)) - float("${verify_delay_us}")) > 1e-6:
     errors.append(f"verify_delay_us={d.get('verify_delay_us')} expected ${verify_delay_us}")
+if d.get("protocol_mode") != "${protocol_mode}":
+    errors.append(f"protocol_mode={d.get('protocol_mode')} expected ${protocol_mode}")
+if int(d.get("protocol", {}).get("participants", -1)) != int("${protocol_n}"):
+    errors.append(f"protocol participants={d.get('protocol', {}).get('participants')} expected ${protocol_n}")
 if int(d.get("total_updates", 0)) <= 0:
     errors.append("total_updates is zero")
 accepted_updates = max(int(d.get("accepted_updates", d.get("total_updates", 0))), 1)
@@ -265,7 +288,8 @@ if should_run "A_pbft_ecdsa"; then
         "A_pbft_ecdsa" \
         9001 100 1 1 "$PBFT_PER_TX_DELAY" \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "Per-tx PBFT baseline"
+        "Per-tx PBFT baseline" \
+        "legacy_pbft" "$BFT_VALIDATORS"
     cooldown_if_all
 fi
 
@@ -276,7 +300,8 @@ if should_run "B_bls_aggregate"; then
         "B_bls_aggregate" \
         9002 100 1 1 0.0 \
         "$BLS_SIG_BYTES" "$BLS_VERIFY_US" "$BLS_SIGN_US" \
-        "BLS-sized aggregate-signature control"
+        "BLS-sized aggregate-signature control" \
+        "none" "$BFT_VALIDATORS"
     cooldown_if_all
 fi
 
@@ -287,7 +312,8 @@ if should_run "C_offchain_statechannel"; then
         "C_offchain_statechannel" \
         9003 100 "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
         "$MLDSA_SIG_BYTES" "$MLDSA_VERIFY_US" -1 \
-        "ASC + real ML-DSA-44"
+        "ASC + real ML-DSA-44" \
+        "none" "$HYDRA_HEAD_SIZE"
     cooldown_if_all
 fi
 
@@ -298,7 +324,8 @@ if should_run "E_offchain_ecdsa"; then
         "E_offchain_ecdsa" \
         9004 100 "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "ASC no-PQC ablation"
+        "ASC no-PQC ablation" \
+        "none" "$HYDRA_HEAD_SIZE"
     cooldown_if_all
 fi
 
@@ -309,7 +336,43 @@ if should_run "D_pbft_batched_ecdsa"; then
         "D_pbft_batched_ecdsa" \
         9005 100 "$ASC_BATCH_SIZE" 1 "$PBFT_BATCH50_DELAY" \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "Batched PBFT analytical-control run"
+        "Batched PBFT analytical-control run" \
+        "legacy_pbft" "$BFT_VALIDATORS"
+fi
+
+echo ""
+echo "[F] Simplex batched BFT protocol + ECDSA-sized packets"
+if should_run "F_simplex_batched_ecdsa"; then
+    run_experiment \
+        "F_simplex_batched_ecdsa" \
+        9006 100 "$ASC_BATCH_SIZE" 1 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Simplex full-protocol batched BFT" \
+        "simplex" "$BFT_VALIDATORS"
+    cooldown_if_all
+fi
+
+echo ""
+echo "[G] Bullshark DAG-BFT protocol ordering + ECDSA-sized packets"
+if should_run "G_bullshark_dag_ecdsa"; then
+    run_experiment \
+        "G_bullshark_dag_ecdsa" \
+        9007 100 "$ASC_BATCH_SIZE" 1 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Bullshark full-protocol DAG-BFT ordering" \
+        "bullshark" "$BFT_VALIDATORS"
+    cooldown_if_all
+fi
+
+echo ""
+echo "[H] Hydra Head ECDSA state-channel protocol"
+if should_run "H_hydra_ecdsa"; then
+    run_experiment \
+        "H_hydra_ecdsa" \
+        9008 100 "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Hydra Head full-protocol state-channel baseline" \
+        "hydra" "$HYDRA_HEAD_SIZE"
 fi
 
 echo ""

@@ -6,6 +6,7 @@ __pycache__/
 .ruff_cache/
 venv/
 .venv/
+.venv-wsl/
 
 # Experiment outputs and temporary artifacts
 results/
@@ -57,6 +58,7 @@ analysis/run_cascading_aftershocks.py
 analysis/run_shap_analysis.py
 analysis/verify_rotation.py
 drl/models/
+drl/models_*/
 drl/models_robust/ppo_final.pt
 
 # Heavy external dependencies/build trees

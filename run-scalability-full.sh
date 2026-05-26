@@ -23,7 +23,7 @@ BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 RESULTS_DIR="$BASE_DIR/results/scalability"
 DURATION=${1:-60}  # seconds per test
 RATE=100           # tx/sec/node; high enough to expose network bottlenecks
-PROTOCOL_COUNT=5
+PROTOCOL_COUNT=8
 NS3_SIM_TIME=$((DURATION * 4 + 240))
 GW_IP="10.1.1.100"
 ASC_PORT=9101
@@ -31,6 +31,9 @@ PBFT_PORT=9102
 BLS_PORT=9103
 PBFT_BATCHED_PORT=9104
 ASC_ECDSA_PORT=9105
+SIMPLEX_PORT=9106
+BULLSHARK_PORT=9107
+HYDRA_PORT=9108
 ALGO="ML-DSA-44"
 ASC_BATCH_SIZE=50
 MLDSA_SIG_BYTES=2420
@@ -43,6 +46,11 @@ BLS_VERIFY_US=0
 BLS_SIGN_US=0
 PBFT_PER_TX_DELAY=0.055
 PBFT_BATCH50_DELAY=0.0463
+BFT_VALIDATORS=${BFT_VALIDATORS:-100}
+HYDRA_HEAD_SIZE=${HYDRA_HEAD_SIZE:-21}
+PROTOCOL_RTT_MS=${PROTOCOL_RTT_MS:-4.0}
+PROTOCOL_BANDWIDTH_MBPS=${PROTOCOL_BANDWIDTH_MBPS:-1000.0}
+BULLSHARK_ROUND_MS=${BULLSHARK_ROUND_MS:-100.0}
 
 NODE_COUNTS=(10 25 50 75 100)
 
@@ -127,6 +135,8 @@ cleanup_all() {
     for i in $(seq 0 100); do
         ip link delete "veth${i}" 2>/dev/null || true
         ip link delete "br${i}" 2>/dev/null || true
+        ip link delete "tap${i}" 2>/dev/null || true
+        ip tuntap del dev "tap${i}" mode tap 2>/dev/null || true
     done
     sleep 3
 }
@@ -186,6 +196,11 @@ start_ns3_and_connect() {
         }
     done
     sleep 5
+    if ! kill -0 "$NS3_PID" 2>/dev/null; then
+        echo "  [ERROR] NS-3 exited while creating tap devices."
+        echo "          This is usually caused by stale tap devices; cleanup now removes tap interfaces."
+        return 1
+    fi
 
     # Connect containers to NS-3 via bridges
     echo "  Connecting $N nodes to NS-3..."
@@ -273,6 +288,8 @@ run_protocol_test() {
     local verify_us=$9
     local emulated_sign_us=${10}
     local description=${11}
+    local protocol_mode=${12:-auto}
+    local protocol_n=${13:-21}
 
     local OUT_DIR="$RESULTS_DIR/N_${N}"
     local summary_file="$BASE_DIR/results/gateway_summary_${slug}_N${N}.json"
@@ -297,6 +314,7 @@ run_protocol_test() {
 
     echo "  [${label}] ${description}"
     echo "  [${label}] port=${port}, tx_batch=${tx_batch}, gateway_batch=${gw_batch}, pbft=${pbft_delay}s, sig=${sig_bytes}B"
+    echo "  [${label}] protocol=${protocol_mode}, protocol_n=${protocol_n}, rtt=${PROTOCOL_RTT_MS}ms, bw=${PROTOCOL_BANDWIDTH_MBPS}Mbps"
 
     docker exec -d "$GW_CONT" bash -c "
         python3 /opt/gateway/sig-aggregator.py \
@@ -306,6 +324,11 @@ run_protocol_test() {
             --pbft-delay $pbft_delay \
             --verify-delay-us $verify_us \
             --expected-sig-len $sig_bytes \
+            --protocol-mode $protocol_mode \
+            --protocol-n $protocol_n \
+            --protocol-rtt-ms $PROTOCOL_RTT_MS \
+            --protocol-bandwidth-mbps $PROTOCOL_BANDWIDTH_MBPS \
+            --bullshark-round-ms $BULLSHARK_ROUND_MS \
             --output /opt/results/gateway_summary_${slug}_N${N}.json \
             > /opt/results/gateway_batches_${slug}_N${N}.csv \
             2> /opt/results/gateway_log_${slug}_N${N}.txt
@@ -577,31 +600,59 @@ for N in "${NODE_COUNTS[@]}"; do
     rm -f "$BASE_DIR"/results/gateway_summary_*_N${N}.json \
           "$BASE_DIR"/results/gateway_batches_*_N${N}.csv \
           "$BASE_DIR"/results/gateway_log_*_N${N}.txt
+    PROTO_N="$N"
+    HYDRA_N="$N"
+    if [ "$HYDRA_N" -gt "$HYDRA_HEAD_SIZE" ]; then
+        HYDRA_N="$HYDRA_HEAD_SIZE"
+    fi
 
     # A) Per-transaction PBFT + ECDSA-sized packets
     run_isolated_protocol "$N" "A" "pbft" "$PBFT_PORT" 1 1 "$PBFT_PER_TX_DELAY" \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "Per-transaction PBFT + ECDSA-sized packets"
+        "Per-transaction PBFT + ECDSA-sized packets" \
+        "legacy_pbft" "$PROTO_N"
 
     # B) Aggregate-signature control, no PBFT
     run_isolated_protocol "$N" "B" "bls" "$BLS_PORT" 1 1 0.0 \
         "$BLS_SIG_BYTES" "$BLS_VERIFY_US" "$BLS_SIGN_US" \
-        "BLS-sized aggregate-signature control"
+        "BLS-sized aggregate-signature control" \
+        "none" "$PROTO_N"
 
     # C) Off-chain state channel + real ML-DSA-44
     run_isolated_protocol "$N" "C" "asc" "$ASC_PORT" "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
         "$MLDSA_SIG_BYTES" "$MLDSA_VERIFY_US" -1 \
-        "ASC + real ML-DSA-44"
+        "ASC + real ML-DSA-44" \
+        "none" "$HYDRA_N"
 
     # D) Batched PBFT + ECDSA-sized packets
     run_isolated_protocol "$N" "D" "pbft_batched" "$PBFT_BATCHED_PORT" 1 "$ASC_BATCH_SIZE" "$PBFT_BATCH50_DELAY" \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "Batched PBFT + ECDSA-sized packets"
+        "Batched PBFT + ECDSA-sized packets" \
+        "legacy_pbft" "$PROTO_N"
 
     # E) Off-chain state channel + ECDSA-sized packets
     run_isolated_protocol "$N" "E" "asc_ecdsa" "$ASC_ECDSA_PORT" "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
         "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-        "ASC no-PQC ablation"
+        "ASC no-PQC ablation" \
+        "none" "$HYDRA_N"
+
+    # F) Simplex batched BFT + ECDSA-sized packets
+    run_isolated_protocol "$N" "F" "simplex_batched" "$SIMPLEX_PORT" 1 "$ASC_BATCH_SIZE" 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Simplex full-protocol batched BFT" \
+        "simplex" "$PROTO_N"
+
+    # G) Bullshark DAG-BFT ordering + ECDSA-sized packets
+    run_isolated_protocol "$N" "G" "bullshark_dag" "$BULLSHARK_PORT" 1 "$ASC_BATCH_SIZE" 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Bullshark full-protocol DAG-BFT ordering" \
+        "bullshark" "$PROTO_N"
+
+    # H) Hydra Head ECDSA state-channel baseline
+    run_isolated_protocol "$N" "H" "hydra_ecdsa" "$HYDRA_PORT" "$ASC_BATCH_SIZE" "$ASC_BATCH_SIZE" 0.0 \
+        "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+        "Hydra Head full-protocol state-channel baseline" \
+        "hydra" "$HYDRA_N"
 
     echo "  ✓ N=$N complete"
 done
@@ -623,10 +674,17 @@ if not os.path.isabs(scale_dir):
     scale_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), scale_dir)
 
 node_counts = [10, 25, 50, 75, 100]
-print(f"\n{'N':>5} | {'A PBFT':>9} | {'B BLS':>9} | {'C ASC':>9} | {'D PBFT50':>9} | {'E ASC-ECDSA':>12}")
-print("-" * 72)
+print(
+    f"\n{'N':>5} | {'A PBFT':>9} | {'B BLS':>9} | {'C ASC':>9} | "
+    f"{'D PBFT50':>9} | {'E ASC-ECDSA':>12} | {'F Simplex':>9} | "
+    f"{'G DAG':>9} | {'H Hydra':>9}"
+)
+print("-" * 111)
 
-protocols = ["pbft", "bls", "asc", "pbft_batched", "asc_ecdsa"]
+protocols = [
+    "pbft", "bls", "asc", "pbft_batched", "asc_ecdsa",
+    "simplex_batched", "bullshark_dag", "hydra_ecdsa",
+]
 summary = {"node_counts": node_counts, **{p: [] for p in protocols}}
 for N in node_counts:
     d = f"results/scalability/N_{N}"
@@ -642,7 +700,8 @@ for N in node_counts:
         summary[proto].append(val)
     print(
         f"{N:5d} | {row['pbft']:9.0f} | {row['bls']:9.0f} | "
-        f"{row['asc']:9.0f} | {row['pbft_batched']:9.0f} | {row['asc_ecdsa']:12.0f}"
+        f"{row['asc']:9.0f} | {row['pbft_batched']:9.0f} | {row['asc_ecdsa']:12.0f} | "
+        f"{row['simplex_batched']:9.0f} | {row['bullshark_dag']:9.0f} | {row['hydra_ecdsa']:9.0f}"
     )
 
 with open("results/scalability/summary.json", "w") as f:

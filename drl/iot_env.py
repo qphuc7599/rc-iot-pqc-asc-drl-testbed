@@ -87,8 +87,8 @@ class IoTNetworkEnv(gym.Env):
                         "reliability": 0.92, "base_tps": 2.5,
                         "sign_ms": 61.611, "verify_ms": 22.213},
         "RP2040":      {"cpu": 0.267, "battery_cap": 0.50, "power_draw": 45,
-                        "reliability": 0.88, "base_tps": 5.5,
-                        "sign_ms": 54.848, "verify_ms": 19.774},
+                        "reliability": 0.88, "base_tps": 1.9,
+                        "sign_ms": 158.907, "verify_ms": 44.000},
     }
 
     # === Network / Consensus Constants ===
@@ -109,16 +109,16 @@ class IoTNetworkEnv(gym.Env):
     #   Number of attempts ~ Geometric(p=0.235), mean ≈ 4.25
     #
     # Signing time is modeled as: t_sign = t_fixed + t_attempt × Geometric(p)
-    #   where t_fixed accounts for context setup, hashing, NTT init (~25% of mean)
-    #   and t_attempt is the variable rejection-sampling portion (~75% of mean).
+    #   where t_fixed accounts for context setup, hashing, NTT init (~35% of mean)
+    #   and t_attempt is the variable rejection-sampling portion (~65% of mean).
     # This two-component model matches published pqm4 benchmark statistics:
-    #   CV ≈ 0.65 (published range: 0.61-0.73 on Cortex-M4)
-    #   P99 ≈ 3.2-3.4× mean
-    # Source: FIPS 204 §5.2, pqm4 benchmark variance analysis, Becker et al. 2022
+    #   CV ≈ 0.56 under the 35% fixed / 65% variable split
+    #   P99 ≈ 3.1× mean (RP2040 direct ML-DSA-44: 158.9 ms mean, ~489.9 ms p99)
+    # Source: FIPS 204 §5.2, pqm4, Chhetri 2026 RP2040 benchmark.
     MLDSA_ACCEPT_PROB = 0.235     # per-attempt acceptance probability
     MLDSA_MEAN_ATTEMPTS = 1.0 / 0.235  # ≈ 4.255 attempts on average
-    MLDSA_FIXED_FRACTION = 0.25   # fraction of mean sign time that is fixed overhead
-    MLDSA_VARIABLE_FRACTION = 0.75  # fraction subject to rejection sampling
+    MLDSA_FIXED_FRACTION = 0.35   # fraction of mean sign time that is fixed overhead
+    MLDSA_VARIABLE_FRACTION = 0.65  # fraction subject to rejection sampling
 
     NODE_FEATURES = 9  # per-node observation features
     GLOBAL_FEATURES = 5
@@ -488,10 +488,10 @@ class IoTNetworkEnv(gym.Env):
 
             # ML-DSA rejection sampling: stochastic sign latency
             # Model: t_sign = t_fixed + t_attempt × Geometric(p)
-            # t_fixed = 25% of mean (context setup, hashing, NTT init)
-            # t_attempt = 75% of mean / mean_attempts (per rejection round)
+            # t_fixed = 35% of mean (context setup, hashing, NTT init)
+            # t_attempt = 65% of mean / mean_attempts (per rejection round)
             # This preserves correct mean while producing:
-            #   CV ≈ 0.65, P99/mean ≈ 3.2-3.4× (matches pqm4 measurements)
+            #   CV ≈ 0.56, P99/mean ≈ 3.1× (matches direct RP2040 p99)
             n_honest = len(honest_indices)
             fixed_ms = base_sign_ms * self.MLDSA_FIXED_FRACTION
             variable_mean = base_sign_ms * self.MLDSA_VARIABLE_FRACTION

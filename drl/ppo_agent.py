@@ -128,11 +128,16 @@ class PerNodeScoringNetwork(nn.Module):
     """
 
     def __init__(self, node_features=9, global_features=5, num_nodes=100,
-                 hidden=128):
+                 hidden=128, committee_size=21, actor_mode="gaussian_masked",
+                 gumbel_temperature=0.7, critic_mode="flat"):
         super().__init__()
         self.node_features = node_features
         self.global_features = global_features
         self.num_nodes = num_nodes
+        self.committee_size = committee_size
+        self.actor_mode = actor_mode
+        self.gumbel_temperature = gumbel_temperature
+        self.critic_mode = critic_mode
         input_dim = node_features + global_features
 
         # Shared scorer: processes each node's features + global context
@@ -144,18 +149,43 @@ class PerNodeScoringNetwork(nn.Module):
             nn.Linear(hidden // 2, 1),
         )
 
-        # Log std per node (shared initial value)
-        self.actor_log_std = nn.Parameter(torch.zeros(num_nodes) - 0.5)
+        # Gaussian score exploration. Flat mode keeps the historical per-node
+        # parameter for checkpoint compatibility; pooled mode uses a scalar so
+        # the trainable parameter set is independent of N.
+        if critic_mode == "pooled":
+            self.actor_log_std = nn.Parameter(torch.tensor(-0.5))
+        else:
+            self.actor_log_std = nn.Parameter(torch.zeros(num_nodes) - 0.5)
 
-        # Critic: takes full observation, outputs single value
-        obs_dim = num_nodes * node_features + global_features
-        self.critic = nn.Sequential(
-            nn.Linear(obs_dim, 256),
-            nn.ReLU(),
-            nn.Linear(256, 128),
-            nn.ReLU(),
-            nn.Linear(128, 1),
-        )
+        if critic_mode == "flat":
+            # Historical critic: takes the full flattened observation. This is
+            # kept for backward-compatible evaluation of existing checkpoints.
+            obs_dim = num_nodes * node_features + global_features
+            self.critic = nn.Sequential(
+                nn.Linear(obs_dim, 256),
+                nn.ReLU(),
+                nn.Linear(256, 128),
+                nn.ReLU(),
+                nn.Linear(128, 1),
+            )
+        elif critic_mode == "pooled":
+            # Permutation-invariant critic: encode each node independently,
+            # then pool across the valid alive-node set. The parameter shapes
+            # no longer depend on num_nodes, which enables clean N=50/200/500
+            # retraining and checkpoint transfer experiments.
+            self.critic_encoder = nn.Sequential(
+                nn.Linear(input_dim, hidden),
+                nn.ReLU(),
+                nn.Linear(hidden, hidden),
+                nn.ReLU(),
+            )
+            self.critic_head = nn.Sequential(
+                nn.Linear(hidden * 2 + global_features, 128),
+                nn.ReLU(),
+                nn.Linear(128, 1),
+            )
+        else:
+            raise ValueError(f"Unsupported critic_mode: {critic_mode}")
 
     def _split_obs(self, obs):
         """Split flat obs into per-node features and global features."""
@@ -168,7 +198,37 @@ class PerNodeScoringNetwork(nn.Module):
 
         return node_obs, global_obs
 
-    def forward(self, obs):
+    def _valid_action_mask(self, obs):
+        """Mask nodes that cannot be selected before policy sampling.
+
+        Feature layout comes from IoTNetworkEnv._get_obs():
+        per-node [battery_ratio, alive, trust, cpu, cap, power, inAC, jitter, service].
+        """
+        node_obs, _ = self._split_obs(obs)
+        battery_ok = node_obs[:, :, 0] > 0.01
+        alive_ok = node_obs[:, :, 1] > 0.5
+        return battery_ok & alive_ok
+
+    def _apply_action_mask(self, scores, obs, floor=-8.0):
+        valid_mask = self._valid_action_mask(obs)
+        masked_scores = scores.masked_fill(~valid_mask, floor)
+        return masked_scores, valid_mask
+
+    def _pooled_value(self, node_input, global_obs, valid_mask):
+        emb = self.critic_encoder(node_input)
+        mask_f = valid_mask.unsqueeze(-1).float()
+        count = mask_f.sum(dim=1).clamp_min(1.0)
+        mean_pool = (emb * mask_f).sum(dim=1) / count
+
+        max_input = emb.masked_fill(~valid_mask.unsqueeze(-1), -1e9)
+        max_pool = max_input.max(dim=1).values
+        no_valid = valid_mask.sum(dim=1) == 0
+        if no_valid.any():
+            max_pool = max_pool.masked_fill(no_valid.unsqueeze(-1), 0.0)
+
+        return self.critic_head(torch.cat([mean_pool, max_pool, global_obs], dim=-1))
+
+    def forward(self, obs, return_mask=False):
         node_obs, global_obs = self._split_obs(obs)
         batch_size = obs.shape[0]
 
@@ -181,30 +241,108 @@ class PerNodeScoringNetwork(nn.Module):
 
         # Score each node with shared network
         scores = self.scorer(node_input).squeeze(-1)  # (batch, num_nodes)
+        scores, valid_mask = self._apply_action_mask(scores, obs)
 
-        value = self.critic(obs)
+        if self.critic_mode == "pooled":
+            value = self._pooled_value(node_input, global_obs, valid_mask)
+        else:
+            value = self.critic(obs)
+        if return_mask:
+            return scores, value, valid_mask
         return scores, value
 
-    def get_action(self, obs, deterministic=False):
-        mean, value = self.forward(obs)
+    def _gaussian_dist(self, logits):
         log_std = torch.clamp(self.actor_log_std, -4.6, 0.0)
-        std = torch.exp(log_std).expand_as(mean)
-        dist = torch.distributions.Normal(mean, std)
+        if log_std.dim() == 0:
+            std = torch.exp(log_std).expand_as(logits)
+        else:
+            std = torch.exp(log_std).expand_as(logits)
+        return torch.distributions.Normal(logits, std)
+
+    def _masked_gaussian_stats(self, dist, action, valid_mask):
+        log_prob = dist.log_prob(action).masked_fill(~valid_mask, 0.0).sum(dim=-1)
+        entropy = dist.entropy().masked_fill(~valid_mask, 0.0).sum(dim=-1)
+        return log_prob, entropy
+
+    def _plackett_luce_log_prob(self, logits, action, valid_mask):
+        """Log-probability of the selected top-k set under sequential sampling.
+
+        This provides a principled PPO-compatible objective for the optional
+        Gumbel-TopK actor mode. The environment still receives a score vector;
+        the selected committee is represented by the top-k entries of action.
+        """
+        k = min(self.committee_size, self.num_nodes)
+        masked_action = action.masked_fill(~valid_mask, -1e9)
+        selected = torch.topk(masked_action, k=k, dim=-1).indices
+        work_logits = logits.masked_fill(~valid_mask, -1e9).clone()
+        logp = torch.zeros(logits.shape[0], device=logits.device)
+
+        for j in range(k):
+            idx = selected[:, j]
+            chosen = work_logits.gather(1, idx.unsqueeze(1)).squeeze(1)
+            denom = torch.logsumexp(work_logits, dim=-1)
+            valid_choice = torch.isfinite(chosen) & torch.isfinite(denom)
+            logp = logp + torch.where(valid_choice, chosen - denom, torch.zeros_like(logp))
+            remove = torch.zeros_like(work_logits, dtype=torch.bool)
+            remove = remove.scatter(1, idx.unsqueeze(1), True)
+            work_logits = work_logits.masked_fill(remove, -1e9)
+        return logp
+
+    def _masked_categorical_entropy(self, logits, valid_mask):
+        masked_logits = logits.masked_fill(~valid_mask, -1e9)
+        probs = torch.softmax(masked_logits, dim=-1)
+        log_probs = torch.log_softmax(masked_logits, dim=-1)
+        ent = -(probs * log_probs).masked_fill(~valid_mask, 0.0).sum(dim=-1)
+        return ent
+
+    def evaluate_actions(self, obs, action):
+        logits, value, valid_mask = self.forward(obs, return_mask=True)
+        if self.actor_mode == "gumbel_topk":
+            log_prob = self._plackett_luce_log_prob(logits, action, valid_mask)
+            entropy = self._masked_categorical_entropy(logits, valid_mask).mean()
+            return log_prob, entropy, value.squeeze(-1)
+
+        dist = self._gaussian_dist(logits)
+        log_prob, entropy_vec = self._masked_gaussian_stats(dist, action, valid_mask)
+        entropy = entropy_vec.mean()
+        return log_prob, entropy, value.squeeze(-1)
+
+    def get_action(self, obs, deterministic=False):
+        mean, value, valid_mask = self.forward(obs, return_mask=True)
+
+        if self.actor_mode == "gumbel_topk":
+            if deterministic:
+                action = mean.masked_fill(~valid_mask, -1e9)
+            else:
+                u = torch.rand_like(mean).clamp_(1e-6, 1.0 - 1e-6)
+                gumbel = -torch.log(-torch.log(u))
+                relaxed = torch.softmax(
+                    (mean + gumbel) / max(self.gumbel_temperature, 1e-3),
+                    dim=-1
+                )
+                action = (relaxed * float(self.num_nodes)).masked_fill(~valid_mask, -1e9)
+            log_prob = self._plackett_luce_log_prob(mean, action, valid_mask)
+            entropy = self._masked_categorical_entropy(mean, valid_mask) * float(self.committee_size)
+            return action, log_prob, value.squeeze(-1), entropy
+
+        dist = self._gaussian_dist(mean)
 
         if deterministic:
             action = mean
         else:
             action = dist.sample()
 
-        log_prob = dist.log_prob(action).sum(dim=-1)
-        entropy = dist.entropy().sum(dim=-1)
+        action = action.masked_fill(~valid_mask, -1e9)
+        log_prob, entropy = self._masked_gaussian_stats(dist, action, valid_mask)
         return action, log_prob, value.squeeze(-1), entropy
 
 
 class PPOTrainer:
 
     def __init__(self, env, lr=3e-4, gamma=0.99, clip_eps=0.2,
-                 epochs=10, save_dir="drl/models", n_envs=None, seed=None):
+                 epochs=10, save_dir="drl/models", n_envs=None, seed=None,
+                 actor_mode="gaussian_masked", gumbel_temperature=0.7,
+                 critic_mode="flat"):
         # Auto-detect: use all logical CPUs (leave 1 for main thread)
         if n_envs is None:
             n_envs = max(2, (os.cpu_count() or 4) - 1)
@@ -215,6 +353,9 @@ class PPOTrainer:
         self.save_dir = save_dir
         self.n_envs = n_envs
         self.seed = seed
+        self.actor_mode = actor_mode
+        self.gumbel_temperature = gumbel_temperature
+        self.critic_mode = critic_mode
 
         # Create TRUE parallel environments only for training rollout
         # collection. Evaluation/sensitivity uses self.env directly and does
@@ -242,6 +383,10 @@ class PPOTrainer:
             node_features=env.NODE_FEATURES,
             global_features=env.GLOBAL_FEATURES,
             num_nodes=env.num_nodes,
+            committee_size=env.committee_size,
+            actor_mode=actor_mode,
+            gumbel_temperature=gumbel_temperature,
+            critic_mode=critic_mode,
         ).to(self.device)
         self.optimizer = optim.Adam(self.net.parameters(), lr=lr)
         self.best_avg_reward = -float('inf')
@@ -257,6 +402,8 @@ class PPOTrainer:
         else:
             print("[PPO] Parallel envs: disabled for evaluation")
         print(f"[PPO] Total params: {total_params:,} (scorer: {scorer_params:,})")
+        print(f"[PPO] Actor mode: {actor_mode} (gumbel_temperature={gumbel_temperature})")
+        print(f"[PPO] Critic mode: {critic_mode}")
 
     def collect_rollout(self, steps=1000):
         """Collect rollout from N_ENVS parallel environments.
@@ -389,12 +536,7 @@ class PPOTrainer:
                 mb_adv = advantages[idx].to(self.device)
                 mb_ret = returns[idx].to(self.device)
 
-                mean, values = self.net(mb_obs)
-                log_std = torch.clamp(self.net.actor_log_std, -4.6, 0.0)
-                std = torch.exp(log_std).expand_as(mean)
-                dist = torch.distributions.Normal(mean, std)
-                new_logp = dist.log_prob(mb_act).sum(dim=-1)
-                entropy = dist.entropy().sum(dim=-1).mean()
+                new_logp, entropy, values = self.net.evaluate_actions(mb_obs, mb_act)
 
                 ratio = torch.exp(new_logp - mb_old_logp)
                 surr1 = ratio * mb_adv
@@ -430,6 +572,8 @@ class PPOTrainer:
         print(f"[PPO] Battery drain: idle={self.env.battery_drain_base}, "
               f"committee={self.env.battery_drain_committee}")
         print(f"[PPO] Architecture: Per-Node Scoring Network")
+        print(f"[PPO] Actor mode: {self.actor_mode}")
+        print(f"[PPO] Critic mode: {self.critic_mode}")
         print(f"{'='*70}")
 
         import time
@@ -484,6 +628,9 @@ class PPOTrainer:
                     "num_nodes": self.env.num_nodes,
                     "committee_size": self.env.committee_size,
                     "training_profile": self.env.training_profile,
+                    "actor_mode": self.actor_mode,
+                    "gumbel_temperature": self.gumbel_temperature,
+                    "critic_mode": self.critic_mode,
                     "gamma": self.gamma,
                     "clip_eps": self.clip_eps,
                     "epochs": self.epochs,
@@ -1614,6 +1761,16 @@ def main():
     parser.add_argument('--train-profile', choices=['robust', 'standard'],
                         default='robust',
                         help='Training fault profile: robust matches Experiment 3')
+    parser.add_argument('--actor-mode',
+                        choices=['gaussian_masked', 'gumbel_topk'],
+                        default='gaussian_masked',
+                        help='Policy head: masked Gaussian scores or experimental Gumbel-TopK relaxation')
+    parser.add_argument('--gumbel-temperature', type=float, default=0.7,
+                        help='Temperature for --actor-mode gumbel_topk')
+    parser.add_argument('--critic-mode',
+                        choices=['flat', 'pooled'],
+                        default='flat',
+                        help='Value head: flat keeps legacy checkpoints; pooled is permutation-invariant and N-transfer friendly')
     parser.add_argument('--kill-ratios', default='0.10,0.20,0.30,0.40',
                         help='Comma-separated kill ratios for sensitivity mode')
     parser.add_argument('--byz-ratios', default='0.00,0.10,0.20,0.30',
@@ -1661,6 +1818,9 @@ def main():
     trainer = PPOTrainer(
         env, lr=args.lr, n_envs=n_workers, seed=args.seed,
         save_dir=args.save_dir,
+        actor_mode=args.actor_mode,
+        gumbel_temperature=args.gumbel_temperature,
+        critic_mode=args.critic_mode,
     )
 
     if args.mode == 'train':

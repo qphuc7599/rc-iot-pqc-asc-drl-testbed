@@ -7,6 +7,9 @@ Expected directories:
   results/comparison_C_offchain_statechannel/gateway_summary.json
   results/comparison_E_offchain_ecdsa/gateway_summary.json
   results/comparison_D_pbft_batched_ecdsa/gateway_summary.json
+  results/comparison_F_simplex_batched_ecdsa/gateway_summary.json
+  results/comparison_G_bullshark_dag_ecdsa/gateway_summary.json
+  results/comparison_H_hydra_ecdsa/gateway_summary.json
 """
 
 import argparse
@@ -47,6 +50,30 @@ PROTOCOL_CONFIG = {
         "quantum": "No",
         "consensus": "Off-chain",
         "model": "ASC batch=50",
+    },
+    "F_simplex_batched_ecdsa": {
+        "label": "Simplex\nBFT batch=50",
+        "color": "#a6761d",
+        "sig": "ECDSA-P256 (72B)",
+        "quantum": "No",
+        "consensus": "Simplex",
+        "model": "Batched L1 protocol",
+    },
+    "G_bullshark_dag_ecdsa": {
+        "label": "Bullshark\nDAG-BFT",
+        "color": "#666666",
+        "sig": "ECDSA-P256 (72B)",
+        "quantum": "No",
+        "consensus": "Bullshark DAG",
+        "model": "DAG-BFT protocol",
+    },
+    "H_hydra_ecdsa": {
+        "label": "Hydra Head\nState Channel",
+        "color": "#984ea3",
+        "sig": "ECDSA-P256 (72B)",
+        "quantum": "No",
+        "consensus": "Off-chain snapshots",
+        "model": "Layer-2 protocol",
     },
     "C_offchain_statechannel": {
         "label": "State Channel\nML-DSA",

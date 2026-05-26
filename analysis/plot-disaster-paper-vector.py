@@ -9,6 +9,7 @@ figure should show the trajectory-level story without visual clutter.
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -19,8 +20,12 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RESULTS_FILE = ROOT / "results" / "disaster_results.json"
 RESULTS_DIR = ROOT / "results"
+RESULTS_CANDIDATES = [
+    RESULTS_DIR / "drl_pooled" / "disaster_results.json",
+    RESULTS_DIR / "disaster_results.json",
+]
+POOLED_RESULTS_DIR = RESULTS_DIR / "drl_pooled"
 PAPER_FIG_DIR = ROOT / "file_project" / "figures"
 
 STRATEGIES = ["ppo", "sa", "gba", "ocd", "random", "static"]
@@ -59,9 +64,20 @@ plt.rcParams.update(
 )
 
 
-def load_data() -> dict:
-    with RESULTS_FILE.open("r", encoding="utf-8") as f:
-        return json.load(f)
+def load_data(path: Path | None = None) -> dict:
+    if path is not None:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        data["_source_path"] = path.as_posix()
+        return data
+    for path in RESULTS_CANDIDATES:
+        if path.exists():
+            with path.open("r", encoding="utf-8") as f:
+                data = json.load(f)
+            data["_source_path"] = path.as_posix()
+            return data
+    searched = ", ".join(path.as_posix() for path in RESULTS_CANDIDATES)
+    raise FileNotFoundError(f"No disaster_results.json found. Searched: {searched}")
 
 
 def runs_to_matrix(runs: list[list[dict]], key: str) -> np.ndarray:
@@ -84,14 +100,20 @@ def smooth_edge(values: np.ndarray, window: int = 15) -> np.ndarray:
     return np.convolve(padded, kernel, mode="valid")
 
 
-def plot_paper_timeline(data: dict) -> list[Path]:
+def plot_paper_timeline(
+    data: dict,
+    output_dir: Path = POOLED_RESULTS_DIR,
+    paper_copy: bool = True,
+    title_suffix: str = "",
+) -> list[Path]:
     all_runs = data["all_runs"]
     disaster_step = int(data["config"]["disaster_step"])
     seeds = data["config"].get("seeds", [])
 
     fig, ax = plt.subplots(figsize=(7.2, 3.05))
 
-    for strat in STRATEGIES:
+    active_strategies = [s for s in STRATEGIES if s in all_runs]
+    for strat in active_strategies:
         tps = runs_to_matrix(all_runs[strat], "tps")
         mean = np.nanmean(tps, axis=0)
         std = np.nanstd(tps, axis=0)
@@ -156,7 +178,7 @@ def plot_paper_timeline(data: dict) -> list[Path]:
     legend = ax.legend(
         loc="upper center",
         bbox_to_anchor=(0.5, 1.24),
-        ncol=6,
+        ncol=min(6, len(active_strategies)),
         frameon=False,
         handlelength=1.8,
         columnspacing=0.9,
@@ -168,11 +190,18 @@ def plot_paper_timeline(data: dict) -> list[Path]:
     fig.subplots_adjust(left=0.085, right=0.995, bottom=0.17, top=0.77)
 
     outputs = [
-        RESULTS_DIR / "disaster_6baselines_timeline_paper.pdf",
-        RESULTS_DIR / "disaster_6baselines_timeline_paper.png",
-        PAPER_FIG_DIR / "disaster_recovery_timeline.pdf",
-        PAPER_FIG_DIR / "disaster_recovery_timeline.png",
+        output_dir / "disaster_6baselines_timeline_paper.pdf",
+        output_dir / "disaster_6baselines_timeline_paper.png",
     ]
+    if paper_copy:
+        outputs.extend(
+            [
+                RESULTS_DIR / "disaster_6baselines_timeline_paper.pdf",
+                RESULTS_DIR / "disaster_6baselines_timeline_paper.png",
+                PAPER_FIG_DIR / "disaster_recovery_timeline.pdf",
+                PAPER_FIG_DIR / "disaster_recovery_timeline.png",
+            ]
+        )
     for out in outputs:
         out.parent.mkdir(parents=True, exist_ok=True)
         if out.suffix == ".png":
@@ -191,9 +220,26 @@ def plot_paper_timeline(data: dict) -> list[Path]:
 
 
 def main() -> None:
-    data = load_data()
-    outputs = plot_paper_timeline(data)
-    print("Generated paper-ready disaster trajectory:")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--disaster-json", type=Path, default=None)
+    parser.add_argument("--output-dir", type=Path, default=POOLED_RESULTS_DIR)
+    parser.add_argument("--title-suffix", default="")
+    parser.add_argument(
+        "--no-paper-copy",
+        action="store_true",
+        help="do not update results/disaster_6baselines_timeline_paper.* or file_project/figures/disaster_recovery_timeline.*",
+    )
+    args = parser.parse_args()
+
+    data = load_data(args.disaster_json)
+    outputs = plot_paper_timeline(
+        data,
+        output_dir=args.output_dir,
+        paper_copy=not args.no_paper_copy,
+        title_suffix=args.title_suffix,
+    )
+    source = data.get("_source_path", "unknown source")
+    print(f"Generated paper-ready disaster trajectory from {source}:")
     for out in outputs:
         print(f"  {out}")
 

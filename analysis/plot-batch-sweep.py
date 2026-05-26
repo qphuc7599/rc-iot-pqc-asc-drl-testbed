@@ -21,11 +21,13 @@ from collections import defaultdict
 PROTOCOL_LABELS = {
     "asc": "ASC + ML-DSA",
     "pbft_batched": "Batched PBFT + ECDSA",
+    "hydra_ecdsa": "Hydra Head + ECDSA",
 }
 
 PROTOCOL_COLORS = {
     "asc": "#1b9e77",
     "pbft_batched": "#e6ab02",
+    "hydra_ecdsa": "#984ea3",
 }
 
 
@@ -146,22 +148,27 @@ def write_latex_table(rows, results_dir):
         f.write("\\caption{Batch-size sensitivity at $N=100$ and 100 tx/s/node offered load. Direct transaction-level p95 is used when tx-generator v2 timestamps are present; otherwise the table falls back to analytical batch-fill latency plus measured gateway settlement latency.}\n")
         f.write("\\label{tab:batch_sensitivity}\n")
         f.write("\\centering\n")
-        f.write("\\small\n")
-        f.write("\\begin{tabular}{@{}rrrrr@{}}\n")
+        f.write("\\footnotesize\n")
+        f.write("\\begin{tabular}{@{}rrrrrrr@{}}\n")
         f.write("\\toprule\n")
-        f.write("$B$ & ASC TPS & ASC p95 (ms) & PBFT-batched TPS & PBFT p95 (ms) \\\\\n")
+        f.write("$B$ & ASC TPS & ASC p95 & PBFT TPS & PBFT p95 & Hydra TPS & Hydra p95 \\\\\n")
+        f.write("    &         & (ms)    &          & (ms)     &           & (ms) \\\\\n")
         f.write("\\midrule\n")
         for batch in batches:
             asc = grouped[batch].get("asc", {})
             pbft = grouped[batch].get("pbft_batched", {})
+            hydra = grouped[batch].get("hydra_ecdsa", {})
             asc_p95 = to_float(asc.get("direct_e2e_p95_ms")) or to_float(asc.get("estimated_e2e_p95_ms"))
             pbft_p95 = to_float(pbft.get("direct_e2e_p95_ms")) or to_float(pbft.get("estimated_e2e_p95_ms"))
+            hydra_p95 = to_float(hydra.get("direct_e2e_p95_ms")) or to_float(hydra.get("estimated_e2e_p95_ms"))
             f.write(
                 f"{batch} & "
                 f"{to_float(asc.get('avg_tps')):,.0f} & "
                 f"{asc_p95:,.0f} & "
                 f"{to_float(pbft.get('avg_tps')):,.0f} & "
-                f"{pbft_p95:,.0f} \\\\\n"
+                f"{pbft_p95:,.0f} & "
+                f"{to_float(hydra.get('avg_tps')):,.0f} & "
+                f"{hydra_p95:,.0f} \\\\\n"
             )
         f.write("\\bottomrule\n")
         f.write("\\end{tabular}\n")

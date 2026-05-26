@@ -4,11 +4,11 @@
 #
 # This runner expects the Docker containers and NS-3 tap/bridge session to
 # already be running, just like run-baseline-comparison.sh. For publication
-# numbers, run it through run-q1-batch-sweep.sh so every (B, protocol) pair gets
+# numbers, run it through run-batch-sweep-full.sh so every (B, protocol) pair gets
 # a fresh Docker + NS-3 session.
 #
 # Usage:
-#   bash run-batch-size-sweep.sh [duration_seconds] [batch|all] [asc|pbft_batched|all]
+#   bash run-batch-size-sweep.sh [duration_seconds] [batch|all] [asc|pbft_batched|hydra_ecdsa|all]
 #
 # Examples:
 #   bash run-batch-size-sweep.sh 60 all asc
@@ -24,6 +24,7 @@ NUM_NODES=100
 RATE=100
 PORT_ASC=9201
 PORT_PBFT_BATCHED=9202
+PORT_HYDRA=9203
 RESULTS_DIR="results"
 SWEEP_DIR="${RESULTS_DIR}/batch_sweep"
 GW_IP="10.1.1.100"
@@ -39,6 +40,9 @@ ECDSA_SIGN_US=27
 # control. In this sweep we keep the commit-delay model fixed and vary only the
 # logical transaction batch carried by one commit/update.
 PBFT_BATCH_DELAY=0.0463
+HYDRA_HEAD_SIZE=${HYDRA_HEAD_SIZE:-21}
+PROTOCOL_RTT_MS=${PROTOCOL_RTT_MS:-4.0}
+PROTOCOL_BANDWIDTH_MBPS=${PROTOCOL_BANDWIDTH_MBPS:-1000.0}
 
 if [ "$REQUESTED_BATCH" = "all" ]; then
     # B=50 is already covered by the paper's main baseline artifact. The
@@ -70,7 +74,7 @@ require_container() {
     container=$(find_container "$service")
     if [ -z "$container" ]; then
         echo "[ERROR] Container for service '$service' is not running." >&2
-        echo "        Start Docker + NS-3 first, or use: sudo bash run-q1-batch-sweep.sh ${DURATION}" >&2
+        echo "        Start Docker + NS-3 first, or use: sudo bash run-batch-sweep-full.sh ${DURATION}" >&2
         exit 1
     fi
     printf '%s\n' "$container"
@@ -210,6 +214,8 @@ run_experiment() {
     local verify_delay_us=$8
     local emulated_sign_us=$9
     local label=${10}
+    local protocol_mode=${11:-auto}
+    local protocol_n=${12:-21}
 
     local slug="${protocol}_B${batch}"
     local run_dir="${SWEEP_DIR}/${slug}"
@@ -228,6 +234,7 @@ run_experiment() {
     echo "  [B=${batch} ${protocol}] ${label}"
     echo "  rate=${RATE} tx/s/node, tx_batch=${tx_batch}, gateway_batch=${gw_batch}"
     echo "  pbft=${pbft_delay}s, sig=${expected_sig_len}B, verify=${verify_delay_us}us"
+    echo "  protocol=${protocol_mode}, protocol_n=${protocol_n}, rtt=${PROTOCOL_RTT_MS}ms, bw=${PROTOCOL_BANDWIDTH_MBPS}Mbps"
     echo "------------------------------------------------------------"
 
     docker exec "$GW_CONT" pkill -f sig-aggregator 2>/dev/null || true
@@ -247,6 +254,10 @@ run_experiment() {
             --pbft-delay $pbft_delay \
             --verify-delay-us $verify_delay_us \
             --expected-sig-len $expected_sig_len \
+            --protocol-mode $protocol_mode \
+            --protocol-n $protocol_n \
+            --protocol-rtt-ms $PROTOCOL_RTT_MS \
+            --protocol-bandwidth-mbps $PROTOCOL_BANDWIDTH_MBPS \
             --output /opt/results/gateway_summary_${slug}.json \
             > /opt/results/gateway_batches_${slug}.csv \
             2> /opt/results/gateway_log_${slug}.txt
@@ -295,12 +306,13 @@ run_experiment() {
         exit 1
     fi
 
-    python3 - "$summary_file" "$tx_batch" "$gw_batch" "$expected_sig_len" "$port" "$pbft_delay" "$verify_delay_us" <<'PY'
+    set +e
+    python3 - "$summary_file" "$tx_batch" "$gw_batch" "$expected_sig_len" "$port" "$pbft_delay" "$verify_delay_us" "$protocol_mode" "$protocol_n" <<'PY'
 import json
 import math
 import sys
 
-path, tx_batch, gw_batch, sig_len, port, pbft, verify_us = sys.argv[1:8]
+path, tx_batch, gw_batch, sig_len, port, pbft, verify_us, protocol_mode, protocol_n = sys.argv[1:10]
 tx_batch = float(tx_batch)
 with open(path, encoding="utf-8") as f:
     d = json.load(f)
@@ -316,6 +328,10 @@ if abs(float(d.get("pbft_delay_s", -999)) - float(pbft)) > 1e-6:
     errors.append(f"pbft_delay_s={d.get('pbft_delay_s')} expected {pbft}")
 if abs(float(d.get("verify_delay_us", -999)) - float(verify_us)) > 1e-6:
     errors.append(f"verify_delay_us={d.get('verify_delay_us')} expected {verify_us}")
+if d.get("protocol_mode") != protocol_mode:
+    errors.append(f"protocol_mode={d.get('protocol_mode')} expected {protocol_mode}")
+if int(d.get("protocol", {}).get("participants", -1)) != int(protocol_n):
+    errors.append(f"protocol participants={d.get('protocol', {}).get('participants')} expected {protocol_n}")
 if int(d.get("total_updates", 0)) <= 0:
     errors.append("total_updates is zero")
 
@@ -331,6 +347,15 @@ if errors:
     print("  observed_sig_lens:", d.get("observed_sig_lens", {}))
     sys.exit(1)
 PY
+    validation_status=$?
+    set -e
+
+    if [ "$validation_status" -ne 0 ]; then
+        cp "$summary_file" "$run_dir/gateway_summary.json" 2>/dev/null || true
+        cp "$batches_file" "$run_dir/gateway_batches.csv" 2>/dev/null || true
+        cp "$log_file" "$run_dir/gateway_log.txt" 2>/dev/null || true
+        exit "$validation_status"
+    fi
 
     cp "$summary_file" "$run_dir/gateway_summary.json"
     cp "$batches_file" "$run_dir/gateway_batches.csv" 2>/dev/null || true
@@ -377,14 +402,26 @@ for batch in "${BATCHES[@]}"; do
         # transaction batch and the gateway settlement batch use B.
         run_experiment "asc" "$batch" "$PORT_ASC" "$batch" "$batch" 0.0 \
             "$MLDSA_SIG_BYTES" "$MLDSA_VERIFY_US" -1 \
-            "ASC + real ML-DSA-44"
+            "ASC + real ML-DSA-44" \
+            "none" "$HYDRA_HEAD_SIZE"
     fi
 
     if should_run_protocol "pbft_batched"; then
         # Batched PBFT commits each logical tx batch as one gateway block.
         run_experiment "pbft_batched" "$batch" "$PORT_PBFT_BATCHED" "$batch" 1 "$PBFT_BATCH_DELAY" \
             "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
-            "Batched PBFT + ECDSA-sized packets"
+            "Batched PBFT + ECDSA-sized packets" \
+            "legacy_pbft" "$NUM_NODES"
+    fi
+
+    if should_run_protocol "hydra_ecdsa"; then
+        # Hydra Head is the Layer-2 non-PQ state-channel baseline. It uses the
+        # same logical batch size B as ASC but commits through the Hydra snapshot
+        # protocol emulation in the gateway.
+        run_experiment "hydra_ecdsa" "$batch" "$PORT_HYDRA" "$batch" "$batch" 0.0 \
+            "$ECDSA_SIG_BYTES" "$ECDSA_VERIFY_US" "$ECDSA_SIGN_US" \
+            "Hydra Head ECDSA state-channel baseline" \
+            "hydra" "$HYDRA_HEAD_SIZE"
     fi
 done
 

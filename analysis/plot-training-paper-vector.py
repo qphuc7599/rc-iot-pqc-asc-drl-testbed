@@ -9,6 +9,7 @@ for a two-column `figure*` in the Elsevier layout.
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -20,10 +21,12 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 LOG_CANDIDATES = [
+    ROOT / "drl" / "models_robust_pooled" / "training_log.json",
     ROOT / "drl" / "models_robust" / "training_log.json",
     ROOT / "drl" / "models" / "training_log.json",
 ]
 RESULTS_DIR = ROOT / "results"
+POOLED_RESULTS_DIR = RESULTS_DIR / "drl_pooled"
 PAPER_FIG_DIR = ROOT / "file_project" / "figures"
 
 
@@ -45,7 +48,10 @@ plt.rcParams.update(
 )
 
 
-def load_training_log() -> tuple[dict, Path]:
+def load_training_log(path: Path | None = None) -> tuple[dict, Path]:
+    if path is not None:
+        with path.open("r", encoding="utf-8") as f:
+            return json.load(f), path
     for path in LOG_CANDIDATES:
         if path.exists():
             with path.open("r", encoding="utf-8") as f:
@@ -64,7 +70,13 @@ def moving_average(values: np.ndarray, window: int = 50) -> np.ndarray:
     return out
 
 
-def plot_training(log: dict, source_path: Path) -> list[Path]:
+def plot_training(
+    log: dict,
+    source_path: Path,
+    output_dir: Path = POOLED_RESULTS_DIR,
+    paper_copy: bool = True,
+    title_suffix: str = "",
+) -> list[Path]:
     rewards = np.asarray(log.get("rewards", []), dtype=float)
     tps = np.asarray(log.get("tps", []), dtype=float)
     alive = np.asarray(log.get("alive", []), dtype=float)
@@ -76,7 +88,10 @@ def plot_training(log: dict, source_path: Path) -> list[Path]:
     if reward_ma.size != rewards.size:
         reward_ma = moving_average(rewards, 50)
     fig, (ax_reward, ax_tps) = plt.subplots(1, 2, figsize=(7.2, 2.75))
-    fig.suptitle("PPO Training -- RC-IoT Committee Selection", fontsize=10.0, y=1.02)
+    title = "PPO Training -- RC-IoT Committee Selection"
+    if title_suffix:
+        title = f"{title} ({title_suffix})"
+    fig.suptitle(title, fontsize=10.0, y=1.02)
 
     ax_reward.plot(x, rewards, color="#a5b4fc", alpha=0.26, linewidth=0.55, label="Per-update")
     ax_reward.plot(x, reward_ma, color="#dc2626", linewidth=1.45, label="Moving avg (50)")
@@ -113,11 +128,18 @@ def plot_training(log: dict, source_path: Path) -> list[Path]:
     fig.subplots_adjust(left=0.07, right=0.94, bottom=0.16, top=0.80, wspace=0.22)
 
     outputs = [
-        RESULTS_DIR / "drl_training_paper.pdf",
-        RESULTS_DIR / "drl_training_paper.png",
-        PAPER_FIG_DIR / "training_convergence.pdf",
-        PAPER_FIG_DIR / "training_convergence.png",
+        output_dir / "drl_training_paper.pdf",
+        output_dir / "drl_training_paper.png",
     ]
+    if paper_copy:
+        outputs.extend(
+            [
+                RESULTS_DIR / "drl_training_paper.pdf",
+                RESULTS_DIR / "drl_training_paper.png",
+                PAPER_FIG_DIR / "training_convergence.pdf",
+                PAPER_FIG_DIR / "training_convergence.png",
+            ]
+        )
     for out in outputs:
         out.parent.mkdir(parents=True, exist_ok=True)
         if out.suffix == ".png":
@@ -135,8 +157,25 @@ def plot_training(log: dict, source_path: Path) -> list[Path]:
 
 
 def main() -> None:
-    log, source_path = load_training_log()
-    outputs = plot_training(log, source_path)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--training-log", type=Path, default=None)
+    parser.add_argument("--output-dir", type=Path, default=POOLED_RESULTS_DIR)
+    parser.add_argument("--title-suffix", default="")
+    parser.add_argument(
+        "--no-paper-copy",
+        action="store_true",
+        help="do not update results/drl_training_paper.* or file_project/figures/training_convergence.*",
+    )
+    args = parser.parse_args()
+
+    log, source_path = load_training_log(args.training_log)
+    outputs = plot_training(
+        log,
+        source_path,
+        output_dir=args.output_dir,
+        paper_copy=not args.no_paper_copy,
+        title_suffix=args.title_suffix,
+    )
     print(f"Generated paper-ready training convergence from {source_path}:")
     for out in outputs:
         print(f"  {out}")

@@ -6,13 +6,17 @@
 # session to avoid queue/backlog leakage between measurements.
 #
 # Usage in WSL:
-#   sudo bash run-q1-batch-sweep.sh [duration_seconds] [asc|pbft_batched|all] [default|all|batch_csv]
+#   sudo bash run-batch-sweep-full.sh [duration_seconds] [asc|pbft_batched|hydra_ecdsa|all] [default|all|batch_csv]
 #
 # Examples:
-#   sudo bash run-q1-batch-sweep.sh 60 asc
-#   sudo bash run-q1-batch-sweep.sh 60 all
-#   sudo bash run-q1-batch-sweep.sh 60 all 50
-#   sudo bash run-q1-batch-sweep.sh 60 all all
+#   sudo bash run-batch-sweep-full.sh 60 asc
+#   sudo bash run-batch-sweep-full.sh 60 all
+#   sudo bash run-batch-sweep-full.sh 60 all 50
+#   sudo bash run-batch-sweep-full.sh 60 all all
+#
+# Optional:
+#   KEEP_BATCH_SWEEP=1   append/retry without deleting results/batch_sweep
+#   CASE_RETRIES=2       retry a failed (B, protocol) run this many times
 
 set -euo pipefail
 
@@ -25,6 +29,7 @@ GW_IP="10.1.1.100"
 SUBNET="10.1.1"
 NS3_BIN="$BASE_DIR/ns-3-dev/build/scratch/ns3-dev-iot-storm-network-optimized"
 NS3_PID=""
+CASE_RETRIES="${CASE_RETRIES:-2}"
 # B=50 is already measured by the main paper baseline. The default wrapper adds
 # surrounding sensitivity points only. Pass "50" for a direct B=50 p95 anchor,
 # "all" for 1/10/25/50/100, or a comma-separated list such as "25,50,100".
@@ -73,6 +78,8 @@ cleanup_all() {
     for i in $(seq 0 "$NUM_NODES"); do
         ip link delete "veth${i}" 2>/dev/null || true
         ip link delete "br${i}" 2>/dev/null || true
+        ip link delete "tap${i}" 2>/dev/null || true
+        ip tuntap del dev "tap${i}" mode tap 2>/dev/null || true
     done
     NS3_PID=""
 }
@@ -121,6 +128,12 @@ start_ns3() {
         fi
     done
     sleep 5
+    if ! kill -0 "$NS3_PID" 2>/dev/null; then
+        echo "[ERROR] NS-3 exited while creating tap devices."
+        echo "        This is usually caused by stale tap devices. Cleanup has been updated;"
+        echo "        rerun the wrapper, or manually run: sudo ip tuntap del dev tap0 mode tap"
+        exit 1
+    fi
 }
 
 connect_ns3_to_docker() {
@@ -188,23 +201,36 @@ connect_ns3_to_docker() {
         ip netns exec "$pid" ip link set "veth${i}c" up
         sleep 0.02
     done
+
+    # Give tap/bridge forwarding and ARP learning a short settling window.
+    # Without this, occasional fresh NS-3 sessions can start the workload before
+    # the Docker-side links are actually passing traffic, producing zero-update
+    # summaries even though tx-generator logs show packets were sent.
+    sleep 8
+
+    if ! kill -0 "$NS3_PID" 2>/dev/null; then
+        echo "[ERROR] NS-3 exited after Docker bridge setup."
+        exit 1
+    fi
 }
 
 protocols_to_run() {
     if [ "$REQUESTED_PROTOCOL" = "all" ]; then
-        echo "asc pbft_batched"
+        echo "asc pbft_batched hydra_ecdsa"
     else
         echo "$REQUESTED_PROTOCOL"
     fi
 }
 
 echo "================================================================"
-echo "  Q1 BATCH-SIZE SENSITIVITY WRAPPER"
+echo "  BATCH-SIZE SENSITIVITY WRAPPER"
 echo "  Duration per run: ${DURATION}s | Nodes: ${NUM_NODES}"
 echo "  Batch sizes: ${BATCHES[*]} | Protocol: ${REQUESTED_PROTOCOL}"
 echo "================================================================"
 
-rm -rf "$BASE_DIR/results/batch_sweep"
+if [ "${KEEP_BATCH_SWEEP:-0}" != "1" ]; then
+    rm -rf "$BASE_DIR/results/batch_sweep"
+fi
 mkdir -p "$BASE_DIR/results/batch_sweep"
 
 for batch in "${BATCHES[@]}"; do
@@ -213,13 +239,29 @@ for batch in "${BATCHES[@]}"; do
         echo "================================================================"
         echo "  B=${batch}, protocol=${protocol}"
         echo "================================================================"
-        cleanup_all
-        start_containers
-        start_ns3
-        connect_ns3_to_docker
-        echo "[4/4] Running batch sweep workload..."
-        cd "$BASE_DIR"
-        bash "$BASE_DIR/run-batch-size-sweep.sh" "$DURATION" "$batch" "$protocol"
+        attempt=1
+        while true; do
+            cleanup_all
+            start_containers
+            start_ns3
+            connect_ns3_to_docker
+            echo "[4/4] Running batch sweep workload... attempt ${attempt}/${CASE_RETRIES}"
+            cd "$BASE_DIR"
+            set +e
+            bash "$BASE_DIR/run-batch-size-sweep.sh" "$DURATION" "$batch" "$protocol"
+            status=$?
+            set -e
+
+            if [ "$status" -eq 0 ]; then
+                break
+            fi
+            if [ "$attempt" -ge "$CASE_RETRIES" ]; then
+                echo "[ERROR] B=${batch}, protocol=${protocol} failed after ${CASE_RETRIES} attempt(s)."
+                exit "$status"
+            fi
+            echo "[WARN] B=${batch}, protocol=${protocol} failed; retrying with a fresh Docker + NS-3 session..."
+            attempt=$((attempt + 1))
+        done
     done
 done
 

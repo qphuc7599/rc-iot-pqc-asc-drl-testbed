@@ -28,16 +28,19 @@ python3 generate.py
 
 ## 1. N=100 NS-3 Baseline, Required For Paper Claims
 
-Heavy. This produces the clean A/B/C/D/E comparison under NS-3:
+Heavy. This produces the clean A/B/C/D/E/F/G/H comparison under NS-3:
 
 - A: PBFT + ECDSA, batch=1
 - B: BLS-sized aggregate control, batch=1
 - C: ASC + ML-DSA, batch=50
 - D: PBFT + ECDSA, batch=50 control
 - E: ASC + ECDSA, batch=50 no-PQC ablation
+- F: Simplex-style ECDSA BFT protocol-emulation baseline
+- G: Bullshark-style DAG-BFT ECDSA protocol-emulation baseline
+- H: Hydra-like ECDSA state-channel upper-bound control
 
 ```bash
-sudo bash run-q1-ns3-baseline.sh 60
+sudo bash run-ns3-baseline.sh 60
 ```
 
 The wrapper now fails fast if the gateway cannot run Python, if a summary file
@@ -47,7 +50,7 @@ batch/signature/PBFT configuration.
 Network note: the NS-3 WiFi tap-bridge uses `10.1.1.0/24`; the gateway is
 assigned `10.1.1.100`, and IoT nodes are assigned `10.1.1.101` onward.
 
-Isolation note: the wrapper restarts Docker + NS-3 for each A/B/C/D/E protocol
+Isolation note: the wrapper restarts Docker + NS-3 for each protocol
 mode. This is slower, but prevents high-rate traffic from one protocol from
 leaking through NS-3/tap queues into the next protocol measurement.
 
@@ -59,6 +62,9 @@ results/comparison_B_bls_aggregate/gateway_summary.json
 results/comparison_C_offchain_statechannel/gateway_summary.json
 results/comparison_D_pbft_batched_ecdsa/gateway_summary.json
 results/comparison_E_offchain_ecdsa/gateway_summary.json
+results/comparison_F_simplex_batched_ecdsa/gateway_summary.json
+results/comparison_G_bullshark_dag_ecdsa/gateway_summary.json
+results/comparison_H_hydra_ecdsa/gateway_summary.json
 results/baseline_comparison.png
 ```
 
@@ -70,9 +76,9 @@ Use these for:
 
 ## 2. Full NS-3 Scalability Curve
 
-Very heavy. This runs N=10,25,50,75,100 for all five A/B/C/D/E protocol
-configurations: PBFT+ECDSA, BLS aggregate, ASC+ML-DSA, batched PBFT+ECDSA,
-and ASC+ECDSA.
+Very heavy. This runs N=10,25,50,75,100 for all protocol configurations:
+PBFT+ECDSA, BLS aggregate, ASC+ML-DSA, batched PBFT+ECDSA, ASC+ECDSA,
+Simplex-style ECDSA, Bullshark-style ECDSA, and Hydra-like ECDSA.
 The offered load is fixed at `100 tx/s/node`; at N=100 this is 10,000 logical
 transactions per second, high enough for throughput to be network/protocol
 limited rather than source limited.

@@ -20,10 +20,11 @@ gateway/                   UDP gateway and state-channel aggregator
 pqc/                       ML-DSA/ECDSA benchmark and traffic-generator sources
 ns3/scratch/               Custom NS-3 scratch simulation source
 generate.py                Generates the 100-node Docker Compose topology
-run-q1-ns3-baseline.sh     Full N=100 A/B/C/D/E baseline wrapper
+run-ns3-baseline.sh        Full N=100 A/B/C/D/E/F/G/H baseline wrapper
 run-scalability-full.sh    Full N in {10,25,50,75,100} scalability wrapper
-run-q1-batch-sweep.sh      Batch-size sensitivity wrapper
+run-batch-sweep-full.sh    Full batch-size sensitivity wrapper
 run-batch-size-sweep.sh    Batch sweep when Docker + NS-3 are already running
+run-drl-experiments.sh     PPO/DRL training, disaster, and sensitivity wrapper
 ```
 
 ## Requirements
@@ -78,23 +79,26 @@ ns-3-dev/build/scratch/ns3-dev-iot-storm-network-optimized
 
 ### 1. N=100 Baseline Comparison
 
-Runs five protocol modes in isolated Docker + NS-3 sessions:
+Runs the paper protocol modes in isolated Docker + NS-3 sessions:
 
 - A: PBFT + ECDSA, batch=1.
 - B: BLS-sized aggregate control, batch=1.
 - C: ASC + ML-DSA, batch=50.
 - D: Batched PBFT + ECDSA, batch=50.
 - E: ASC + ECDSA, batch=50.
+- F: Simplex-style ECDSA BFT protocol-emulation baseline.
+- G: Bullshark-style DAG-BFT ECDSA protocol-emulation baseline.
+- H: Hydra-like ECDSA state-channel upper-bound control.
 
 ```bash
-sudo bash run-q1-ns3-baseline.sh 60
+sudo bash run-ns3-baseline.sh 60
 python3 analysis/plot-comparison.py
 python3 analysis/plot_ablation.py
 ```
 
 ### 2. Scalability Sweep
 
-Runs N in `{10,25,50,75,100}` for all five protocol modes:
+Runs N in `{10,25,50,75,100}` for all protocol modes:
 
 ```bash
 sudo bash run-scalability-full.sh 60
@@ -106,39 +110,47 @@ python3 analysis/plot_scalability.py
 Run all paper sweep points:
 
 ```bash
-sudo bash run-q1-batch-sweep.sh 60 all
+sudo bash run-batch-sweep-full.sh 60 all all
 python3 analysis/plot-batch-sweep.py --results-dir results/batch_sweep
 ```
 
 Use a custom comma-separated batch list when needed:
 
 ```bash
-sudo bash run-q1-batch-sweep.sh 60 asc 25,50,100
+sudo bash run-batch-sweep-full.sh 60 asc 25,50,100
 ```
 
 ### 4. DRL Training and Disaster Evaluation
 
+The paper DRL path uses model-level invalid-action masking, a pooled critic,
+and the masked Gumbel-Top-k actor. The wrapper auto-selects a Python
+environment with `numpy`, `torch`, and `gymnasium`.
+
+Smoke test:
+
+```bash
+bash run-drl-experiments.sh smoke
+```
+
 Train the robust PPO policy:
 
 ```bash
-python3 drl/ppo_agent.py --mode train --sim --episodes 3000 --steps 3000 \
-  --seed 2026 --workers 11 --save-dir drl/models_robust --train-profile robust
+bash run-drl-experiments.sh train-gumbel 3000 3000 11
 ```
 
 Evaluate disaster recovery:
 
 ```bash
-python3 drl/ppo_agent.py --mode disaster --sim \
-  --model drl/models_robust/ppo_best.pt --seed 42
-python3 analysis/plot-drl-results.py
+bash run-drl-experiments.sh disaster-gumbel
 ```
 
 Run the DRL fault-magnitude sensitivity grid:
 
 ```bash
-python3 drl/ppo_agent.py --mode sensitivity --sim \
-  --model drl/models_robust/ppo_best.pt --output results/drl_sensitivity.json
-python3 analysis/plot-drl-sensitivity.py --input results/drl_sensitivity.json
+bash run-drl-experiments.sh sensitivity-gumbel
+python3 analysis/plot-drl-sensitivity-paper.py \
+  --input results/drl_gumbel_pooled/drl_sensitivity.json \
+  --output-dir results/drl_gumbel_pooled
 ```
 
 ## Notes

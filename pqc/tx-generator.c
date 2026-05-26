@@ -67,7 +67,7 @@ typedef struct {
  *
  * Cortex-M4 devices:  pqm4 m4f optimized cycles
  * Cortex-M7 devices:  pqm4 m4f cycles (conservative; M7 pipeline may be faster)
- * Cortex-M0+ devices: pqm4 clean reference cycles (no DSP instructions)
+ * Cortex-M0+ devices: direct RP2040 benchmark where available
  * Xtensa devices:     estimated 1.3x clean cycles (different ISA, no NTT-friendly DSP)
  *
  * v3: Replaced cpu_scale_factor with hard-coded pqm4 latencies.
@@ -75,6 +75,11 @@ typedef struct {
  *     throttling does not model ARM micro-architecture (in-order pipeline,
  *     no SIMD/AVX, limited memory bandwidth). Hard-coded delays from pqm4
  *     provide accurate device-specific latencies independent of host CPU.
+ *
+ * v4: RP2040 uses direct ARM Cortex-M0+ measurements from Chhetri 2026
+ *     (arXiv:2603.19340) rather than M4 extrapolation. Real ML-DSA signing
+ *     delay is sampled from a geometric rejection-sampling model so tail
+ *     latency is represented in the NS-3/Docker traffic generator.
  */
 typedef struct {
     const char *name;
@@ -91,8 +96,39 @@ static const DeviceProfile DEVICE_PROFILES[NUM_DEVICE_TYPES] = {
     {"STM32F4-M4",    23471,    8462,      50.0},
     {"STM32H7-M7",     4518,    1629,      90.0},
     {"nRF52840",      61611,   22213,      23.0},
-    {"RP2040",        54848,   19774,      45.0},
+    {"RP2040",       158907,   44000,      45.0},
 };
+
+/* ML-DSA-44 rejection-sampling model.
+ *
+ * Mean latency is preserved, while per-update signing delay gets a realistic
+ * long tail. With p=0.235 and a 35% fixed component, the p99/mean ratio is
+ * about 3.1x, matching the direct RP2040 benchmark (158.9 ms mean, ~489.9 ms
+ * p99) without special-casing one device in the sampling logic.
+ */
+#define MLDSA_ACCEPT_PROB 0.235
+#define MLDSA_FIXED_FRACTION 0.35
+#define MLDSA_VARIABLE_FRACTION 0.65
+#define MLDSA_MAX_REJECTION_ATTEMPTS 128
+
+static double rand_unit_open(void) {
+    return ((double)rand() + 1.0) / ((double)RAND_MAX + 2.0);
+}
+
+static uint32_t sample_mldsa_sign_delay_us(uint32_t mean_us) {
+    int attempts = 1;
+    while (attempts < MLDSA_MAX_REJECTION_ATTEMPTS
+           && rand_unit_open() > MLDSA_ACCEPT_PROB) {
+        attempts++;
+    }
+
+    const double mean_attempts = 1.0 / MLDSA_ACCEPT_PROB;
+    const double fixed_us = (double)mean_us * MLDSA_FIXED_FRACTION;
+    const double per_attempt_us = ((double)mean_us * MLDSA_VARIABLE_FRACTION)
+                                  / mean_attempts;
+    const double sampled = fixed_us + per_attempt_us * (double)attempts;
+    return (uint32_t)(sampled + 0.5);
+}
 
 static const DeviceProfile* get_device_profile(int node_id) {
     /*
@@ -173,7 +209,7 @@ int main(int argc, char *argv[]) {
     uint8_t *pk = NULL;
     uint8_t *sk = NULL;
 
-    fprintf(stderr, "[TX-GEN %d] Device=%s, sign_delay=%uus (pqm4), power=%.0fmW\n",
+    fprintf(stderr, "[TX-GEN %d] Device=%s, mean_sign_delay=%uus, power=%.0fmW\n",
             node_id, dev->name, dev->sign_delay_us, dev->power_mw);
 
     if (use_emulated_signature) {
@@ -312,7 +348,7 @@ int main(int argc, char *argv[]) {
 
             uint32_t target_sign_us = (emulated_sign_delay_us >= 0)
                 ? (uint32_t)emulated_sign_delay_us
-                : dev->sign_delay_us;
+                : sample_mldsa_sign_delay_us(dev->sign_delay_us);
             if (target_sign_us > (uint32_t)raw_sign_time) {
                 usleep(target_sign_us - (unsigned int)raw_sign_time);
             }
@@ -376,10 +412,18 @@ int main(int argc, char *argv[]) {
             }
             if (emulated_sign_delay_us > 0) {
                 usleep((useconds_t)emulated_sign_delay_us);
+                total_sign_us += (uint64_t)emulated_sign_delay_us;
             }
         } else {
+            uint64_t sign_start = now_us();
             sign_ok = (OQS_SIG_sign(sig, signature, &sig_len,
                                     state_hash, DATA_SIZE, sk) == OQS_SUCCESS);
+            uint64_t raw_sign_time = now_us() - sign_start;
+            uint32_t target_sign_us = sample_mldsa_sign_delay_us(dev->sign_delay_us);
+            if (target_sign_us > (uint32_t)raw_sign_time) {
+                usleep(target_sign_us - (unsigned int)raw_sign_time);
+            }
+            total_sign_us += (uint64_t)target_sign_us;
         }
         if (sign_ok) {
             TxChannelPacket *hdr = (TxChannelPacket *)pkt_buf;
@@ -407,12 +451,12 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "  Channel updates sent: %u (avg %.1f TX/channel)\n",
             total_channels,
             total_channels > 0 ? (double)total_tx_count / total_channels : 0);
-    fprintf(stderr, "  Device=%s, pqm4 sign: %u us, Avg actual: %.1f us (1 per channel)\n",
+    fprintf(stderr, "  Device=%s, mean sign: %u us, Avg injected: %.1f us (1 per channel)\n",
             dev->name, dev->sign_delay_us,
             total_channels > 0 ? (double)total_sign_us / total_channels : 0);
     fprintf(stderr, "  Avg hash/TX: %.1f us (off-chain, no crypto)\n",
             total_tx_count > 0 ? (double)total_hash_us / total_tx_count : 0);
-    fprintf(stderr, "  Energy/sign: %.4f mJ (pqm4 latency x device power)\n",
+    fprintf(stderr, "  Energy/sign: %.4f mJ (mean latency x device power)\n",
             dev->sign_delay_us * 1e-6 * dev->power_mw);
 
     free(pk); free(sk); free(signature);
