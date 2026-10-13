@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "all_eight_baselines_present": true,
+    "all_exogenous_streams_paired": true,
+    "all_mean_timelines_exactly_2000_steps": true,
+    "all_scalar_metrics_finite": true,
+    "all_timeline_values_finite": true,
+    "all_trajectories_exactly_2000_steps": true,
+    "no_forced_zero_tps_injected": true,
+    "one_deterministic_primary_per_seed": true,
+    "three_stochastic_replicas_per_seed": true,
+    "twenty_registered_environment_seeds": true
+  },
+  "paper_evidence_eligible": false,
+  "receipt_hash": "064878e9cc2f74ca185e0a632392f266df6d76959218432840359276b0f2f6a6",
+  "schema": "qrelay-security-speed-v5-disaster-validation-1",
+  "single_training_seed_diagnostic": true,
+  "status": "PASS"
+}

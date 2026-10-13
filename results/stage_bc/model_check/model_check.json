@@ -1,0 +1,103 @@
+{
+  "schema": "qrelay-stage-c-finite-model-check-1",
+  "evidence_status": "executed_finite_exhaustive_model",
+  "parameters": {
+    "n": 21,
+    "f": 6,
+    "safe_quorum": 14
+  },
+  "q13": {
+    "possible_intersection_cardinalities": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "minimum_intersection": 5,
+    "closed_form_lower_bound": 5,
+    "unsafe_intersection_cardinalities": [
+      5,
+      6
+    ],
+    "safe_under_non_equivocation": false,
+    "counterexample": {
+      "certificate_a": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "certificate_b": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "intersection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "intersection_is_all_byzantine": true
+    }
+  },
+  "q14": {
+    "possible_intersection_cardinalities": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "minimum_intersection": 7,
+    "closed_form_lower_bound": 7,
+    "unsafe_intersection_cardinalities": [],
+    "safe_under_non_equivocation": true,
+    "counterexample": null
+  },
+  "settlement_state_machine": {
+    "reachable_states": 81,
+    "explored_delivery_transitions": 648,
+    "stale_or_duplicate_rejections": 352,
+    "conflicting_same_sequence_rejections": 216,
+    "monotone_sequence_invariant": true,
+    "single_digest_per_channel_sequence_invariant": true
+  },
+  "tla_plus_specification": "/mnt/d/DoAnChuyenNganh/rc-iot-testbed/formal/QRelayQuorum.tla",
+  "tla_plus_executed": false,
+  "tla_plus_execution_note": "TLC is optional; the bundled Python checker executes the finite cardinality and settlement state spaces without external tooling.",
+  "all_invariants_pass": true,
+  "source_sha256": {
+    "stage_bc_model_check.py": "a4122505b6e99b6c52a317c2cbbd25bb3143fc6f53615befe4f544f0f91ad0f5",
+    "QRelayQuorum.tla": "d3bbf2a029b2642888b23a4db73ea840cc15758321b1dd3da0843eef82b7f519"
+  }
+}

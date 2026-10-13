@@ -1,0 +1,5766 @@
+{
+  "backend": {
+    "checksum_sha256": "eb65faef9e88d8822f096b864a03635b3f23669e353a1f99e4d95c01882b2801",
+    "execution_model": "single-process SDK orchestrating independent party states; no network transport",
+    "name": "threshold-ml-dsa",
+    "published_party_envelope": "2 <= T <= N <= 6",
+    "scheme": "Mithril-style three-round threshold ML-DSA-44 with replicated secret sharing",
+    "source": "https://github.com/lattice-safe/threshold-ml-dsa",
+    "verifier": "unmodified FIPS-204-compatible ML-DSA-44 verifier exposed by the dependency",
+    "version": "0.3.6"
+  },
+  "campaign_id": "paper_recovery_threshold_v3_registered_n100_affinity",
+  "configurations": [
+    {
+      "all_signatures_verified": true,
+      "attempt_success_rate": 1.0,
+      "implementation_defined_outbound_bytes_per_attempt": {
+        "final_signature": 2420,
+        "party_to_coordinator_total": 31552,
+        "qualification": "Derived from the executed crate's public packing constants; SDK execution is in-process and does not measure transport framing or network bytes",
+        "round1_commit_hash_per_party": 32,
+        "round2_reveal_per_party": 8832,
+        "round3_response_packing_per_party": 6912
+      },
+      "k_parallel_repetitions": 3,
+      "keygen_ms": 0.2212,
+      "n": 3,
+      "protocol_attempts": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "public_key_bytes": 1312,
+      "restart_same_public_key": true,
+      "restart_verified_prior_signature": true,
+      "rotation_changed_public_key": true,
+      "rotation_rejected_prior_signature": true,
+      "rss_subsets": 3,
+      "samples": [
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 0,
+          "sign_ms": 1.6432,
+          "signature_sha256": "e7dcb217b4bc278fff4b4307ef40594907ca9ed9c633134bd3d665c582131f2a",
+          "verified": true,
+          "verify_us": 112.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 1,
+          "sign_ms": 1.5150000000000001,
+          "signature_sha256": "a3bcd22266cb9946eebd2838b11a95b5de67eff81aa61f74298290e8314c3e72",
+          "verified": true,
+          "verify_us": 85.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 2,
+          "sign_ms": 1.3937000000000002,
+          "signature_sha256": "6b8d9706ca82369d111ceff22347e2708866e6afb8db2c59861baf7b6312ed4c",
+          "verified": true,
+          "verify_us": 84.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 3,
+          "sign_ms": 1.3483,
+          "signature_sha256": "8d20d0a6cd384be3e24ccd0a2c699427276dbeb84da62b3f3812e11f7aae2d1e",
+          "verified": true,
+          "verify_us": 80.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 4,
+          "sign_ms": 1.3789,
+          "signature_sha256": "4b9f3cc5603caff1523614226a876f665f85af851f4678f6411a679bcd4ed1e4",
+          "verified": true,
+          "verify_us": 78.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 5,
+          "sign_ms": 1.4291,
+          "signature_sha256": "53e24bab479c54d41a6b99735144e2efe20259695d2450e92202389520236099",
+          "verified": true,
+          "verify_us": 82.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 6,
+          "sign_ms": 1.2902,
+          "signature_sha256": "f76e10970c7a0c494720512a8d67d9a85883b0193b5b1c3695a025c6217acfbd",
+          "verified": true,
+          "verify_us": 77.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 7,
+          "sign_ms": 1.2576,
+          "signature_sha256": "c9235ca57dc8e5a142bd5248fb27fc3e52abda948f0b394fa591e36bd3340b8b",
+          "verified": true,
+          "verify_us": 82.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 8,
+          "sign_ms": 1.2593,
+          "signature_sha256": "6509cff74d1ba1588d5d1eb27a55398756a9274b21773a4b4b694dbaa574dc55",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 9,
+          "sign_ms": 1.3366,
+          "signature_sha256": "2f87970350864d536ec8c281fec69388fd16db5f29f8337e008737f7c58d8579",
+          "verified": true,
+          "verify_us": 93.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 10,
+          "sign_ms": 1.4483,
+          "signature_sha256": "4f58b4586ccc9e9f26e8e511d1df9e4c2775464ddb2d408d3e76da6e959fbf21",
+          "verified": true,
+          "verify_us": 86.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 11,
+          "sign_ms": 1.2836,
+          "signature_sha256": "36357f93b10a4ac87ad834c8a07a6d718c73ea84675979b47e66e54c7f72d93e",
+          "verified": true,
+          "verify_us": 78.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 12,
+          "sign_ms": 1.27,
+          "signature_sha256": "150402b520b5ff3ff95e86c8005e5a0334f6a88cc5a1f8bab7186c926f5d1276",
+          "verified": true,
+          "verify_us": 77.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 13,
+          "sign_ms": 1.2788000000000002,
+          "signature_sha256": "da407acca68b175b282c71e16dcf78c5021aa8e938bf0d52b99d2e1ac8f6bd57",
+          "verified": true,
+          "verify_us": 77.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 14,
+          "sign_ms": 1.3362999999999998,
+          "signature_sha256": "1c365f2cc9dcd6a92762a8a0bdaa6e7326191b4227b9313cf8dd7dfcb938ebbc",
+          "verified": true,
+          "verify_us": 89.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 15,
+          "sign_ms": 1.6486999999999998,
+          "signature_sha256": "d77c58a9f1635004793af7c18b3e3430aaeda8e89b1d8249ecb5515055adc9fd",
+          "verified": true,
+          "verify_us": 83.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 16,
+          "sign_ms": 1.333,
+          "signature_sha256": "8459424ceba26f81b1b7f069ca8ade9e1c3480502cc7e117d360ed015ba3ed8e",
+          "verified": true,
+          "verify_us": 78.80000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 17,
+          "sign_ms": 1.2995999999999999,
+          "signature_sha256": "04d1d6be442c20d5add307c6c45c4a3a1acada0b6ced15b395abc7f01bf023e5",
+          "verified": true,
+          "verify_us": 82.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 18,
+          "sign_ms": 1.2943,
+          "signature_sha256": "2f3663a1ebbb69380a221a60853377b41fc1e0c214849b04b03c70aee9398954",
+          "verified": true,
+          "verify_us": 77.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 19,
+          "sign_ms": 1.4051,
+          "signature_sha256": "674327772d26504211d3671cab1a822356362e7d29ab941f005b26987851caf7",
+          "verified": true,
+          "verify_us": 88.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 20,
+          "sign_ms": 1.5781,
+          "signature_sha256": "08869c906b7fc0abc7c831564a8b70cca32247af512e967ff05c554e1ceb2a95",
+          "verified": true,
+          "verify_us": 81.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 21,
+          "sign_ms": 1.3048,
+          "signature_sha256": "e651a391d18eeadf18de602ad29832e15be56c4064ba1cf9b8f5da10a46d58f3",
+          "verified": true,
+          "verify_us": 84.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 22,
+          "sign_ms": 1.2832,
+          "signature_sha256": "2edf730d121f6aa7412c30a273fc87a3a9c10af31a915181955c667b48d73e91",
+          "verified": true,
+          "verify_us": 89.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 23,
+          "sign_ms": 1.2793999999999999,
+          "signature_sha256": "6a653b4be69bbdbb535c533e01fa7726aa92db1cb6bda6f64b798be6be8b53fe",
+          "verified": true,
+          "verify_us": 78.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 24,
+          "sign_ms": 1.4157,
+          "signature_sha256": "32f1ecd146f5cbc56cc200139827a58f85e7afe6e2450f0c17e90871da53ba15",
+          "verified": true,
+          "verify_us": 90.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 25,
+          "sign_ms": 1.4439,
+          "signature_sha256": "04ec79d790629c9242882503b571e12d80537247f3783a708bb31fd6f7c626af",
+          "verified": true,
+          "verify_us": 79.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 26,
+          "sign_ms": 1.2836,
+          "signature_sha256": "a6d47f943aed8d41c7991f1bf605e0b9fbb78cd30b5f6db544ef2c3c2091f057",
+          "verified": true,
+          "verify_us": 81.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 27,
+          "sign_ms": 1.2754999999999999,
+          "signature_sha256": "f9582e531cfc84477e5846f531336f5db5e1a72195d69997dc74be43813e9cb0",
+          "verified": true,
+          "verify_us": 82.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 28,
+          "sign_ms": 1.288,
+          "signature_sha256": "e70053acd8132eea6fa6c5f3fe8c77a8b52f92c00bb43ab610b2ab218f89821d",
+          "verified": true,
+          "verify_us": 77.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 29,
+          "sign_ms": 1.4973,
+          "signature_sha256": "d868e07f34797eeef269ac1399df4921a02bc8767061d4be9c68f349ccfbf953",
+          "verified": true,
+          "verify_us": 80.3
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 30,
+          "sign_ms": 1.3445,
+          "signature_sha256": "b3bed45abf2ec14bf071b5479074c6c6ebaa164029c5f364ced67e7e890c99c3",
+          "verified": true,
+          "verify_us": 82.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 31,
+          "sign_ms": 1.2744,
+          "signature_sha256": "96a1cc1323a4a9365b3e6cf9c81375d40a591649b06c723f7f5be1c0a67b23c1",
+          "verified": true,
+          "verify_us": 77.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 32,
+          "sign_ms": 1.2796,
+          "signature_sha256": "27611000b8a1a5cc759433c76b6ade52a71930dc2e04c404d9070d95e9c79dc5",
+          "verified": true,
+          "verify_us": 76.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 33,
+          "sign_ms": 1.2718,
+          "signature_sha256": "34dc21577ba29291130fd9165b7f63c5b127103386f4b2c63164347e0a2228a5",
+          "verified": true,
+          "verify_us": 74.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 34,
+          "sign_ms": 1.4803,
+          "signature_sha256": "c7521b0a339b38da3297edb13776dfbec7ba2e3b29925a34fd8fdae9e5aa44e9",
+          "verified": true,
+          "verify_us": 78.1
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 35,
+          "sign_ms": 1.3041,
+          "signature_sha256": "555d8b7664c5125b157a302fa8c6f04448d75238da4db04ea4d56bf76afe240b",
+          "verified": true,
+          "verify_us": 77.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 36,
+          "sign_ms": 1.3052000000000001,
+          "signature_sha256": "eebeb0ca4fa476c3db4bfd1b733606ded07cea385afbc0bedb6f362cb70d776b",
+          "verified": true,
+          "verify_us": 74.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 37,
+          "sign_ms": 1.277,
+          "signature_sha256": "c42583baa9a38222da3e554f43564f314631c44a956aa538e03325602b9d2bd1",
+          "verified": true,
+          "verify_us": 75.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 38,
+          "sign_ms": 1.2644,
+          "signature_sha256": "4f2853d492d8d209378af81cb3a55a798db0880dc4abcdef5092a2ae2a625bd6",
+          "verified": true,
+          "verify_us": 124.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 39,
+          "sign_ms": 1.4459,
+          "signature_sha256": "0e65c5fbdad97033b195fb6916a6afc56ea754e5e07c69105b246c20893c084f",
+          "verified": true,
+          "verify_us": 82.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 40,
+          "sign_ms": 1.3109,
+          "signature_sha256": "613dfb11bc288efdc04ea1eacc2533a6d6f01b3d0e8ed1416b858350b7937ba7",
+          "verified": true,
+          "verify_us": 76.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 41,
+          "sign_ms": 1.2776,
+          "signature_sha256": "eddf2b462021fe8937f43797a48ce764394f6bfd3d683ea19975cc1ccbc2a515",
+          "verified": true,
+          "verify_us": 77.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 42,
+          "sign_ms": 1.2669000000000001,
+          "signature_sha256": "7c198606d045e4afc15d35b0f4ab819a68ea6d467efcf419a38366f74368768d",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 43,
+          "sign_ms": 1.3455,
+          "signature_sha256": "f104e2fd41e5eb25fd38146bf72f24d56a621986abbc0ae39a24735eb76ab4d0",
+          "verified": true,
+          "verify_us": 82.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 44,
+          "sign_ms": 1.4266999999999999,
+          "signature_sha256": "f0989e4fdfb2a77aaed65a0df506f92618e592a97c405d1fb911f66b8df584ea",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 45,
+          "sign_ms": 1.3056,
+          "signature_sha256": "4f29c03c5ae3884bf656562b1b2a09cd40815ca617cb14a62b727b75c654d48f",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 46,
+          "sign_ms": 1.277,
+          "signature_sha256": "c8e31f255e8d7e6d9484edc099ddc76b117eca2e46012d399ccd41882ef34006",
+          "verified": true,
+          "verify_us": 74.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 47,
+          "sign_ms": 1.2786,
+          "signature_sha256": "2dce427af481a07b68f679d27d7463f3f837bc9c57e8415e7f12ef35f65dfb89",
+          "verified": true,
+          "verify_us": 74.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 48,
+          "sign_ms": 1.3858,
+          "signature_sha256": "11b850219aef4095cf4a9225c64a5ba484c3a0a406e23704a1a3fbb0693d6e64",
+          "verified": true,
+          "verify_us": 93.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 49,
+          "sign_ms": 1.5636999999999999,
+          "signature_sha256": "f1368e04a46e73ee0fce2ff0d27e33aa00f99d55d58ee4c1fe6a18e1e9f29149",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 50,
+          "sign_ms": 1.3152000000000001,
+          "signature_sha256": "c6001cf6fef2302a698a565a2b338adaf89da558626225a815181317f1684668",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 51,
+          "sign_ms": 1.2989,
+          "signature_sha256": "c591b5ea3908258f50a82359c8e511ac032dbd8b07ee85cebda0cece731cb790",
+          "verified": true,
+          "verify_us": 86.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 52,
+          "sign_ms": 1.2894,
+          "signature_sha256": "81e99aaf14732db363d94c23bf5208b595b9eab9eea4fd0edb5817ac739f299f",
+          "verified": true,
+          "verify_us": 75.1
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 53,
+          "sign_ms": 1.4315,
+          "signature_sha256": "0a1592ad201f7160b076df0bc307482d9cc5a87c1e8e50668a831c0db8208407",
+          "verified": true,
+          "verify_us": 86.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 54,
+          "sign_ms": 1.464,
+          "signature_sha256": "45b4c18c1c4e277a7b7431dd847358e381aea55a5a2a6cab5788797a224ce3b5",
+          "verified": true,
+          "verify_us": 83.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 55,
+          "sign_ms": 1.3140999999999998,
+          "signature_sha256": "781b3c8d9ee397b74d8637bf8853716a1f27c712db76863e3fed2b3c4f792795",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 56,
+          "sign_ms": 1.2851,
+          "signature_sha256": "77ab6a9a79a08902823139b46ecbe4ad2359b53bfcbe881bd281031486988102",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 57,
+          "sign_ms": 1.2683,
+          "signature_sha256": "e565bd9719fede929dbf46cce039971ac3805de78be321d0421a5c960c44aa61",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 58,
+          "sign_ms": 1.3625,
+          "signature_sha256": "4b3b11aa5a655df4b1ae9656a946f4cea991880eb4dcdfd61c0731b080d8f743",
+          "verified": true,
+          "verify_us": 83.1
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 59,
+          "sign_ms": 1.4051,
+          "signature_sha256": "b71db17df6608f1ae03a79f5119e5b7a46e97eb07e3f7acff9861d2ff2b8488b",
+          "verified": true,
+          "verify_us": 79.3
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 60,
+          "sign_ms": 1.2852000000000001,
+          "signature_sha256": "06ff6175c573e5a8fd6fd13fd65c6cc2bffe9e0aea5298eab7cfb8190a89a1c7",
+          "verified": true,
+          "verify_us": 79.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 61,
+          "sign_ms": 1.2685000000000002,
+          "signature_sha256": "6e9df5a660383f3a251e0dd91250314f13ff2f8416174b7aef36d12abf44dcf9",
+          "verified": true,
+          "verify_us": 75.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 62,
+          "sign_ms": 1.2696999999999998,
+          "signature_sha256": "d64e84b71674587c4c391390aa0da1c75970bbad0ddabb3cab212a3df7dc72a8",
+          "verified": true,
+          "verify_us": 76.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 63,
+          "sign_ms": 1.3692000000000002,
+          "signature_sha256": "a64e753bea6889fdca5c4efc2294dc9ad1fe1b2b0848c462c67807a8080de1e1",
+          "verified": true,
+          "verify_us": 83.1
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 64,
+          "sign_ms": 1.3953,
+          "signature_sha256": "72f08f875cd18243e93ba14179e74fc0c77d36676e5d96014d17d6668988042a",
+          "verified": true,
+          "verify_us": 79.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 65,
+          "sign_ms": 1.2792999999999999,
+          "signature_sha256": "87646b4166949d5cea474e311c1ba6d9ec2a595a5c4b8efb4af712d10ec900b4",
+          "verified": true,
+          "verify_us": 75.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 66,
+          "sign_ms": 1.2796999999999998,
+          "signature_sha256": "faaece47f1857eeec4a96c6a0d4f49f4b1d95fe80ab631378242ff20adee82f7",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 67,
+          "sign_ms": 1.2715,
+          "signature_sha256": "6056af65ff4f48e22ff14d580e306f27605ffa4c87afd0aff427965ba11c56be",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 68,
+          "sign_ms": 1.383,
+          "signature_sha256": "f6bb36986697d43e52ce8e5101c25a2f2a30d161471c6bc88120a89fb6f25906",
+          "verified": true,
+          "verify_us": 84.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 69,
+          "sign_ms": 1.3787999999999998,
+          "signature_sha256": "c0ef6a19bc9d2add8fa28e6b415a98dffa319215ddd55371339c1115771e5897",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 70,
+          "sign_ms": 1.2746000000000002,
+          "signature_sha256": "4b177bd223a488de145ea8c418f6fa924f87b587ca9d072efd7358e4dba4324a",
+          "verified": true,
+          "verify_us": 76.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 71,
+          "sign_ms": 1.278,
+          "signature_sha256": "ef272272ccd95e830fb9b1888ed2a676c0162f63b2cf5f9abaa99d35dac19022",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 72,
+          "sign_ms": 1.2683,
+          "signature_sha256": "948812a4edfe70ad4c9a5a8676a0a7ebc61dc60a8859fc1d4448891d3ac1e9c8",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 73,
+          "sign_ms": 1.3702,
+          "signature_sha256": "b2721156b26c30ca8066b09486bf4df47887d2cab975f3a1b5733c5310b74735",
+          "verified": true,
+          "verify_us": 85.2
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 74,
+          "sign_ms": 1.4289,
+          "signature_sha256": "87626a3c61e12858a649f86f2e3290ff4a30c5c80511b54a40092a6e54bf192c",
+          "verified": true,
+          "verify_us": 78.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 75,
+          "sign_ms": 1.2719,
+          "signature_sha256": "70cb7fe416b8b61f9f179e4491e989824ec38d9b40e276d311c0a237716ff60c",
+          "verified": true,
+          "verify_us": 79.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 76,
+          "sign_ms": 1.2672,
+          "signature_sha256": "f2a08f79fad8b4b2571a312b3c5cd0ef9dd2c42bd3286cdb48469d96c74ebc6b",
+          "verified": true,
+          "verify_us": 76.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 77,
+          "sign_ms": 1.3043,
+          "signature_sha256": "362f5571f8abe21ebfda81e605d36d2f8ff16f7a9a5d16c251eeb5ca872bed6a",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 78,
+          "sign_ms": 1.3806999999999998,
+          "signature_sha256": "72edf1060fb8e9fde7f28fef98a79f066fbe96226901256ea6dc9a2ece668788",
+          "verified": true,
+          "verify_us": 83.8
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 79,
+          "sign_ms": 1.4082000000000001,
+          "signature_sha256": "03033a7fb26f06403262bc7cf1858a37cc98b7263e6064a28de017e0348ce55a",
+          "verified": true,
+          "verify_us": 77.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 80,
+          "sign_ms": 1.2717,
+          "signature_sha256": "7db10d34f064779d395f463785156fa604bd59698ab5e60612b8fe7eaf039a4b",
+          "verified": true,
+          "verify_us": 77.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 81,
+          "sign_ms": 1.2752,
+          "signature_sha256": "a6781f2515fa3b3318093e2f68031cbafd3f6b291ce26867ce0fb66db828db54",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 82,
+          "sign_ms": 1.2717,
+          "signature_sha256": "a0c8a530abd76a5c64da97c78ed2f276b28975ce910f491ae8fcd800e18d57a1",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 83,
+          "sign_ms": 1.407,
+          "signature_sha256": "d0ad17d3ce66fba3a278f64aee519badf8118341bd2838c89829a2f124a4e5eb",
+          "verified": true,
+          "verify_us": 86.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 84,
+          "sign_ms": 1.3893,
+          "signature_sha256": "c7c5069758cb60fb3f48bc2c9deafca70e42c1612772f5db95c1ca314d6bcd0c",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 85,
+          "sign_ms": 1.2786,
+          "signature_sha256": "5ca7b1677409c751fca3293ffa967d87720f8a7a81e17121907a9d0f95c332f5",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 86,
+          "sign_ms": 1.2679,
+          "signature_sha256": "3c4c9c4fac51a855f7af48270159822ef9ed3c145d9092018f06be63ab2ed4f6",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 87,
+          "sign_ms": 1.2659,
+          "signature_sha256": "ba88c0dc583d09e0b2ee49e7ef54129ed236768dbc824e7cd3b6ed02d2226fb3",
+          "verified": true,
+          "verify_us": 76.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 88,
+          "sign_ms": 1.3978,
+          "signature_sha256": "126a2957a37f74a0378bca5ca5d0e70771175a1460998c4e6416cfdceeca3a9a",
+          "verified": true,
+          "verify_us": 149.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 89,
+          "sign_ms": 1.3139,
+          "signature_sha256": "ebe8f93a308990bb8d6670b2ec9e2ab0450a00ea60816c79bc125b59cc190f46",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 90,
+          "sign_ms": 1.2708000000000002,
+          "signature_sha256": "9c803c0cf5389868100ca8837cc959f720d8ebcaad665f005d7c86a9998e4173",
+          "verified": true,
+          "verify_us": 76.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 91,
+          "sign_ms": 1.2630000000000001,
+          "signature_sha256": "a44cbcece23f9345c8a79dc339bd5190e985aa9b1df7566f1d8e16be6bb5d7f9",
+          "verified": true,
+          "verify_us": 75.4
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 92,
+          "sign_ms": 1.2691,
+          "signature_sha256": "8b065bcd399c4a93e2be624a3c73db7d4465af4a0e040accab79b1e9f447eab9",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 93,
+          "sign_ms": 1.4021000000000001,
+          "signature_sha256": "6babfb7e96f48a249424474d80cbfcc73357788957a322e5e658446aab01d97e",
+          "verified": true,
+          "verify_us": 80.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 94,
+          "sign_ms": 1.4596,
+          "signature_sha256": "7afffc6c6a2c7525a129b99d08c6ae6acb150d517a08adbb179916aa03987d52",
+          "verified": true,
+          "verify_us": 78.80000000000001
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 95,
+          "sign_ms": 1.271,
+          "signature_sha256": "c3c19638a671abf786662f90e715c52ea2ecebb8052b6122099b3c6f5623157c",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 96,
+          "sign_ms": 1.2754999999999999,
+          "signature_sha256": "3e66620c6b0b038596882467092309e3f8da3c9382a634211fda29614a42d34c",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 97,
+          "sign_ms": 1.2778,
+          "signature_sha256": "a32baac40965258f64014f4bc3874990bea0d32857f5cffc461779f1f6b0395f",
+          "verified": true,
+          "verify_us": 75.5
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 98,
+          "sign_ms": 1.4815,
+          "signature_sha256": "3cd07a97215d08205e4c726f82c15354249b983aa71684199698cd86eca800a0",
+          "verified": true,
+          "verify_us": 134.1
+        },
+        {
+          "active": [
+            0,
+            1
+          ],
+          "attempts": 1,
+          "sample_index": 99,
+          "sign_ms": 1.3168,
+          "signature_sha256": "eca891aff1c8f3aec639cc557b08fce931b7240197b7418ac647525853cd6f64",
+          "verified": true,
+          "verify_us": 75.9
+        }
+      ],
+      "signature_bytes": 2420,
+      "signing_ms": {
+        "count": 100,
+        "max": 1.6486999999999998,
+        "mean": 1.3407740000000001,
+        "min": 1.2576,
+        "p50": 1.3042,
+        "p95": 1.498185,
+        "p99": 1.643255
+      },
+      "t": 2,
+      "verification_us": {
+        "count": 100,
+        "max": 149.5,
+        "mean": 81.35000000000002,
+        "min": 74.8,
+        "p50": 77.7,
+        "p95": 93.235,
+        "p99": 134.25400000000008
+      }
+    },
+    {
+      "all_signatures_verified": true,
+      "attempt_success_rate": 1.0,
+      "implementation_defined_outbound_bytes_per_attempt": {
+        "final_signature": 2420,
+        "party_to_coordinator_total": 110304,
+        "qualification": "Derived from the executed crate's public packing constants; SDK execution is in-process and does not measure transport framing or network bytes",
+        "round1_commit_hash_per_party": 32,
+        "round2_reveal_per_party": 20608,
+        "round3_response_packing_per_party": 16128
+      },
+      "k_parallel_repetitions": 7,
+      "keygen_ms": 0.199,
+      "n": 4,
+      "protocol_attempts": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "public_key_bytes": 1312,
+      "restart_same_public_key": true,
+      "restart_verified_prior_signature": true,
+      "rotation_changed_public_key": true,
+      "rotation_rejected_prior_signature": true,
+      "rss_subsets": 6,
+      "samples": [
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 0,
+          "sign_ms": 4.0504,
+          "signature_sha256": "6d38977829d4d0e16f7c9e015428da5acca8671b685acfc19a0398d514533d90",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 1,
+          "sign_ms": 4.1118,
+          "signature_sha256": "7010e426afe6e7437ae55e9c663c1f60e5c37ad67145fae5c6e81e8c47cb846a",
+          "verified": true,
+          "verify_us": 83.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 2,
+          "sign_ms": 3.9081,
+          "signature_sha256": "c8c1b2cb8b77939a5630f4ddd876e4bc707a3375d5ea1bb075e28770c8cc3ca7",
+          "verified": true,
+          "verify_us": 76.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 3,
+          "sign_ms": 4.1165,
+          "signature_sha256": "a707d108bd63cf0a90f4891b2e8cc25f9d576ddc1d68e8a8be8171d15e0f24a3",
+          "verified": true,
+          "verify_us": 76.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 4,
+          "sign_ms": 3.9625,
+          "signature_sha256": "bfbf9734073b32202f74c2d89f49dbaef7d38d8b64de250cbab8c81ee54a4039",
+          "verified": true,
+          "verify_us": 80.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 5,
+          "sign_ms": 4.0429,
+          "signature_sha256": "c0b6d352639f827a2e16d04fa03b2ba3eef1ebfcd56c231a176060dae478ffb3",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 6,
+          "sign_ms": 4.1309,
+          "signature_sha256": "74fd84bc2e396496f42b3e7f6d5008509e288d4b0bee3d86e20c5107e152b8dc",
+          "verified": true,
+          "verify_us": 77.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 7,
+          "sign_ms": 3.9919,
+          "signature_sha256": "17370d9cc021cb90a32911468b2954916a22e79f0ef42513efd7d74a43172dac",
+          "verified": true,
+          "verify_us": 90.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 8,
+          "sign_ms": 4.189100000000001,
+          "signature_sha256": "e62ba163e6ee1212a0ea196fcee4b4af1ee02a83b0642d686a9122e211755377",
+          "verified": true,
+          "verify_us": 77.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 9,
+          "sign_ms": 4.0428,
+          "signature_sha256": "b58895a23a1d61aa0e4007fbea0fcb1035be8ded409cc8602fe5c22b09852fe9",
+          "verified": true,
+          "verify_us": 86.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 10,
+          "sign_ms": 4.281,
+          "signature_sha256": "0047a12642deef8bd29a343df52478fa654d4c61064dd64255b40e2006730882",
+          "verified": true,
+          "verify_us": 99.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 11,
+          "sign_ms": 4.2237,
+          "signature_sha256": "0b33ca670c0f2eb385e4a505f0843d02a0c746bc23b61c6e5d5a4e0b23a23573",
+          "verified": true,
+          "verify_us": 84.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 12,
+          "sign_ms": 3.9179999999999997,
+          "signature_sha256": "00a4e2533fcea6cf2f8b1f742f8b8aa3de2b168aaefc25aa8b262dbf13f1a9cf",
+          "verified": true,
+          "verify_us": 76.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 13,
+          "sign_ms": 4.1027,
+          "signature_sha256": "c713c1c75ce8c66c2c74a952879320bd3db1ee11c978ab88b49d540c57b4a688",
+          "verified": true,
+          "verify_us": 76.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 14,
+          "sign_ms": 3.9560000000000004,
+          "signature_sha256": "74360f469b013fd43593ff751e65ccffe107ad15db42992e47ae4b48db567356",
+          "verified": true,
+          "verify_us": 86.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 15,
+          "sign_ms": 4.0655,
+          "signature_sha256": "16abd8f514217cf9c244e06fbd67da36739f84e6c7bbad320e3919bc5dfd919c",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 16,
+          "sign_ms": 4.130199999999999,
+          "signature_sha256": "a9f9bc56938f25d6358a795ea9ddcf8a622ed89abfaa89bf66f8ae2d52271906",
+          "verified": true,
+          "verify_us": 77.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 17,
+          "sign_ms": 3.9177999999999997,
+          "signature_sha256": "220a04ecca6fd39f891fdd35b111e85922c5baff2e54d62dfd3548eee96ab86d",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 18,
+          "sign_ms": 4.249499999999999,
+          "signature_sha256": "6d2b4d50d3b60ef73c69e858576bedef02963254ae4991ac1db04033745b8121",
+          "verified": true,
+          "verify_us": 76.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 19,
+          "sign_ms": 3.9764,
+          "signature_sha256": "6d448df5baa23632e2b465c1b166b128847338f4f1b21219973fddf80373a52b",
+          "verified": true,
+          "verify_us": 80.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 20,
+          "sign_ms": 4.1019000000000005,
+          "signature_sha256": "f517862d7560e6207222e942788ab1019247239dd812c964020739af69a284fc",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 21,
+          "sign_ms": 4.123500000000001,
+          "signature_sha256": "4d381c5ce6bbf506d627f1b821fbc03c3ee79a771088fe85399841be29e8ebe9",
+          "verified": true,
+          "verify_us": 77.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 22,
+          "sign_ms": 3.9617000000000004,
+          "signature_sha256": "39e0a8bed04c4c766323ab00524738b96f00f085b8ba3dcb910b572226430cb6",
+          "verified": true,
+          "verify_us": 77.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 23,
+          "sign_ms": 4.1213999999999995,
+          "signature_sha256": "21f480394d2ff26912b44df546354ac0d63df0e9d1ecfcf478cd063a200af5eb",
+          "verified": true,
+          "verify_us": 76.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 24,
+          "sign_ms": 3.96,
+          "signature_sha256": "00553c9decf391d5e0f783daebf2dfc64f890c4ca4b164b8800625439fb590c4",
+          "verified": true,
+          "verify_us": 80.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 25,
+          "sign_ms": 4.111400000000001,
+          "signature_sha256": "a7765ebd8eb1784326bb76bbd33e726fa124dbf196f525a3881ded8bcdb89691",
+          "verified": true,
+          "verify_us": 76.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 26,
+          "sign_ms": 4.1349,
+          "signature_sha256": "c9ddf0a0a51b4fb176c98ebe827c1b05b4120e927712c967a9fe5b98b7eea593",
+          "verified": true,
+          "verify_us": 78.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 27,
+          "sign_ms": 3.932,
+          "signature_sha256": "1f48da6000f410e341637468e8c8015139a2da5030c3be265b6f2b8c68086691",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 28,
+          "sign_ms": 4.1363,
+          "signature_sha256": "2eae312c4fc32453d415853c71d9575df653a01e4cc22d7fe790b369bfe3f1de",
+          "verified": true,
+          "verify_us": 76.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 29,
+          "sign_ms": 3.9477999999999995,
+          "signature_sha256": "7e4dfbdce54cfa122471c9566df38ec93df264538ff15fcb9e676854a1fed96a",
+          "verified": true,
+          "verify_us": 80.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 30,
+          "sign_ms": 4.0789,
+          "signature_sha256": "7e6a9f1a16979adfaecace5261ec65897bcd93b798440438bd94dbdb0ed49262",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 31,
+          "sign_ms": 4.1099,
+          "signature_sha256": "16d98da251ee182a9eb192fb8e4678186682fec7c80353f61533a95153d41e3e",
+          "verified": true,
+          "verify_us": 83.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 32,
+          "sign_ms": 3.9455999999999998,
+          "signature_sha256": "a2a6202a4eb66e64a022fde632e3afb2daa6e83fafc0abebccf48d636d735a3b",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 33,
+          "sign_ms": 4.1801,
+          "signature_sha256": "c08d070f3baf86b358526fa7e126bac227ee6435ae54e0e2715b41061513f334",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 34,
+          "sign_ms": 3.8922000000000003,
+          "signature_sha256": "202ea1b547cca461348ef934bd62ebe27b927a47eca6b539b5d41dd70aa6aa63",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 35,
+          "sign_ms": 4.2715000000000005,
+          "signature_sha256": "da38a08e5084e17b1bd037cec32f9f81aa722ea51a880bd560a8e2eb51aa79e2",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 36,
+          "sign_ms": 4.0954,
+          "signature_sha256": "b45538184913bd2f34a2c73a6b9fdc3d913eccfdfd0dcd9c6ba585bcf6a96713",
+          "verified": true,
+          "verify_us": 85.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 37,
+          "sign_ms": 3.9533,
+          "signature_sha256": "311dc1f661adac4316ea29300791955f66cb8add07e92ce02659aaa753061c5e",
+          "verified": true,
+          "verify_us": 75.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 38,
+          "sign_ms": 4.1921,
+          "signature_sha256": "5eaf76a92a32eaa4ee3652d590712e1065806ef0c1357b7bdf95bf8988432e6b",
+          "verified": true,
+          "verify_us": 76.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 39,
+          "sign_ms": 3.9617000000000004,
+          "signature_sha256": "f3548e7b623e38c0965a7ff43516f1b482cfc1efccf3a666f96dcc97514967b7",
+          "verified": true,
+          "verify_us": 126.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 40,
+          "sign_ms": 4.0886000000000005,
+          "signature_sha256": "3711ea45764403215b8a5946b7bfb4fac974a351b34affe21296e97333886562",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 41,
+          "sign_ms": 4.1704,
+          "signature_sha256": "2713d4d4eb5e6c72116f165028569c1aa21db598fe01b513816766acc32eac06",
+          "verified": true,
+          "verify_us": 99.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 42,
+          "sign_ms": 4.1651,
+          "signature_sha256": "ef1bd4975bfb7019d1e4992a1e0e97643ac07febce9256a39cf367a92badc74a",
+          "verified": true,
+          "verify_us": 100.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 43,
+          "sign_ms": 4.2182,
+          "signature_sha256": "1fea2a6afbfb7c3f23409e959a482b90b51c90646b81c6c8a7305692b02bab16",
+          "verified": true,
+          "verify_us": 76.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 44,
+          "sign_ms": 3.9415999999999998,
+          "signature_sha256": "febabdb484d67f73464b4cd081441d3796926610322323992291c01944e3829d",
+          "verified": true,
+          "verify_us": 80.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 45,
+          "sign_ms": 4.072,
+          "signature_sha256": "261cba9c6aa7fb893bd77c925f2c8beb27dc4a55ab74f73963521bf7877969d4",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 46,
+          "sign_ms": 4.0884,
+          "signature_sha256": "879ebf58865113833d6a752d53d1c4618592109691c4c7df689cff43252b6656",
+          "verified": true,
+          "verify_us": 76.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 47,
+          "sign_ms": 3.9119999999999995,
+          "signature_sha256": "59d5feebaae92e81daf819a6cdac97326126f98bcc4ee68ebe1920202e2bdfae",
+          "verified": true,
+          "verify_us": 75.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 48,
+          "sign_ms": 4.3017,
+          "signature_sha256": "ef07dce1910f0a958cf18ba01129da89687cc5a7be66bdcdc40bfda4de3289d5",
+          "verified": true,
+          "verify_us": 77.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 49,
+          "sign_ms": 3.9003,
+          "signature_sha256": "3324688e3c33a376a9921006391622b8f2bc4e41ee143ee1f04553a170eb793d",
+          "verified": true,
+          "verify_us": 101.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 50,
+          "sign_ms": 4.3209,
+          "signature_sha256": "34e4b6f91733cef99c4146eb9de261182e0fdc4365c0d4d725480e8a3bc94d18",
+          "verified": true,
+          "verify_us": 75.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 51,
+          "sign_ms": 4.0815,
+          "signature_sha256": "0143c8f1733e9c3afcaba8c55f6809127e921c8ac2cdf6892c12fec6c0f5c838",
+          "verified": true,
+          "verify_us": 77.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 52,
+          "sign_ms": 3.8715,
+          "signature_sha256": "b6437217068e7131aa0eea584fc71a99cfe269a0cf80764c835751d17907317b",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 53,
+          "sign_ms": 4.1332,
+          "signature_sha256": "2f3bd52fb2cfcf2725819ed96fd6713b1cb4629b32cf94b8387d85ac0b6fd74d",
+          "verified": true,
+          "verify_us": 76.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 54,
+          "sign_ms": 3.8487999999999998,
+          "signature_sha256": "88e4a315eeed410a4d9f7fe7ae2b4761b6e749f55b9730ea5f61c2edf92856ba",
+          "verified": true,
+          "verify_us": 75.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 55,
+          "sign_ms": 4.1982,
+          "signature_sha256": "1fd00c452512b95c92373e7a04ee65c4a14b94c7f379cd80d187035bd179aab0",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 56,
+          "sign_ms": 4.1079,
+          "signature_sha256": "bdf466fb7610ace8f8c224cd4a36b436c03c7947d757c496b40c5412b3ac1022",
+          "verified": true,
+          "verify_us": 81.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 57,
+          "sign_ms": 3.8628,
+          "signature_sha256": "a9d57eb45548d68a02cb2e6f7a4d8cbd9403bf1a94a73bcc6f4c2411dcc077f3",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 58,
+          "sign_ms": 4.1381,
+          "signature_sha256": "b826c66dd3122f532bcfb8c788c3011aaa10e7fb4478b251da12c9bf650a1d33",
+          "verified": true,
+          "verify_us": 78.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 59,
+          "sign_ms": 3.9313000000000002,
+          "signature_sha256": "e0989e21907e9d7b4665e005c61a07c112289cca9b86d023d4d0c01cb69c1058",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 60,
+          "sign_ms": 4.1548,
+          "signature_sha256": "f389725e8a6fc46365c464f74d551fb61e29bfba0707229df91efeff349433b6",
+          "verified": true,
+          "verify_us": 75.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 61,
+          "sign_ms": 4.0691,
+          "signature_sha256": "ceb3a5bfd557b4e5811a6c025a4c57c5afd1909292dd93b503ebdaf872b6ceca",
+          "verified": true,
+          "verify_us": 151.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 62,
+          "sign_ms": 3.9059,
+          "signature_sha256": "15bfdf113cd00c560054b990e94af0948e1e165cdbbbc013a4216750406e1902",
+          "verified": true,
+          "verify_us": 77.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 63,
+          "sign_ms": 4.1248,
+          "signature_sha256": "68e12e8d986c3a278a2e5c8058c12a33bb5381e381268971a932c0ea06b8e94a",
+          "verified": true,
+          "verify_us": 83.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 64,
+          "sign_ms": 4.052,
+          "signature_sha256": "ff924e0d795e5538a8053055a73cfd9c8a57ea6ac8b67ed80f66f8e7f5ab8f53",
+          "verified": true,
+          "verify_us": 80.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 65,
+          "sign_ms": 4.2451,
+          "signature_sha256": "228488e97475720db71852854be89f1e0b2810f6661a44b75f32d37e37f2cc5c",
+          "verified": true,
+          "verify_us": 84.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 66,
+          "sign_ms": 4.2309,
+          "signature_sha256": "81a89c26b0bf8d44f5e07caa4bb81b167ba42301ba889faf63f09f9081724629",
+          "verified": true,
+          "verify_us": 81.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 67,
+          "sign_ms": 4.0488,
+          "signature_sha256": "954838747e81633196c301beaf4d2078b4c05ccbd00fe888577147b090517751",
+          "verified": true,
+          "verify_us": 80.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 68,
+          "sign_ms": 4.2267,
+          "signature_sha256": "10c0ac4ac3cc2b6fa76f45b6e1029d2d4d2cf00cb5efef8eb66433f81fbb7e91",
+          "verified": true,
+          "verify_us": 80.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 69,
+          "sign_ms": 4.0831,
+          "signature_sha256": "38bcf3d18088f8dcd8b27459f23b0a0bcaf12de26e0c22855d418558b4a14cd0",
+          "verified": true,
+          "verify_us": 83.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 70,
+          "sign_ms": 4.171399999999999,
+          "signature_sha256": "4620efb16c1ccffed651196776e57ecf88a1568cb7aa359f26356cf1fde09a1a",
+          "verified": true,
+          "verify_us": 81.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 71,
+          "sign_ms": 4.205699999999999,
+          "signature_sha256": "2d59b6dbaffac1368dbdf2f722ad48cd241cd7ae2adb6d613ce214ac4019b5dc",
+          "verified": true,
+          "verify_us": 82.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 72,
+          "sign_ms": 3.9642999999999997,
+          "signature_sha256": "d0f1415787c021771a531a185954f0a75d396f1382db3f53ab34652bb75753ad",
+          "verified": true,
+          "verify_us": 76.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 73,
+          "sign_ms": 4.2170000000000005,
+          "signature_sha256": "36445d1348768c8b9bc38aa42f29d72eeb614597985674bbb4a5f4d734befe1c",
+          "verified": true,
+          "verify_us": 77.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 74,
+          "sign_ms": 3.8958,
+          "signature_sha256": "c233430074f137298e70b2655bb65f7011229a5998fad06dc961e7ee6fa0dfef",
+          "verified": true,
+          "verify_us": 91.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 75,
+          "sign_ms": 4.010599999999999,
+          "signature_sha256": "14c1497f6383bd2152beab11b2ece10f96e62f7e107a3571ec5025b7081bf118",
+          "verified": true,
+          "verify_us": 76.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 76,
+          "sign_ms": 4.011,
+          "signature_sha256": "c148b008aa7e7c40d87ed1a3fbc3a89e1b71512e8012cab9b4be182030758419",
+          "verified": true,
+          "verify_us": 162.10000000000002
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 77,
+          "sign_ms": 3.9755,
+          "signature_sha256": "0a2d0f53641f6cffa9f5d2ead45fdb5a6776e5eb4d546a28e796698c2b59ff03",
+          "verified": true,
+          "verify_us": 88.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 78,
+          "sign_ms": 4.1289,
+          "signature_sha256": "3855b1b4723986f0b0fc660b3e2c69ed458d744e68aaae3b1fd0bf128548b55e",
+          "verified": true,
+          "verify_us": 84.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 79,
+          "sign_ms": 3.9039,
+          "signature_sha256": "09b8dafaccdcc815cc2489bfd61ca6abd22d8487c4cbf1e616873ce9a763d1f2",
+          "verified": true,
+          "verify_us": 78.80000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 80,
+          "sign_ms": 4.2111,
+          "signature_sha256": "9f19f6b8540cc9a5a08ef9d7e1156ab2b62d6921595cdbdc5c65ad72b995d5ea",
+          "verified": true,
+          "verify_us": 76.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 81,
+          "sign_ms": 4.0626999999999995,
+          "signature_sha256": "87ec892e6cc99d654dfde4aeedeeda6bed5bfacc4f1bcd55c7aa01ba7e8915cd",
+          "verified": true,
+          "verify_us": 80.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 82,
+          "sign_ms": 4.1092,
+          "signature_sha256": "9fe2244cfaa7e6ac94252c5f3104f5562a63fd66d894fc35acf52cfba753ffd7",
+          "verified": true,
+          "verify_us": 75.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 83,
+          "sign_ms": 4.2341,
+          "signature_sha256": "e5f2a7c975a10cd56ca9051242363e71af958cb6f3fd988087403ac7d1723c16",
+          "verified": true,
+          "verify_us": 84.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 84,
+          "sign_ms": 3.8803,
+          "signature_sha256": "be893fcf3439ffcc57a3be9f700070da1b6abce64cccdd61e3e7cb45817f2588",
+          "verified": true,
+          "verify_us": 112.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 85,
+          "sign_ms": 4.0733999999999995,
+          "signature_sha256": "a99265dab0ab159b334a75d93788e5ab72c502a17573fcfae5a87e12e65a6670",
+          "verified": true,
+          "verify_us": 78.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 86,
+          "sign_ms": 4.0306999999999995,
+          "signature_sha256": "10a3a798beed71d8c87ced60f940459546d2b9a7674ebf3430d0d5bddcc24e57",
+          "verified": true,
+          "verify_us": 159.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 87,
+          "sign_ms": 3.9951,
+          "signature_sha256": "0187b0590dba82556181112eab06493bd2b8b9a99ec421cf06f7ddf34dd32d83",
+          "verified": true,
+          "verify_us": 77.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 88,
+          "sign_ms": 4.1775,
+          "signature_sha256": "d467302282b8011d6e2eea2f84d76227ef6a8ebde58c64fc52dcf3421e27a90d",
+          "verified": true,
+          "verify_us": 85.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 89,
+          "sign_ms": 3.8571,
+          "signature_sha256": "a1f539a8e209b1a1791bc5393bfaf22250e74de423b12e1ff531c0c1585c5984",
+          "verified": true,
+          "verify_us": 81.19999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 90,
+          "sign_ms": 4.2068,
+          "signature_sha256": "5c39585db6def01f5fc6359ab51aa48ff846097c1b3b48042eb149c323794e13",
+          "verified": true,
+          "verify_us": 78.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 91,
+          "sign_ms": 3.9871999999999996,
+          "signature_sha256": "c074b60e4382da957c7a32cac72c0f3c7d5f69d7535bc854e8dda7daf098e038",
+          "verified": true,
+          "verify_us": 82.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 92,
+          "sign_ms": 4.0007,
+          "signature_sha256": "15f89b417c3a7dec0d6b06b0db807009e44cb3e11cda15084fcbfbc445ffeb6b",
+          "verified": true,
+          "verify_us": 78.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 93,
+          "sign_ms": 4.1236,
+          "signature_sha256": "1f26cb8ea98329a0e72b3a84459aad503443b1ca635273b3dcda01add29064a8",
+          "verified": true,
+          "verify_us": 76.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 94,
+          "sign_ms": 3.8482999999999996,
+          "signature_sha256": "f936da47720956a65121772a912bcbf98b50698dab2737161100d7cad3b2fb7f",
+          "verified": true,
+          "verify_us": 77.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 95,
+          "sign_ms": 4.1533999999999995,
+          "signature_sha256": "0369d8cf518187d7c5d3b2441f6641c54357893883b0b3d7c4dd21ab045f00ee",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 96,
+          "sign_ms": 3.9427000000000003,
+          "signature_sha256": "abe480b17bf6454f03895221326956b3a10303581ef0fd4f5893f2ae898ab113",
+          "verified": true,
+          "verify_us": 82.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 97,
+          "sign_ms": 4.015000000000001,
+          "signature_sha256": "bcc67c7ad86596eb56cf34a953ff59e95aa92a6aba3d4b5857c13fdd62cc8925",
+          "verified": true,
+          "verify_us": 78.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 98,
+          "sign_ms": 4.1341,
+          "signature_sha256": "4e5fc8fd559b01712f2ae9702e189f07ce5e404fe5a1a31257a86bbae45039ef",
+          "verified": true,
+          "verify_us": 83.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2
+          ],
+          "attempts": 1,
+          "sample_index": 99,
+          "sign_ms": 3.9031000000000002,
+          "signature_sha256": "aa34da3d5079a855efeba30cb661be8fc25df6c8227d5379d2788c3ccb3fbcec",
+          "verified": true,
+          "verify_us": 76.4
+        }
+      ],
+      "signature_bytes": 2420,
+      "signing_ms": {
+        "count": 100,
+        "max": 4.3209,
+        "mean": 4.0650319999999995,
+        "min": 3.8482999999999996,
+        "p50": 4.0802,
+        "p95": 4.2453199999999995,
+        "p99": 4.3018920000000005
+      },
+      "t": 3,
+      "verification_us": {
+        "count": 100,
+        "max": 162.10000000000002,
+        "mean": 82.954,
+        "min": 75.2,
+        "p50": 77.8,
+        "p95": 102.41499999999996,
+        "p99": 159.82300000000004
+      }
+    },
+    {
+      "all_signatures_verified": true,
+      "attempt_success_rate": 1.0,
+      "implementation_defined_outbound_bytes_per_attempt": {
+        "final_signature": 2420,
+        "party_to_coordinator_total": 1553536,
+        "qualification": "Derived from the executed crate's public packing constants; SDK execution is in-process and does not measure transport framing or network bytes",
+        "round1_commit_hash_per_party": 32,
+        "round2_reveal_per_party": 217856,
+        "round3_response_packing_per_party": 170496
+      },
+      "k_parallel_repetitions": 74,
+      "keygen_ms": 0.7014,
+      "n": 6,
+      "protocol_attempts": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "public_key_bytes": 1312,
+      "restart_same_public_key": true,
+      "restart_verified_prior_signature": true,
+      "rotation_changed_public_key": true,
+      "rotation_rejected_prior_signature": true,
+      "rss_subsets": 20,
+      "samples": [
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 0,
+          "sign_ms": 55.7664,
+          "signature_sha256": "3111088c84bf91aa433a85b062971e90e1f0fb9c320bfceaf262382012de8f10",
+          "verified": true,
+          "verify_us": 88.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 1,
+          "sign_ms": 54.7522,
+          "signature_sha256": "c48df352c4617d1b7a7e1e7c7d01c6a8ac83b45ea8622f8a5d6d2ca5b6ad149a",
+          "verified": true,
+          "verify_us": 140.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 2,
+          "sign_ms": 55.277300000000004,
+          "signature_sha256": "7ffe85f013af163bb110f48ffac1c2f6260e3b13918d8c82e9fa16c450c0e86d",
+          "verified": true,
+          "verify_us": 100.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 3,
+          "sign_ms": 56.6329,
+          "signature_sha256": "533bd7da88370bcecb19c615e81c7a8f27a1cb85e2ba2c1b6346b8040bbf04fb",
+          "verified": true,
+          "verify_us": 111.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 4,
+          "sign_ms": 55.3159,
+          "signature_sha256": "157c04448123ea4fabc989872d51fec11f3cda423de76e75d7c7af8a450f8af4",
+          "verified": true,
+          "verify_us": 170.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 5,
+          "sign_ms": 55.7318,
+          "signature_sha256": "49f369d9ca61e4fb30c6e926695656c0a323cb767a1914164a820e5c1170fff8",
+          "verified": true,
+          "verify_us": 137.79999999999998
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 6,
+          "sign_ms": 55.781400000000005,
+          "signature_sha256": "ed615a532cbc7ce6165675f56052094335c5035ab716050da0e433f032540b57",
+          "verified": true,
+          "verify_us": 217.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 7,
+          "sign_ms": 55.9411,
+          "signature_sha256": "2ce195360bd309e003d07a2022364b5e470eb263a1cda15fca4b0754f08fae32",
+          "verified": true,
+          "verify_us": 85.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 8,
+          "sign_ms": 55.0407,
+          "signature_sha256": "27e2e784e08b9f42543f517f207ee8ce88bcbf50362aa18beb4e893c439faf83",
+          "verified": true,
+          "verify_us": 154.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 9,
+          "sign_ms": 55.380199999999995,
+          "signature_sha256": "37adf304cf19444186ad18add4a216cb05837c90964c90fdabda0a14beae7ed6",
+          "verified": true,
+          "verify_us": 87.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 10,
+          "sign_ms": 55.817899999999995,
+          "signature_sha256": "ebd955d7ea7ab38458b1d062fb1134e9401e7d88de1aa3e3d7cbb5156f9d9be7",
+          "verified": true,
+          "verify_us": 89.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 11,
+          "sign_ms": 55.3356,
+          "signature_sha256": "b98deba9fa7279002c495e4a3ce651c797e20795287ea7e6ab97b54b89535b07",
+          "verified": true,
+          "verify_us": 82.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 12,
+          "sign_ms": 55.0162,
+          "signature_sha256": "640edd91756c8cbed91d5f9964c59afed9598849b327f7fe85de8017723bf5db",
+          "verified": true,
+          "verify_us": 161.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 13,
+          "sign_ms": 54.6571,
+          "signature_sha256": "b52ae3a232494c904b1b93bba456a2d3499df5b0c0528664ab25207d943879d2",
+          "verified": true,
+          "verify_us": 87.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 14,
+          "sign_ms": 54.592099999999995,
+          "signature_sha256": "a3fc9d34ba0df2a5aefb59ddff272cd7b555613389c2055302c82a93d7054566",
+          "verified": true,
+          "verify_us": 93.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 15,
+          "sign_ms": 54.2739,
+          "signature_sha256": "9de5d3c283dc14938234c2b763f4399ea35f6b9d7b3c7e667a2993ae452518ab",
+          "verified": true,
+          "verify_us": 85.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 16,
+          "sign_ms": 55.296400000000006,
+          "signature_sha256": "c19f8064b954f4d4354505a842134c7d8e6c9db2760858f8dbcd49b07c282341",
+          "verified": true,
+          "verify_us": 67.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 17,
+          "sign_ms": 55.1245,
+          "signature_sha256": "3fc3a937bdb55fe5bf28859776cc145a89ffd7f4b13acea3eea133cbcb0171d8",
+          "verified": true,
+          "verify_us": 89.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 18,
+          "sign_ms": 55.3965,
+          "signature_sha256": "6236f884b0e39098c50241822bcbdfc027c271b1aab1cd5edf71a57df1340e9e",
+          "verified": true,
+          "verify_us": 100.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 19,
+          "sign_ms": 54.9622,
+          "signature_sha256": "f23d7e241e357a3033561e8de9b9d1ea8a80455f4726ac80eb34d4eb49e40f5e",
+          "verified": true,
+          "verify_us": 90.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 20,
+          "sign_ms": 54.7675,
+          "signature_sha256": "660d4f858573aab5ecab6ad9a3083ba67c14f125b022cb3c91a0063e47172277",
+          "verified": true,
+          "verify_us": 92.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 21,
+          "sign_ms": 54.8054,
+          "signature_sha256": "656dc2e578ad4d5836d5eab7378f0c6ae07be60445d33846745a4a7918c7f3f6",
+          "verified": true,
+          "verify_us": 62.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 22,
+          "sign_ms": 54.023799999999994,
+          "signature_sha256": "1d099ccf4ffd712371473155badaaf69eeea04090b91de2a19c850b4446a93f4",
+          "verified": true,
+          "verify_us": 65.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 23,
+          "sign_ms": 55.014599999999994,
+          "signature_sha256": "aa9c35a0039cbd92fceb88b944610d62bf41037addfcf23b3514ea654c17a67f",
+          "verified": true,
+          "verify_us": 89.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 24,
+          "sign_ms": 54.2505,
+          "signature_sha256": "8af0c7e6d96f6c94088922c77b874b769db93cc779dc89574e3d220c8b124d02",
+          "verified": true,
+          "verify_us": 66.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 25,
+          "sign_ms": 54.354600000000005,
+          "signature_sha256": "e4a71c0d6b84e8e76e1778c076b463c128212a1f672b52d53db98e60988f034e",
+          "verified": true,
+          "verify_us": 65.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 26,
+          "sign_ms": 55.1851,
+          "signature_sha256": "27d149e0d69ab7699949739de71dd25fc11f18d70289c7786692d7ad81079984",
+          "verified": true,
+          "verify_us": 70.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 27,
+          "sign_ms": 55.8205,
+          "signature_sha256": "fda8856660e7112ee49b6fd2507ac47370b732203567c4d0e0bd72597e04c2b3",
+          "verified": true,
+          "verify_us": 65.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 28,
+          "sign_ms": 55.0096,
+          "signature_sha256": "3a5e45af6e0225af5f0e283974a8296fbd90d14a71ae5f42a2368259a87b6afa",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 29,
+          "sign_ms": 55.1348,
+          "signature_sha256": "95f97f4bdcc71422c4a9de7bc405c5b02ff2cd6708ce9145e9c112bda00903c5",
+          "verified": true,
+          "verify_us": 62.199999999999996
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 30,
+          "sign_ms": 54.8947,
+          "signature_sha256": "3c468af86567b9341bc8320dd7bc94d9d622a5d6e7f019f2571c08901fb1d410",
+          "verified": true,
+          "verify_us": 161.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 31,
+          "sign_ms": 55.109199999999994,
+          "signature_sha256": "e0a4485b79fa76754625f46a16b0cfb1fde42a1d2a03730d231a3264cabd1c4e",
+          "verified": true,
+          "verify_us": 68.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 32,
+          "sign_ms": 54.6323,
+          "signature_sha256": "b12eb2680963e204049cf3fba307a514503297d339f6d332ce42f65ff5e2c714",
+          "verified": true,
+          "verify_us": 64.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 33,
+          "sign_ms": 57.5871,
+          "signature_sha256": "2866bfdc07fa0b0c7f2465b55b61b077de3887ff849db3eecb23993fa2bb1c28",
+          "verified": true,
+          "verify_us": 191.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 34,
+          "sign_ms": 55.0229,
+          "signature_sha256": "e6fc5cea97108d77c5a356b9e215f42682a6e7248f3b3e94a0aeb772df4a0ed5",
+          "verified": true,
+          "verify_us": 65.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 35,
+          "sign_ms": 55.3034,
+          "signature_sha256": "4d54da1b14e7ccbea88c8804334d9096be2cae0593275648140ad3774290861a",
+          "verified": true,
+          "verify_us": 65.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 36,
+          "sign_ms": 55.042300000000004,
+          "signature_sha256": "25274105a0d72ca9544ba5667946128b353aa090cc344466a6b3589ad1cf914e",
+          "verified": true,
+          "verify_us": 105.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 37,
+          "sign_ms": 54.7649,
+          "signature_sha256": "131fecfb42479db954cfe9470cc9d5b3ca9ecf70d25dc351a63a84ff827c306c",
+          "verified": true,
+          "verify_us": 66.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 38,
+          "sign_ms": 54.9193,
+          "signature_sha256": "8eec5f633c6fbf87a7be2233dc9871868fd75c0468e5b8f3254eb426b9ec7259",
+          "verified": true,
+          "verify_us": 67.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 39,
+          "sign_ms": 55.057700000000004,
+          "signature_sha256": "64692fd5b8a9f5e1d842027b58ca2ad3dfa379f844e0bd2edbbc36c0554b9131",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 40,
+          "sign_ms": 55.4523,
+          "signature_sha256": "69bc3d19bee898790874ba97337aef8f5f5f44f97b7309dce6d7d04f9104e05e",
+          "verified": true,
+          "verify_us": 65.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 41,
+          "sign_ms": 55.1366,
+          "signature_sha256": "d2dda4604608c3f566750d4c413e55bae9e9334b956f54d70c1a7169ddb725d4",
+          "verified": true,
+          "verify_us": 65.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 42,
+          "sign_ms": 55.169500000000006,
+          "signature_sha256": "d3581094882522e940754304500431b780f5c363710f3145fe20fafea90966c9",
+          "verified": true,
+          "verify_us": 76.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 43,
+          "sign_ms": 55.5916,
+          "signature_sha256": "ae804dc7f58f8100bd8a8c81c60e4bf7a48aadf88a9ee3f82fefbeffa406e8ab",
+          "verified": true,
+          "verify_us": 155.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 44,
+          "sign_ms": 55.1509,
+          "signature_sha256": "25451d9cbf629f1e2e1c8f44a191f8d856c32afe5ccfc516b905da05af8472fb",
+          "verified": true,
+          "verify_us": 69.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 45,
+          "sign_ms": 53.9922,
+          "signature_sha256": "5c1068093c78a3b934d9d265b862f41426787cb21563258526cfe5ac938e0edd",
+          "verified": true,
+          "verify_us": 67.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 46,
+          "sign_ms": 54.4253,
+          "signature_sha256": "9bcd14e6c71d3a75b18081641453a1d5d2b7fc03c763ac4e694a346fe8df13af",
+          "verified": true,
+          "verify_us": 165.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 47,
+          "sign_ms": 54.5035,
+          "signature_sha256": "1c2c9f1613f02756998e9f26a004a4f1b898cdc10c0a94fd078b9f2735b7b434",
+          "verified": true,
+          "verify_us": 72.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 48,
+          "sign_ms": 55.116,
+          "signature_sha256": "703a534500e17d31217ee4f4a27191fc50a17ef0209c9e4ef46bec24a5afe77d",
+          "verified": true,
+          "verify_us": 68.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 49,
+          "sign_ms": 54.8884,
+          "signature_sha256": "40e93a2342ede646478abbba66d6a0c4d12cf3c3f79e5b2763405458a43d7eb2",
+          "verified": true,
+          "verify_us": 88.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 50,
+          "sign_ms": 55.468900000000005,
+          "signature_sha256": "000f71e894d60509f21cb76b04e5a557d0a095a3b23d377032c0cbd2e0c81e5e",
+          "verified": true,
+          "verify_us": 77.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 51,
+          "sign_ms": 55.1109,
+          "signature_sha256": "52d169049d110a25516e36fd9d84686a86fd33843ad7aa0bd98b9b7151c005ce",
+          "verified": true,
+          "verify_us": 68.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 52,
+          "sign_ms": 55.0209,
+          "signature_sha256": "1fe16dd450060d1c34113eb82b925b1b4dd17c982c8b777d415461ae28b514dd",
+          "verified": true,
+          "verify_us": 68.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 53,
+          "sign_ms": 54.2079,
+          "signature_sha256": "0a801de9493ae0fbb0b457dffc3b0845cb87ce5d2e1ad0a8804de906084bdbc7",
+          "verified": true,
+          "verify_us": 69.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 54,
+          "sign_ms": 54.8788,
+          "signature_sha256": "e8cbb813f16e6ac0cd1d7b48533db6978056963f283deea1def5b9eb639ec60c",
+          "verified": true,
+          "verify_us": 65.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 55,
+          "sign_ms": 53.7283,
+          "signature_sha256": "a530de8981a52f862c1aba355eca170ae09d4d6ca4ae417711e38ae95bcd91f8",
+          "verified": true,
+          "verify_us": 67.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 56,
+          "sign_ms": 54.3358,
+          "signature_sha256": "d7d47f81c08444f7ed2b5cc2f079376fedfaf5f594fdbd735e709ce2559a6248",
+          "verified": true,
+          "verify_us": 196.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 57,
+          "sign_ms": 55.4871,
+          "signature_sha256": "8ff6911cabcfa361b8ed6d0a9ed39a1603b3a280d59293267881d87ddd02987d",
+          "verified": true,
+          "verify_us": 65.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 58,
+          "sign_ms": 55.073299999999996,
+          "signature_sha256": "3b4e92a2ce435b6afcd005a19b8530f6307dcc59e29b4b34f7b261e20158688c",
+          "verified": true,
+          "verify_us": 65.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 59,
+          "sign_ms": 54.7599,
+          "signature_sha256": "31d9e6b66cac9400e69f8586a2b3f1efc3003d48d84fc01030fdd737921624df",
+          "verified": true,
+          "verify_us": 183.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 60,
+          "sign_ms": 54.5394,
+          "signature_sha256": "9728beffb443c52c6c5bea17c4b13b5788cd78df1db1c4737126bc93028f227c",
+          "verified": true,
+          "verify_us": 64.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 61,
+          "sign_ms": 54.6548,
+          "signature_sha256": "c02af6634ba9afabf97ab02c6aba0736ef3302ec92279510b8f50e59da12bc56",
+          "verified": true,
+          "verify_us": 66.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 62,
+          "sign_ms": 56.0742,
+          "signature_sha256": "f4ec79098732a1ddab75ea2c2f20561f62881b5224098ee5e610624f196148b8",
+          "verified": true,
+          "verify_us": 89.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 63,
+          "sign_ms": 55.439299999999996,
+          "signature_sha256": "fdb86d499012533a06c8ec03b05fa1c3ce5ae37f4f0c1d367d7cdcb86880ec5e",
+          "verified": true,
+          "verify_us": 65.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 64,
+          "sign_ms": 54.669200000000004,
+          "signature_sha256": "624eba6c6a2e3a563ec50904fbc704cdfc26ac4e230e8f2343121bb8c08437c5",
+          "verified": true,
+          "verify_us": 72.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 65,
+          "sign_ms": 54.7916,
+          "signature_sha256": "dd4030967c02900cae4884ee57ed40380b252c5e327f6289b3cc8247ae0dc1d4",
+          "verified": true,
+          "verify_us": 65.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 66,
+          "sign_ms": 54.703,
+          "signature_sha256": "dd992ef6c72f35ba83f19d4aa128ef21a367949ce952dad8d19ea9cf0273826e",
+          "verified": true,
+          "verify_us": 65.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 67,
+          "sign_ms": 55.364,
+          "signature_sha256": "24fba3737c487191aff437b16d64bfc3bc17b7e5d5f4e09be4d6a479fcceb88c",
+          "verified": true,
+          "verify_us": 67.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 68,
+          "sign_ms": 54.48950000000001,
+          "signature_sha256": "1fe9479d7493d35e8d0428bd4c7790c94cc5f2f1ca242a28f4ba517fc15910dd",
+          "verified": true,
+          "verify_us": 66.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 69,
+          "sign_ms": 54.1852,
+          "signature_sha256": "af46078a0694dbdd52c1e08559e37e4555a46773e3e03de3cf2230bf4f8ab21e",
+          "verified": true,
+          "verify_us": 260.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 70,
+          "sign_ms": 56.2466,
+          "signature_sha256": "bf08258e9582e8b9520d45d88418fbffa8776ba6ba4465c9117cfd7cdca973fa",
+          "verified": true,
+          "verify_us": 69.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 71,
+          "sign_ms": 53.9136,
+          "signature_sha256": "60058b3bbcf957116c1174f3c15824a28b71f9c7f61f0e45ba2645aa86519d63",
+          "verified": true,
+          "verify_us": 92.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 72,
+          "sign_ms": 54.684999999999995,
+          "signature_sha256": "cd7625ba8253ebe55354f2675a98e1186af2a2b72fa29482dce3a69a7dca7918",
+          "verified": true,
+          "verify_us": 65.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 73,
+          "sign_ms": 55.012100000000004,
+          "signature_sha256": "8181d64c6e90152d7a5df1273e26474e8e277b784008acb9cef3531cedf3fa1f",
+          "verified": true,
+          "verify_us": 64.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 74,
+          "sign_ms": 55.2577,
+          "signature_sha256": "e19b081275e8947fa82fed7efbf1290acabd6be934d4452a718f1a528ab1ea27",
+          "verified": true,
+          "verify_us": 66.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 75,
+          "sign_ms": 54.472300000000004,
+          "signature_sha256": "51eab2bb292d7ee32bc3b89303a999468486126821ec4ed24e0bf01677631e10",
+          "verified": true,
+          "verify_us": 65.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 76,
+          "sign_ms": 55.180600000000005,
+          "signature_sha256": "46d521e40e15d785cf19331116f2cae854b7fbcc7b20dc00153f70690f3564ed",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 77,
+          "sign_ms": 55.448499999999996,
+          "signature_sha256": "3912dbbe62fd1799d579e5e2b1c844be469952e79d626fcb156b9c534400ea37",
+          "verified": true,
+          "verify_us": 75.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 78,
+          "sign_ms": 55.279599999999995,
+          "signature_sha256": "4eeaf52b581cc35e14e2172662a872f423cf02a256a02458dd73dc5638a59c0a",
+          "verified": true,
+          "verify_us": 64.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 79,
+          "sign_ms": 54.6038,
+          "signature_sha256": "e2f18bc7e269fe080db185c5b13c3e2f056bc92521b9b7e06431bd37453e86af",
+          "verified": true,
+          "verify_us": 75.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 80,
+          "sign_ms": 54.8874,
+          "signature_sha256": "f0b549e1c3a19aecea6131349c21a653d86bed256298fa684c3a28a3597d0897",
+          "verified": true,
+          "verify_us": 65.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 81,
+          "sign_ms": 54.0734,
+          "signature_sha256": "81dc51ed133dcdd3f7b29aa5842a71637dea9d3f9775c131216cbdc23471341f",
+          "verified": true,
+          "verify_us": 66.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 82,
+          "sign_ms": 54.5253,
+          "signature_sha256": "5fe707d0b1e8f6605f44de6495fbc3695fb4ea956a460e6d3dfa3cff1686d09e",
+          "verified": true,
+          "verify_us": 156.60000000000002
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 83,
+          "sign_ms": 54.9692,
+          "signature_sha256": "8280bc7dc5b2235ff4e10793474385a4a608e4a2902bb6034f97129664645d3f",
+          "verified": true,
+          "verify_us": 67.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 84,
+          "sign_ms": 54.9199,
+          "signature_sha256": "6667a7309885d2672ed38f6d9ce623c7ce3deeb6bb09aa89a38312a507f52cab",
+          "verified": true,
+          "verify_us": 64.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 85,
+          "sign_ms": 54.683,
+          "signature_sha256": "0c97a5feff26ec631e964d587a6ef42d778f9b2b5737ce7bcbd86fad5b873b58",
+          "verified": true,
+          "verify_us": 64.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 86,
+          "sign_ms": 55.1107,
+          "signature_sha256": "1e8ab4a846d082f0b258a11eb4eefa8bd40f5410601cb4c8a7b8d98682623760",
+          "verified": true,
+          "verify_us": 64.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 87,
+          "sign_ms": 55.7388,
+          "signature_sha256": "04fbdd3dbfbf7caab607e6ac587ff875898e172df3b4c6f43d04057856fef2a1",
+          "verified": true,
+          "verify_us": 79.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 88,
+          "sign_ms": 54.7577,
+          "signature_sha256": "a4a45b63ae4e6955752f0aafffe55b6baa8e359de9efe8cb57bfe9f9e27ab49d",
+          "verified": true,
+          "verify_us": 65.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 89,
+          "sign_ms": 55.4259,
+          "signature_sha256": "5678c4aa71f91b830be6a72ae0ccd0521573bebfc61517cabdf01c6d69c058ce",
+          "verified": true,
+          "verify_us": 83.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 90,
+          "sign_ms": 54.869099999999996,
+          "signature_sha256": "33bd4f2e194d2d34366ad145f5892a6f154fb194f7f5bbf3507d210273547f2b",
+          "verified": true,
+          "verify_us": 75.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 91,
+          "sign_ms": 55.266000000000005,
+          "signature_sha256": "8ddcb433120da0de311d4c9ddc6a44e69f5c2e6b0240eaadcb698b39804f0727",
+          "verified": true,
+          "verify_us": 65.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 92,
+          "sign_ms": 55.1709,
+          "signature_sha256": "1956b8aa51766f9b8a340bfacaf16f7bdf797491eafd7e9a9f575f855ca02e66",
+          "verified": true,
+          "verify_us": 68.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 93,
+          "sign_ms": 54.7541,
+          "signature_sha256": "72d0bbe5cb034fe85168a952ef81a0262c10d04ab5db11ce4a5b77b1f1a43b16",
+          "verified": true,
+          "verify_us": 65.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 94,
+          "sign_ms": 54.8303,
+          "signature_sha256": "0a21083515422c456a209802f5db87e6df31035c649a6e78cc7a4b46e4b64876",
+          "verified": true,
+          "verify_us": 143.20000000000002
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 95,
+          "sign_ms": 54.6024,
+          "signature_sha256": "0c6dd81fac4a0fc1dd27e01a3476ec0300fba7590e68c683a76ee3d14c854956",
+          "verified": true,
+          "verify_us": 174.20000000000002
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 96,
+          "sign_ms": 55.5662,
+          "signature_sha256": "3cf84dda56c4ef7843683aa4697f7483568d22bde95519a913c1831e5636ee7f",
+          "verified": true,
+          "verify_us": 75.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 97,
+          "sign_ms": 54.620599999999996,
+          "signature_sha256": "4ea439f3995d05bd1f69121da02d420e24673cae6e56fd1e6558196bbbfe1958",
+          "verified": true,
+          "verify_us": 73.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 98,
+          "sign_ms": 54.441700000000004,
+          "signature_sha256": "2358e2824832ed174d93a9c4d5221c5ac4acde03a785300d44e84c42f7b13f87",
+          "verified": true,
+          "verify_us": 71.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "attempts": 1,
+          "sample_index": 99,
+          "sign_ms": 54.6004,
+          "signature_sha256": "669e7dda4479aa974195dbe5369c69cd2b16117da4d2a05becfc60786c029be7",
+          "verified": true,
+          "verify_us": 77.7
+        }
+      ],
+      "signature_bytes": 2420,
+      "signing_ms": {
+        "count": 100,
+        "max": 57.5871,
+        "mean": 55.01113599999998,
+        "min": 53.7283,
+        "p50": 55.01335,
+        "p95": 55.826530000000005,
+        "p99": 56.642442
+      },
+      "t": 4,
+      "verification_us": {
+        "count": 100,
+        "max": 260.3,
+        "mean": 89.52500000000002,
+        "min": 62.199999999999996,
+        "p50": 70.2,
+        "p95": 174.665,
+        "p99": 218.0270000000002
+      }
+    },
+    {
+      "all_signatures_verified": true,
+      "attempt_success_rate": 1.0,
+      "implementation_defined_outbound_bytes_per_attempt": {
+        "final_signature": 2420,
+        "party_to_coordinator_total": 2624160,
+        "qualification": "Derived from the executed crate's public packing constants; SDK execution is in-process and does not measure transport framing or network bytes",
+        "round1_commit_hash_per_party": 32,
+        "round2_reveal_per_party": 294400,
+        "round3_response_packing_per_party": 230400
+      },
+      "k_parallel_repetitions": 100,
+      "keygen_ms": 0.4129,
+      "n": 6,
+      "protocol_attempts": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "public_key_bytes": 1312,
+      "restart_same_public_key": true,
+      "restart_verified_prior_signature": true,
+      "rotation_changed_public_key": true,
+      "rotation_rejected_prior_signature": true,
+      "rss_subsets": 15,
+      "samples": [
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 0,
+          "sign_ms": 96.2315,
+          "signature_sha256": "45ee1455c4ea51312dde374e74d49aced9986ae1a0e2ea4b65e87a6dd1cb79fa",
+          "verified": true,
+          "verify_us": 92.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 1,
+          "sign_ms": 96.4127,
+          "signature_sha256": "8f433569b6a8921641b54ce12509b837f3cd6d88f57b6933fcd7f05a7f2f6b19",
+          "verified": true,
+          "verify_us": 66.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 2,
+          "sign_ms": 96.3914,
+          "signature_sha256": "c2063364cd02bebe56e315c9ba4e523b04d7aa44850225ecb0e5387a8eac431a",
+          "verified": true,
+          "verify_us": 76.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 3,
+          "sign_ms": 96.49929999999999,
+          "signature_sha256": "17c14d261b3cfe0c0980e24faddd2fa80990adf17932127d6ed20a680bb8037a",
+          "verified": true,
+          "verify_us": 67.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 4,
+          "sign_ms": 97.1745,
+          "signature_sha256": "e07ba4c96c3f0ad21a3e46800daf40e7d5535babc98ac8d8f237b8b9634625a2",
+          "verified": true,
+          "verify_us": 70.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 5,
+          "sign_ms": 96.18010000000001,
+          "signature_sha256": "74b03326d44d61e4b4cfa823afa540b67052e32b1f19711678c22940c2f752b3",
+          "verified": true,
+          "verify_us": 68.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 6,
+          "sign_ms": 96.44030000000001,
+          "signature_sha256": "500055da0f1bff558b380cd26b4d9f4e761c7d3be25a375f8496faeffc20ad79",
+          "verified": true,
+          "verify_us": 72.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 7,
+          "sign_ms": 95.5424,
+          "signature_sha256": "60801417633ac12005986e0cb0abfb5c2c531b5be4e6b8fd718a5a74cad5d492",
+          "verified": true,
+          "verify_us": 66.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 8,
+          "sign_ms": 95.8976,
+          "signature_sha256": "13f15115a6909acfa6f54d9bcc3e7a3c7239bd0686a894c2af81703c7f7ef37c",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 9,
+          "sign_ms": 96.37360000000001,
+          "signature_sha256": "217e1d95308a0cb3d113164ceba5c7734a0064d672e077ca0ceaabc259da45fb",
+          "verified": true,
+          "verify_us": 67.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 10,
+          "sign_ms": 95.79799999999999,
+          "signature_sha256": "08b4f16b41786626ad3090abad9e11d810396b4d104465a9ef5c36e36141e7a6",
+          "verified": true,
+          "verify_us": 68.30000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 11,
+          "sign_ms": 97.21539999999999,
+          "signature_sha256": "fe31e99a1c7f82a971f50d93604ef5a5e0136dbe7eec5546cc7901a69c1c136c",
+          "verified": true,
+          "verify_us": 79.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 12,
+          "sign_ms": 97.7933,
+          "signature_sha256": "d918c65a2f160e01cf694684ab80d418ae99a4cb9b09b5a619788b45ae996d92",
+          "verified": true,
+          "verify_us": 71.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 13,
+          "sign_ms": 98.251,
+          "signature_sha256": "f824c40797e785b993518c8e0c6d4f9022983f31640b25d9b8a152a461c899c2",
+          "verified": true,
+          "verify_us": 66.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 14,
+          "sign_ms": 96.17280000000001,
+          "signature_sha256": "8e2a450beb60ad28af9c57635fd807928ead31304c9c435ec853e7cebc2da852",
+          "verified": true,
+          "verify_us": 82.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 15,
+          "sign_ms": 96.00269999999999,
+          "signature_sha256": "7fed2da3f32362d1a7311527cee19d37f0c84a7e5334b30c1f941332529b5d63",
+          "verified": true,
+          "verify_us": 68.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 16,
+          "sign_ms": 96.8826,
+          "signature_sha256": "4746c356ad5ccbe4c80c078f8cb03657d3d5c833c8de15c18ef597c3e4052453",
+          "verified": true,
+          "verify_us": 66.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 17,
+          "sign_ms": 96.9149,
+          "signature_sha256": "966457e45485d96576fe66b4cc3f79be3868fa01484f040a01bb08eba2fc21fa",
+          "verified": true,
+          "verify_us": 66.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 18,
+          "sign_ms": 97.6354,
+          "signature_sha256": "7de5099bc68a4b18e76a8092f6b2b2aea30e99a449279868e601224c5857cf3c",
+          "verified": true,
+          "verify_us": 73.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 19,
+          "sign_ms": 97.2149,
+          "signature_sha256": "3863cc0a38b7cf2d2e8401a41955e408e05c3fbe67d809d914677473e8050dfc",
+          "verified": true,
+          "verify_us": 105.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 20,
+          "sign_ms": 98.0432,
+          "signature_sha256": "87879f722a39d4f15adea687a7bbd4cc5e647c4547369aa137cdc92055172d80",
+          "verified": true,
+          "verify_us": 84.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 21,
+          "sign_ms": 96.0085,
+          "signature_sha256": "0e4612a824984d2c9745cb266e02d9f9447e49fe3858aa13245db221950d15d2",
+          "verified": true,
+          "verify_us": 80.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 22,
+          "sign_ms": 96.0826,
+          "signature_sha256": "dde378276c9ad87067af377eee16e8d711b7a5aa328daebae740889e2abd77bf",
+          "verified": true,
+          "verify_us": 65.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 23,
+          "sign_ms": 95.6245,
+          "signature_sha256": "b45cbd7fbbce7ebcdbd73debf868c43195f36934a25507fb19669917b1218fcf",
+          "verified": true,
+          "verify_us": 67.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 24,
+          "sign_ms": 94.9928,
+          "signature_sha256": "3d9a2601dba9ade9a28f18c33fd3b1ceb10e6441c422db733f14a6611b850ebb",
+          "verified": true,
+          "verify_us": 72.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 25,
+          "sign_ms": 96.0964,
+          "signature_sha256": "f2b2957ff4ab0449a69018db26bea76d22eaa6b2f70810e18d7edec6dd07ece6",
+          "verified": true,
+          "verify_us": 67.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 26,
+          "sign_ms": 95.769,
+          "signature_sha256": "e752a6b896215cacea223494df4201d4296e50b6d3b8de0eb7d01cf1140423ab",
+          "verified": true,
+          "verify_us": 63.800000000000004
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 27,
+          "sign_ms": 95.89580000000001,
+          "signature_sha256": "def703a733d9d979f09b9af07ef3ef28f43d0eca7fd4fe75b0c7e2595cf4bc36",
+          "verified": true,
+          "verify_us": 95.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 28,
+          "sign_ms": 97.24929999999999,
+          "signature_sha256": "10c766708a4eb65fc5017adff53a4ca10213281aa9e711fa2592d730eb33cecb",
+          "verified": true,
+          "verify_us": 75.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 29,
+          "sign_ms": 95.0137,
+          "signature_sha256": "088cafd8122bd8d36f8827fdc55d1d0bd3ab4e7d2e9beb40e5747c49df2ad096",
+          "verified": true,
+          "verify_us": 66.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 30,
+          "sign_ms": 95.5283,
+          "signature_sha256": "9f3f51c3c6ae79298df97406c51fa5bc6b00c97b9bc2e01409be7bb614f6b091",
+          "verified": true,
+          "verify_us": 77.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 31,
+          "sign_ms": 95.8506,
+          "signature_sha256": "a22456f20af00c11bd547c099690efb11edd4c4eb239dfc8b0736cdbbbd4f226",
+          "verified": true,
+          "verify_us": 78.80000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 32,
+          "sign_ms": 96.16890000000001,
+          "signature_sha256": "d886266c1bf645b93cfd6f8732422a17702f46b08491d1f4b998d8c7c49db9c5",
+          "verified": true,
+          "verify_us": 70.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 33,
+          "sign_ms": 120.58879999999999,
+          "signature_sha256": "9fd6238822d9696d0a54ae394f1c9e4d72d3bfe6ced4a7458baaaf63c8a69983",
+          "verified": true,
+          "verify_us": 67.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 34,
+          "sign_ms": 100.3953,
+          "signature_sha256": "f1358345123f11a85fc35db0da54a9bbb6ae5030cc818bd4f14b308c16b58f47",
+          "verified": true,
+          "verify_us": 68.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 35,
+          "sign_ms": 96.10109999999999,
+          "signature_sha256": "86aeeb1ef278f7c9f7ab62a51b33f88822a10a12105ecd785fdd9ffa7138a962",
+          "verified": true,
+          "verify_us": 89.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 36,
+          "sign_ms": 97.1346,
+          "signature_sha256": "38c3384004ae8dbaed97b2697dcb99535ac5d9cd26ad457fe4210dc9dac89cd6",
+          "verified": true,
+          "verify_us": 67.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 37,
+          "sign_ms": 96.50110000000001,
+          "signature_sha256": "00de8b71d77e4e124d714ba15964084e6da37f6802c93d1d9ed561922be0f0e8",
+          "verified": true,
+          "verify_us": 65.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 38,
+          "sign_ms": 96.143,
+          "signature_sha256": "109aca55f9f3bdb1644a5201fbf564aa496bf706bde51eedc64c2aa1f0b36628",
+          "verified": true,
+          "verify_us": 65.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 39,
+          "sign_ms": 95.6594,
+          "signature_sha256": "93ff838ee977f054bb58bb921029fe23a9b1a5bf4649fbe3809245053e32bce2",
+          "verified": true,
+          "verify_us": 66.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 40,
+          "sign_ms": 95.8895,
+          "signature_sha256": "6b80c12b53cea61f5bdc81432910218897cbb26d2ed82bba3b3695eb96d1e818",
+          "verified": true,
+          "verify_us": 63.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 41,
+          "sign_ms": 95.6638,
+          "signature_sha256": "0550769da515ede68fa36b2685d7b5204b6cdc87c9a3d79be7d9f0d362dbde28",
+          "verified": true,
+          "verify_us": 68.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 42,
+          "sign_ms": 95.5457,
+          "signature_sha256": "ae6e277f5871cace9de901e4b4a58ab28768a6bd2b88a893bb2fc7ebde04cd81",
+          "verified": true,
+          "verify_us": 127.79999999999998
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 43,
+          "sign_ms": 96.55160000000001,
+          "signature_sha256": "6bb7f90509a3fa0c0c07b81df45b97622e68482141701fe8df2930cc2cad1458",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 44,
+          "sign_ms": 94.88589999999999,
+          "signature_sha256": "1e44bd0bcf6aa41cd07c8cd67c53499cf23999bd025f139fc8eb4e5de7524f5f",
+          "verified": true,
+          "verify_us": 71.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 45,
+          "sign_ms": 97.2335,
+          "signature_sha256": "eb6448293c8d5849a10008df44d3e48cb8430860f491aec65ad6dfc84917bb89",
+          "verified": true,
+          "verify_us": 78.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 46,
+          "sign_ms": 95.9769,
+          "signature_sha256": "11cee17a27facca9fa29cd43498bac110d7e17b9d3efc5f2f30e382b6c89b44f",
+          "verified": true,
+          "verify_us": 62.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 47,
+          "sign_ms": 96.5405,
+          "signature_sha256": "4c4139ab5041ec19a1e0b6ee41c6a56c5af22d13e07b5e5a4089ae8afeac473a",
+          "verified": true,
+          "verify_us": 66.69999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 48,
+          "sign_ms": 95.83579999999999,
+          "signature_sha256": "f96749283a173671159a6082e379ef53d12422ad898a11bd3967aee709bf6f34",
+          "verified": true,
+          "verify_us": 67.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 49,
+          "sign_ms": 96.24000000000001,
+          "signature_sha256": "bf84d84f1206d1afd5d0f5ed52a7fa666b74cc9ac48049b9a3e7aed134fb39c3",
+          "verified": true,
+          "verify_us": 66.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 50,
+          "sign_ms": 96.5007,
+          "signature_sha256": "d3f75876a7b52dc094bb03480cecf5a8fd67841e3ede3bdb5483668729d6f767",
+          "verified": true,
+          "verify_us": 82.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 51,
+          "sign_ms": 97.187,
+          "signature_sha256": "a0bb36c3fd82f3b010221f35e4b02ea92a9bac67af4c07bc94cea52f1deabb35",
+          "verified": true,
+          "verify_us": 65.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 52,
+          "sign_ms": 96.88380000000001,
+          "signature_sha256": "aeebf715de8d1b62f5705bd2fd65fc22421e1ef9d3ba61fb6af56162e13cc77d",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 53,
+          "sign_ms": 96.8469,
+          "signature_sha256": "7f6abd5ce2dfd9a39de6d87eb24d97cebf9d233616bdbc7408210c4d2b39b921",
+          "verified": true,
+          "verify_us": 66.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 54,
+          "sign_ms": 99.8339,
+          "signature_sha256": "4e57a1ec492a7cd74f294f685055636a32028d629052a1ef09b3912674c7f794",
+          "verified": true,
+          "verify_us": 65.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 55,
+          "sign_ms": 98.66900000000001,
+          "signature_sha256": "6bca5789a6d55cade8cdc6afbbde0f1a94768086c63e4badc3de355300711a1a",
+          "verified": true,
+          "verify_us": 65.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 56,
+          "sign_ms": 97.3479,
+          "signature_sha256": "558f56dc993801bf9a2a10e25d97688029921740b66b26885075b376836f04c1",
+          "verified": true,
+          "verify_us": 68.80000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 57,
+          "sign_ms": 95.47940000000001,
+          "signature_sha256": "820ffd927e2dc2b063778fd2c15eff71ef1d87c7ea3d342f7e4ca691f2d171f0",
+          "verified": true,
+          "verify_us": 62.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 58,
+          "sign_ms": 95.6236,
+          "signature_sha256": "f7c46d685d6ee2eaad5ff86991abe04d145eacee88d27acb8e33af723f0b3b19",
+          "verified": true,
+          "verify_us": 65.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 59,
+          "sign_ms": 95.623,
+          "signature_sha256": "df0aee1a98edbeca8afa66206a7d3245a4c56cc836f97fd68a71164401223fa9",
+          "verified": true,
+          "verify_us": 65.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 60,
+          "sign_ms": 96.74969999999999,
+          "signature_sha256": "354e3fd2855740cccebafc453fae035423411c8f46baa241a991067f290ca2ba",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 61,
+          "sign_ms": 95.3591,
+          "signature_sha256": "68ca214766c452bac2b92e78ec8599d84a05de815f195cba79eb7f57d3ebf882",
+          "verified": true,
+          "verify_us": 65.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 62,
+          "sign_ms": 95.9688,
+          "signature_sha256": "0410da3eda1c45e6f2d1f980652922be5cb7e992583592eec9f182a6ebaf693c",
+          "verified": true,
+          "verify_us": 65.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 63,
+          "sign_ms": 96.42280000000001,
+          "signature_sha256": "a4cd85ef5740b4b79a5de95be607b0506de40ab6bc1392fbda69f1a9f6c555dd",
+          "verified": true,
+          "verify_us": 66.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 64,
+          "sign_ms": 98.6836,
+          "signature_sha256": "d2dce09284849de802459fbcda6658a3ef9b657fc307ae36e890da9968598190",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 65,
+          "sign_ms": 95.4251,
+          "signature_sha256": "d8df21da5d8b5c37450bea2765bfa1c957dedba37d6812e765b2322652ccfcf5",
+          "verified": true,
+          "verify_us": 66.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 66,
+          "sign_ms": 95.8387,
+          "signature_sha256": "14680928c269f2b96de1d38a3d6ed406d4716d5e0e36dd947b6f0b5199d946b3",
+          "verified": true,
+          "verify_us": 89.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 67,
+          "sign_ms": 96.4303,
+          "signature_sha256": "f62803e4eeedbf44d5ab0f410b05f911a6089d23a7f330be6892c8cfbc3118c6",
+          "verified": true,
+          "verify_us": 65.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 68,
+          "sign_ms": 96.00359999999999,
+          "signature_sha256": "26cb49165dc0dea2dd3a79747037bbd124ae3c2d65e9ec062e011a4ed1a0bde5",
+          "verified": true,
+          "verify_us": 66.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 69,
+          "sign_ms": 95.4879,
+          "signature_sha256": "c610cfdcc51505d12e6e82b7e4c00654fc066207a9bd68355ab65492cb825403",
+          "verified": true,
+          "verify_us": 66.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 70,
+          "sign_ms": 96.2383,
+          "signature_sha256": "71f2eff76684bfdaeca2a80a32270c2c6613a6bdced5a5b721343ac9dc0de2a2",
+          "verified": true,
+          "verify_us": 63.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 71,
+          "sign_ms": 96.2929,
+          "signature_sha256": "5c980676cfe36397212980a6e0ede768bf5ff6aa96bf74d0f22a4a1b293eb249",
+          "verified": true,
+          "verify_us": 66.60000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 72,
+          "sign_ms": 96.0444,
+          "signature_sha256": "8cf7e03d82547da4921ae7e41c4770327de3f5a68c6181536823376bb06af488",
+          "verified": true,
+          "verify_us": 68.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 73,
+          "sign_ms": 95.7875,
+          "signature_sha256": "9b262ca4cd0032f2c9df61aecde361b1940c0a0f9d9d167b1bac9e9e82407afc",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 74,
+          "sign_ms": 99.44980000000001,
+          "signature_sha256": "d22672739f25a74a3a41829da24a3560ada6db93333bb85c856d50eb5c863c53",
+          "verified": true,
+          "verify_us": 66.0
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 75,
+          "sign_ms": 96.8034,
+          "signature_sha256": "2344aabb7fa16d60b3f8d01b9a74a457385e79839c5e377ac9458d9d9790bbe2",
+          "verified": true,
+          "verify_us": 68.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 76,
+          "sign_ms": 95.7378,
+          "signature_sha256": "d6c805d06dd7fb69206bebc04645d24bb54bf8267c4a47b4d1d62022622e4b7c",
+          "verified": true,
+          "verify_us": 66.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 77,
+          "sign_ms": 96.0099,
+          "signature_sha256": "1373330020c7d8496fb55116a8e126dae155a70b3409e9d0ad1d3b37700715aa",
+          "verified": true,
+          "verify_us": 65.5
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 78,
+          "sign_ms": 95.30900000000001,
+          "signature_sha256": "18d651b9ccbdcb0242fcaab8dd9dc5b80f1a2922e5b52711d9140aeb0b120928",
+          "verified": true,
+          "verify_us": 70.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 79,
+          "sign_ms": 96.8179,
+          "signature_sha256": "8f584395a81a4ecc454f561efa0d88119678f5a73d465862fd68fd567ae6858d",
+          "verified": true,
+          "verify_us": 84.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 80,
+          "sign_ms": 95.9068,
+          "signature_sha256": "159aad53b9e01b4b5749f7fc6f0001cb48d3170df4069859266d599707bc1360",
+          "verified": true,
+          "verify_us": 66.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 81,
+          "sign_ms": 97.01350000000001,
+          "signature_sha256": "421638845416cd3b723e656f39584453440a007274efb90b22505a8166700357",
+          "verified": true,
+          "verify_us": 80.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 82,
+          "sign_ms": 96.25590000000001,
+          "signature_sha256": "f31492a102326b0b0712f5aacee7cd05b7ab17329a2d79c00c09faeaf2722a01",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 83,
+          "sign_ms": 95.0604,
+          "signature_sha256": "757866d0dbd2a51212d2cf587de79197f5e8ae34c7f38e75834c40b1c76c80b1",
+          "verified": true,
+          "verify_us": 65.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 84,
+          "sign_ms": 96.0538,
+          "signature_sha256": "f776887d08dbc560a3682c3afce47b3324eb41d64d7eaa4a153d7cad6fe27749",
+          "verified": true,
+          "verify_us": 75.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 85,
+          "sign_ms": 96.1704,
+          "signature_sha256": "8fe6e02ac47e1442e201f9b3e6c63e0cec5a21f5593c6b8ae16d7686ffed63e6",
+          "verified": true,
+          "verify_us": 65.8
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 86,
+          "sign_ms": 96.61019999999999,
+          "signature_sha256": "f6962b4b832edb3f007f072b1067315724b19438298c7f5ac5a37c25f4ea0d28",
+          "verified": true,
+          "verify_us": 87.3
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 87,
+          "sign_ms": 97.0641,
+          "signature_sha256": "3f2d69539bff8096f96f0121c895882e330c36146d29a63ee5a524b8da02f8fe",
+          "verified": true,
+          "verify_us": 68.89999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 88,
+          "sign_ms": 96.961,
+          "signature_sha256": "1a5d52dc29e67259688b5d962fa8a29071ec9d3aa3f863c4decec7df3fcf1fe7",
+          "verified": true,
+          "verify_us": 65.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 89,
+          "sign_ms": 95.8193,
+          "signature_sha256": "4522326159b2ebb2c1408d9f111695110d03e9cb364753c1affda37bca0705dd",
+          "verified": true,
+          "verify_us": 66.1
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 90,
+          "sign_ms": 96.4504,
+          "signature_sha256": "2c2d5dc9e75661dcc9d7ae0e1769dfa27ebb12cad11a02722895d392362d5f55",
+          "verified": true,
+          "verify_us": 67.39999999999999
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 91,
+          "sign_ms": 96.1333,
+          "signature_sha256": "0eb820f6fdb5c73e0238eda6ca44758c53c2f17473e6c8447f428743fd1d4249",
+          "verified": true,
+          "verify_us": 68.2
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 92,
+          "sign_ms": 95.7183,
+          "signature_sha256": "2366b34c50cd539ad3e4653e88ba65823cddc8b617d38e082bd000bd803280a3",
+          "verified": true,
+          "verify_us": 65.4
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 93,
+          "sign_ms": 95.76389999999999,
+          "signature_sha256": "0d94089eec61a70bb74b1456c94443613b097ee0e2e277c7a0ae59e50fc30653",
+          "verified": true,
+          "verify_us": 89.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 94,
+          "sign_ms": 95.95570000000001,
+          "signature_sha256": "10fdca6563587d01001f3ef608f922108b94a870f24686a7bfba8072a5b1732e",
+          "verified": true,
+          "verify_us": 72.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 95,
+          "sign_ms": 96.6554,
+          "signature_sha256": "8434592ed716111465a5336b584d618e01a8dce454b50aee2aa1434fbcadcff0",
+          "verified": true,
+          "verify_us": 93.9
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 96,
+          "sign_ms": 95.4471,
+          "signature_sha256": "2d32b87e0aa62d69cc98680abec4098de312377295753a210ab23ef9d0da0880",
+          "verified": true,
+          "verify_us": 83.7
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 97,
+          "sign_ms": 95.9218,
+          "signature_sha256": "2cd7a423573f371858b17ec027fdbcb925799801e106f57ca2ddf5974cab18cb",
+          "verified": true,
+          "verify_us": 92.10000000000001
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 98,
+          "sign_ms": 95.8751,
+          "signature_sha256": "cabe87707efca6096657c106b6b191011712b0ce76b037e60d44b70a19f5370d",
+          "verified": true,
+          "verify_us": 65.6
+        },
+        {
+          "active": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "attempts": 1,
+          "sample_index": 99,
+          "sign_ms": 95.7263,
+          "signature_sha256": "6470b5cf39de937c33200e34389b457ec389f20ee3b4361996be28d173014c10",
+          "verified": true,
+          "verify_us": 78.0
+        }
+      ],
+      "signature_bytes": 2420,
+      "signing_ms": {
+        "count": 100,
+        "max": 120.58879999999999,
+        "mean": 96.63652899999997,
+        "min": 94.88589999999999,
+        "p50": 96.16965,
+        "p95": 98.66973000000002,
+        "p99": 100.59723500000011
+      },
+      "t": 5,
+      "verification_us": {
+        "count": 100,
+        "max": 127.79999999999998,
+        "mean": 71.776,
+        "min": 62.3,
+        "p50": 67.3,
+        "p95": 92.125,
+        "p99": 106.02000000000011
+      }
+    }
+  ],
+  "created_unix_ms": 1786956846273,
+  "dropout_campaign": [
+    {
+      "cardinality_sufficient": true,
+      "completion_rate": 1.0,
+      "completions": 100,
+      "dropped": 0,
+      "expected_fail_closed": false,
+      "n": 6,
+      "protocol_attempts_successes": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "rejection_class": null,
+      "signing_ms_successes": {
+        "count": 100,
+        "max": 58.8823,
+        "mean": 54.905562000000025,
+        "min": 53.921,
+        "p50": 54.8395,
+        "p95": 55.68501,
+        "p99": 58.803793000000006
+      },
+      "survivors": 6,
+      "t": 4,
+      "trials": 100
+    },
+    {
+      "cardinality_sufficient": true,
+      "completion_rate": 1.0,
+      "completions": 100,
+      "dropped": 1,
+      "expected_fail_closed": false,
+      "n": 6,
+      "protocol_attempts_successes": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "rejection_class": null,
+      "signing_ms_successes": {
+        "count": 100,
+        "max": 57.7023,
+        "mean": 55.05788100000001,
+        "min": 53.9924,
+        "p50": 54.98615,
+        "p95": 56.564575,
+        "p99": 57.116121
+      },
+      "survivors": 5,
+      "t": 4,
+      "trials": 100
+    },
+    {
+      "cardinality_sufficient": true,
+      "completion_rate": 1.0,
+      "completions": 100,
+      "dropped": 2,
+      "expected_fail_closed": false,
+      "n": 6,
+      "protocol_attempts_successes": {
+        "count": 100,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0
+      },
+      "rejection_class": null,
+      "signing_ms_successes": {
+        "count": 100,
+        "max": 61.9418,
+        "mean": 55.23406099999999,
+        "min": 53.9436,
+        "p50": 54.9857,
+        "p95": 57.22039,
+        "p99": 58.827458000000014
+      },
+      "survivors": 4,
+      "t": 4,
+      "trials": 100
+    },
+    {
+      "cardinality_sufficient": false,
+      "completion_rate": 0.0,
+      "completions": 0,
+      "dropped": 3,
+      "expected_fail_closed": true,
+      "n": 6,
+      "protocol_attempts_successes": null,
+      "rejection_class": "InvalidParameters",
+      "signing_ms_successes": null,
+      "survivors": 3,
+      "t": 4,
+      "trials": 100
+    }
+  ],
+  "evidence_scope": "Executed in-process Mithril-style threshold ML-DSA-44 within the dependency's published N<=6 envelope; not TALUS, not networked MPC, and not Q-Relay 14-of-21",
+  "host": {
+    "arch": "x86_64",
+    "cargo": "cargo 1.90.0 (840b83a10 2025-07-30)",
+    "cpu_identifier": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+    "logical_parallelism": 12,
+    "os": "windows",
+    "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)\nbinary: rustc\ncommit-hash: 1159e78c4747b02ef996e55082b704c09b970588\ncommit-date: 2025-09-14\nhost: x86_64-pc-windows-msvc\nrelease: 1.90.0\nLLVM version: 20.1.8"
+  },
+  "negative_tests": {
+    "all_passed": true,
+    "duplicate_active_id_rejected": true,
+    "insufficient_active_set_rejected": true,
+    "out_of_range_active_id_rejected": true,
+    "tampered_signature_rejected": true,
+    "unsorted_active_set_rejected": true,
+    "unsupported_14_of_21_rejected": true,
+    "wrong_message_rejected": true
+  },
+  "protocol": {
+    "deterministic_benchmark_rng": "ChaCha20Rng; domain-separated SHA-256 seeds",
+    "dropout_samples_per_cell": 100,
+    "max_single_attempts": 50,
+    "message_bytes": 256,
+    "samples_per_config": 100,
+    "warmup_signatures": 1
+  },
+  "provenance": {
+    "cargo_lock_sha256": "04ab19108fe35520251533e66ff3f683a682e290485cb3b85f2158add46e90ca",
+    "executable_sha256": "8957e030c5c4a7add74d74ae79e32a649f2c00cfdd9ce95dcb4a1fcd6e6924b4",
+    "protocol_path": "${PRIVATE_HOST_PATH_REDACTED}",
+    "protocol_sha256": "0be579710b98a2b4efcc835d8d2c32ee748122bcbe9f7f752d5f2d58fb5f569f",
+    "source_sha256": "60c80f77999a1bf902957827f0de89360d376765a9674b23ffe02ce0bdede83a"
+  },
+  "schema": "qrelay-real-threshold-backend-receipt-1",
+  "status": "PASS"
+}

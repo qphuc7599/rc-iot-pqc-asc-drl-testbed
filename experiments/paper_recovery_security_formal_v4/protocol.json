@@ -1,0 +1,102 @@
+{
+  "schema": "qrelay-security-constrained-formal-protocol-4",
+  "status": "prospectively_frozen_with_preformal-qualification-corrigendum-2",
+  "objective": "Reduce public posterior tail risk and actual hidden-label exposure while preserving or improving service TPS under the unchanged hardcore disaster environment.",
+  "scientific_parent": "original-paper direct full-committee PPO plus reviewer-required public fair inputs",
+  "environment": {
+    "source": "drl/paper_recovery_hardcore_v5/env.py",
+    "nodes": 100,
+    "committee_size": 21,
+    "fault_budget": 6,
+    "safe_quorum": 14,
+    "horizon_steps": 2000,
+    "original_registered_event": "permanent 30 percent node kill at control step 1000",
+    "additional_training_families": "unchanged multihazard training families from hardcore v5",
+    "reward_changed": false,
+    "physics_changed": false
+  },
+  "controller": {
+    "family": "direct PPO without FMG or residual prior",
+    "public_history_steps": 64,
+    "critics": [
+      "reward",
+      "certificate_failure",
+      "depletion",
+      "public_security_tail"
+    ],
+    "security_cost": "exact Poisson-binomial P(public posterior nonresponses in selected committee > f)",
+    "security_tail_limit": 0.05,
+    "public_admission": "quarantine only when consecutive public deadline misses >=2 and public response trust LCB <0.45",
+    "admission_below_k_mode": "release exactly the deficit with the lowest public posterior risk; no hidden label and no post-action shield",
+    "training_decoder": "exact prefix-conditioned stochastic Plackett-Luce at temperature 0.55",
+    "primary_evaluation_decoder": "deterministic public-risk top-k",
+    "secondary_evaluation_decoder": "stochastic Plackett-Luce action-seed audit",
+    "hidden_byzantine_labels_in_control_path": false,
+    "disaster_flag_in_control_path": false,
+    "future_realization_in_control_path": false,
+    "post_action_shield": false
+  },
+  "training": {
+    "updates": 3000,
+    "transitions_per_update": 3000,
+    "transitions": 9000000,
+    "persistent_workers": 11,
+    "cold_start": true,
+    "resume": false,
+    "early_stop": false,
+    "best_checkpoint_selection": false,
+    "checkpoint": "fixed-budget ppo_final.pt only",
+    "monitor_interval_minutes": 15
+  },
+  "seeds": {
+    "smoke_spent_zero_transition_missing_calibration": 657001,
+    "smoke": 657002,
+    "qualification_completed_but_deployment_edge_case_rejected": 657003,
+    "qualification": 657004,
+    "formal_training": 657101,
+    "heldout_evaluation": [
+      657201,
+      657202,
+      657203,
+      657204,
+      657205,
+      657206,
+      657207,
+      657208,
+      657209,
+      657210,
+      657211,
+      657212,
+      657213,
+      657214,
+      657215,
+      657216,
+      657217,
+      657218,
+      657219,
+      657220
+    ]
+  },
+  "frozen_contract": {
+    "config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21"
+  },
+  "runtime_corrigendum_1": {
+    "scientific_contract_changed": false,
+    "reason": "The first smoke claim failed before environment construction because the native-ext4 stage omitted the already-frozen calibration artifact.",
+    "fix": "Stage results/v12_ns3_final_validation/calibration.json byte-for-byte before constructing workers.",
+    "formal_seed_affected": false
+  },
+  "qualification_corrigendum_2": {
+    "formal_seed_claimed": false,
+    "trigger": "The first 8-update qualification trained successfully, but deterministic deployment reached only 20 admitted nodes in one disaster state.",
+    "fix": "Replace all-or-nothing failure below k with an exact-deficit, minimum-public-risk pre-action refill.",
+    "hidden_information_added": false,
+    "reward_or_environment_changed": false,
+    "replacement_qualification_seed": 657004
+  },
+  "interpretation": {
+    "single_seed_role": "diagnostic candidate, not confirmatory paper evidence",
+    "security_guard": "Report both public chance-risk and offline actual exposure. Positive TPS does not establish safety.",
+    "fundamental_limit": "No public-telemetry policy can guarantee hidden committee composition at the first uninformative decision; cryptographic safety claims remain conditional on admission assumptions."
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "all_honest_intersection_signers_refuse_conflict": true,
+    "both_gateways_reverified_every_device_packet": true,
+    "committee_nondouble_sign_survives_restart": true,
+    "corrupted_committee_signature_rejected": true,
+    "dispute_selects_highest_valid_countersigned_state": true,
+    "duplicate_committee_signer_rejected": true,
+    "force_close_commits_selected_state": true,
+    "force_close_requires_deadline_condition": true,
+    "gateway_conflict_rejected_for_both_signers": true,
+    "gateway_nondouble_sign_survives_restart": true,
+    "gateway_recomputation_is_deterministic": true,
+    "openssl_exposes_standard_mldsa44": true,
+    "q13_counterexample_both_conflicts_verify": true,
+    "q13_counterexample_intersection_is_byzantine_only": true,
+    "q14_actual_mldsa_bundle_verifies": true,
+    "q14_conflict_has_at_most_thirteen_signers": true,
+    "q14_conflicting_certificate_rejected": true,
+    "relay_commits_two_monotone_states": true,
+    "relay_replay_rejected_after_restart": true,
+    "relay_state_survives_restart": true,
+    "tampered_update_rejected_by_gateway_approvals": true,
+    "tier1_source_all_checks_passed": true,
+    "two_actual_mldsa_gateway_approvals_verify": true,
+    "unknown_committee_signer_rejected": true
+  },
+  "configuration": {
+    "certificate_mode": "Q individual ML-DSA signatures; no aggregation",
+    "committee_bundle_bytes": 33994,
+    "committee_size": 21,
+    "device_packet_count": 62,
+    "fault_budget": 6,
+    "gateway_count": 2,
+    "quorum": 14,
+    "sequence_packet_counts": [
+      31,
+      31
+    ],
+    "sequence_record_counts": [
+      310,
+      292
+    ]
+  },
+  "cryptography": {
+    "device_signature_implementation": "liboqs mldsa-verifier static worker",
+    "gateway_and_committee_signature_implementation": "OpenSSL 3.5.0 8 Apr 2025 (Library: OpenSSL 3.5.0 8 Apr 2025)",
+    "signature_algorithm": "ML-DSA-44",
+    "signature_bytes": 2420
+  },
+  "evidence_tier": "functional-fallback-settlement",
+  "negative_tests": {
+    "gateway_conflicting_context_rejections": 2,
+    "honest_committee_conflicting_context_rejections": 8,
+    "q13_intersection": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "q13_set_a": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "q13_set_b": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "q14_conflict_signature_count": 13
+  },
+  "receipts": {
+    "cooperative_sequence_1": {
+      "channel_id": 1,
+      "committee_bundle_digest": "0eb20e1330b7580be5fd6685e8128ff399101409a628a82867a1c4e000579c1b",
+      "mode": "cooperative",
+      "relay_receipt_root": "9f53ee5b21f526fa4a7fe00425a5ba9281623ca8bd0d5eb8cdcc4a377098637d",
+      "sequence": 1,
+      "update_digest": "fed038644065fd426508c0c5dfdd29585b43bb3f57ebe71951f687d1f4b0040e"
+    },
+    "cooperative_sequence_2": {
+      "channel_id": 1,
+      "committee_bundle_digest": "fe144497c98d7e373a2c14e6e484119744e8828f09192e6133325cc31543504d",
+      "mode": "cooperative",
+      "relay_receipt_root": "e627b29379bc5acaae0f83d677132f9a3807bb4567b86b80f1e11e78a8c48309",
+      "sequence": 2,
+      "update_digest": "097b1e88f55544c4d5ec2190b182f4a92fcbad819a9386a1022843d2c36abfb4"
+    },
+    "force_close_sequence_2": {
+      "channel_id": 1,
+      "committee_bundle_digest": "fe144497c98d7e373a2c14e6e484119744e8828f09192e6133325cc31543504d",
+      "mode": "force-close",
+      "relay_receipt_root": "3291e929bfc7615c21202f24d03231d5d95ea5a2b68c7d43e60cb6475296d1d5",
+      "sequence": 2,
+      "update_digest": "097b1e88f55544c4d5ec2190b182f4a92fcbad819a9386a1022843d2c36abfb4"
+    }
+  },
+  "run_id": "20260730T151005",
+  "schema_version": 1,
+  "scope": {
+    "executed": [
+      "two independent liboqs ML-DSA-44 device-packet verification paths",
+      "canonical two-gateway channel-update recomputation",
+      "two actual OpenSSL ML-DSA-44 gateway approvals",
+      "persistent gateway and committee non-equivocation logs",
+      "Q=14 bundle of individually verifiable ML-DSA-44 signatures",
+      "durable software relay settlement and restart-safe replay rejection",
+      "highest-valid-state force-close selection"
+    ],
+    "not_executed": [
+      "threshold or aggregate ML-DSA",
+      "TEE isolation or attestation",
+      "replicated raw-record storage",
+      "deployed Layer-1 smart contract",
+      "gas, block-finality, or production network latency"
+    ]
+  },
+  "source_evidence": {
+    "manifest_sha256": "c9be29d2f7c730d5b9f5d082af166783fbbf78fe69201038ee70fb689c67e916",
+    "run": "${PRIVATE_HOST_PATH_REDACTED}",
+    "source_all_checks_passed": true,
+    "validation_sha256": "8fd9da5d922eca58f3d60eabb88fcf95ba03577bbfb88ce730b073cc957aa87e"
+  },
+  "timing_diagnostic_only": {
+    "gateway_1_seconds": 0.22509639999771025,
+    "gateway_2_seconds": 0.19136770000477554
+  }
+}

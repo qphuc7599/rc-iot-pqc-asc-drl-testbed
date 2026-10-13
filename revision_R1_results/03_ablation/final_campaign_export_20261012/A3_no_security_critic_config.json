@@ -1,0 +1,41 @@
+{
+  "architecture_switches": {
+    "history_lag_differences_zeroed": false,
+    "public_admission_removed": false,
+    "security_critic_removed_and_lambda_s_fixed_zero": true
+  },
+  "scientific_config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21",
+  "shared_contract": {
+    "N_k_Q_f": [
+      100,
+      21,
+      14,
+      6
+    ],
+    "actor_learning_rate": 3e-05,
+    "cell_count": 5,
+    "checkpoint_selection": "fixed_budget_final_only",
+    "clip_epsilon": 0.1,
+    "critic_learning_rate": 0.0002,
+    "early_stop": false,
+    "environment": "paper_recovery_hardcore_v5 unchanged",
+    "epochs_per_update": 2,
+    "gae_lambda": 0.97,
+    "gamma": 0.995,
+    "gradient_clip": 0.5,
+    "horizon_steps": 2000,
+    "logical_environments": 33,
+    "minibatch_size": 1024,
+    "permanent_kill_count_at_step_1000": 30,
+    "persistent_backlog_thermal_aftershocks_and_withholding": true,
+    "physical_workers": 11,
+    "resume": false,
+    "telemetry_delay_steps": [
+      12,
+      22
+    ],
+    "transitions_per_formal_seed": 9000000,
+    "transitions_per_update": 3000,
+    "updates": 3000
+  }
+}

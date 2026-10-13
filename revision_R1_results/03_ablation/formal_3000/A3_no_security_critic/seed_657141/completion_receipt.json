@@ -1,0 +1,291 @@
+{
+  "all_required_modules_updated": true,
+  "all_updates_finite": true,
+  "arm": "A3_no_security_critic",
+  "checkpoint_path": "revision_R1_results/03_ablation/formal_3000/A3_no_security_critic/seed_657141/ppo_final.pt",
+  "checkpoint_sha256": "a6e81eb20313d2c10c12f787def03ec4eca0a6aff2a74fdf5d9167087a79fade",
+  "completed_at": "2026-10-07T07:41:58.430221+00:00",
+  "config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21",
+  "elapsed_seconds": 16258.998415586,
+  "final_depletion_dual": 0.0,
+  "final_failure_dual": 4.354499999999977,
+  "final_module_hashes": {
+    "actor": "d3ce1fe537ccb71fbc23e34d665e1a866b5518b20b2781d7a5fe079aee9dcf41",
+    "depletion_critic": "38c8d9ccf2a9a5bd6eae5e770df6e8e91054e0dbe3ccc1518f13209d054837e5",
+    "failure_critic": "32582149086fcbe8e65a732f78334c09774574c492e2bcd9d3611f8294c40f3c",
+    "reward_critic": "7a5f13a2a27f5d458091bf177baf7c35b208fc0b36d72c38768b226a515d0c5c"
+  },
+  "final_security_dual": 0.0,
+  "initial_module_hashes": {
+    "actor": "bd3013ac8a8e88a51509ebdf04787a9f5b89c60d7d64f58d9161b20c9dd2ae0d",
+    "depletion_critic": "4da4cc69a7007dad4490fc2f2230daeb9a56e5b4dd5953ea87a52015e272e2da",
+    "failure_critic": "c79ebad0b7059cd21389e08fb9aba36c2329b2458307f5aa4bc5d4f122c8d32f",
+    "reward_critic": "70f8158436fc32c02dd30d9a20ca61d8109db522b50875b9a41ab7739dd56f7b"
+  },
+  "logical_environments": 33,
+  "logical_trajectory_receipts": [
+    {
+      "episode_count": 137,
+      "trajectory_hash": "37f6393754f2853181ae58af21a6f90ce57a3cd12558f882b488798c1e7cafdf",
+      "transition_count": 272728,
+      "worker_id": 0
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "f6ec3b560426ccf3e68ee71c38bd56af849c92c9ee0f754159aa3b7b7d4065ba",
+      "transition_count": 272728,
+      "worker_id": 1
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "8e4ab6ee6fe37e12cb5c9105d51cb3c8b7a0a0583e384210f01ac6df79de9e64",
+      "transition_count": 272728,
+      "worker_id": 2
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "f870c259c670266e7dbef65a93017e4bdee2e3eb1667c9da9172cb2c77c76fb6",
+      "transition_count": 272728,
+      "worker_id": 3
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "219ab763674845e9ef19a39dca874c5a66d0faaf1ee75ddbed82ad532421f311",
+      "transition_count": 272728,
+      "worker_id": 4
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "4a2467532f8877d3785f9a3be37ba16586e529497f86e6db01f16263db9722b3",
+      "transition_count": 272728,
+      "worker_id": 5
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "3f3f4f4888e570a9b3e730f088ba12297ae2c540dd09c4417a2d6f13ce19fdb5",
+      "transition_count": 272728,
+      "worker_id": 6
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "56d96e705739de2e2d7914f7f48b6fcf28df63975cbbb070d91a86060659a7ed",
+      "transition_count": 272728,
+      "worker_id": 7
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "063c43b59ecd327b0425c8c53fbbff82d55e3aa939188f937f291d03cbb400b0",
+      "transition_count": 272728,
+      "worker_id": 8
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "13d7600615d2f930566c93ad6df98983e09ba9deb99da32ebb9af4ce1184cf62",
+      "transition_count": 272727,
+      "worker_id": 9
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "4ac805659d5ce7cc3e1c23096200754943fbc0684a57fdb497c77707b7bdb16a",
+      "transition_count": 272727,
+      "worker_id": 10
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "6b88ce9607daad82d860eb14bb5a7d374f8d2d55d44e359be41f5fd971662f4e",
+      "transition_count": 272727,
+      "worker_id": 11
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "45bba58afab36d8a8c10b40b0ab99d8f7a4f589828ea71a7f5d7b9bab5b0d58f",
+      "transition_count": 272727,
+      "worker_id": 12
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "b896a2f1e2664af481b55046f7d0bdcf0845b8e18a1a434ddb784a6a9a05e5d3",
+      "transition_count": 272727,
+      "worker_id": 13
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "2aaac1687fe05853f7d1f28094b0b80233648126404e4ff44cf8d9db2fc48228",
+      "transition_count": 272727,
+      "worker_id": 14
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "2e2d7cb6df83db715aef96167b105f41aded8fb366a537ddf6ebdbcca70c2b30",
+      "transition_count": 272727,
+      "worker_id": 15
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "6078ee4dd77ea8eedc0e3cd857afc8f5b779746e89b359a2b6ada57f8c9cb1fa",
+      "transition_count": 272727,
+      "worker_id": 16
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "6a9d4db9210a2474c229f3ac0d7e4060038d0199e7e221cc158c4bdbc13a694b",
+      "transition_count": 272727,
+      "worker_id": 17
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "06c0246efbb31d0609a364aa7af1faba120fa764a4c8aa6140313877449d035f",
+      "transition_count": 272727,
+      "worker_id": 18
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "219088f6effddba952f454442140c0ce798dbaadcf02ffc3edc1345778585bb2",
+      "transition_count": 272727,
+      "worker_id": 19
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "c582f8f1c1457ad2db03d570a57ee451456559d5d207728db371acb51a9adaef",
+      "transition_count": 272727,
+      "worker_id": 20
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "e2fb2dfa8334443b8605d81cea89041b2b3d4505435ef38757903aa89e2de2c4",
+      "transition_count": 272727,
+      "worker_id": 21
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "47c3dbd84fed241587fa9b7e34c1d1d7732fe191c6fd38205947aa961cdbe053",
+      "transition_count": 272727,
+      "worker_id": 22
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "96d6e2c9640fd9b7cfab38364a2e04992ab06f880b9ea36035448224481caa18",
+      "transition_count": 272727,
+      "worker_id": 23
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "3a9e3df216e14abb88ca8888773176d2fd95aef4efd1cd2b9c61132944d72a4c",
+      "transition_count": 272727,
+      "worker_id": 24
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "f08f420408ccd89275ae20003fa25c69bcf4eb97b8f6fb0cdfb8a793d205071f",
+      "transition_count": 272727,
+      "worker_id": 25
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "d73db8a02856317e9698af4252f7f219a038a8723641e65b33ee60597cb9d4b1",
+      "transition_count": 272727,
+      "worker_id": 26
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "feb0ab9941784da6c066a3daf4f53f0d18e7b68394fe6040ef074a703d3f04cd",
+      "transition_count": 272727,
+      "worker_id": 27
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "232062e3d4c4d222defff957ce29e37772c19fe55c40e99ea38ec615d7c50ca7",
+      "transition_count": 272727,
+      "worker_id": 28
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "00c346270cab0d89468973103d5bdfff76c93d748c56d13d155bb7a3db14936f",
+      "transition_count": 272727,
+      "worker_id": 29
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "5c97602c0a26c77dd7a914b360e662ec40fb7330147c210740509a22a45b2b72",
+      "transition_count": 272727,
+      "worker_id": 30
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "d7ef0f159f3a225f69ecbc729f1e9d4023ca3aedf159e33825518895ac963fd4",
+      "transition_count": 272727,
+      "worker_id": 31
+    },
+    {
+      "episode_count": 137,
+      "trajectory_hash": "25241d5d73bc8c69bb61a53c45fbecab6207051341e638b641328fa2109eee21",
+      "transition_count": 272727,
+      "worker_id": 32
+    }
+  ],
+  "maximum_observed_kl": 0.0026160033885389566,
+  "mean_transitions_per_second": 553.5396320213999,
+  "modules_updated": {
+    "actor": true,
+    "depletion_critic": true,
+    "failure_critic": true,
+    "reward_critic": true
+  },
+  "paper_evidence_eligible": false,
+  "physical_workers": 11,
+  "receipt_hash": "8a52b542d42447c04e9cb714c864776ec56c89458ff872e25914343d182a8334",
+  "role": "candidate_requires_heldout_evaluation",
+  "run_kind": "formal_3000",
+  "runtime": {
+    "accelerator": {
+      "cuda_available": true,
+      "cuda_device": "NVIDIA GeForce RTX 2050",
+      "mps_available": false
+    },
+    "packages": {
+      "numpy": "2.4.4",
+      "torch": "2.6.0+cu124"
+    },
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]"
+  },
+  "schema": "qrelay-minor-revision-ablation-completion-1",
+  "seed": 657141,
+  "source_hash": "4e3e0e187aef96c615fe0fa37a2a8ce15e478c76854362daeb1f88499febfed6",
+  "started_at": "2026-10-07T02:52:00.728624+00:00",
+  "status": "complete",
+  "trajectory_hash": "9d2debb09c2c5102e27b6eb5c15ee00f9955bc316b5b7e54260d350145577b32",
+  "transitions_completed": 9000000,
+  "updates_completed": 3000,
+  "worker_runtime": {
+    "all_workers_reaped": true,
+    "exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "logical_environments": 33,
+    "physical_worker_pids": [
+      701,
+      702,
+      703,
+      704,
+      705,
+      706,
+      707,
+      708,
+      709,
+      710,
+      711
+    ],
+    "physical_workers": 11
+  }
+}

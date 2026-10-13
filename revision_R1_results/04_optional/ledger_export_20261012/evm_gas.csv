@@ -1,0 +1,9 @@
+transaction_type,samples,mean_gas,min_gas,max_gas,local_EVM,hardfork,native_ML_DSA_verification_included
+cooperative_update,20,655626.0,630330,680922,Ganache7.9.2,Shanghai,False
+deploy_registry,20,269557.0,269557,269557,Ganache7.9.2,Shanghai,False
+deploy_settlement,20,779682.0,779682,779682,Ganache7.9.2,Shanghai,False
+finalize_force_close,10,57714.0,57714,57714,Ganache7.9.2,Shanghai,False
+open_channel,20,67733.0,67733,67733,Ganache7.9.2,Shanghai,False
+register_digest,40,48117.0,48117,48117,Ganache7.9.2,Shanghai,False
+request_force_close,10,722535.0,722535,722535,Ganache7.9.2,Shanghai,False
+sequence_1,10,680922.0,680922,680922,Ganache7.9.2,Shanghai,False

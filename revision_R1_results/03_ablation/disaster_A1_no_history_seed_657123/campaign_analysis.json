@@ -1,0 +1,186 @@
+{
+  "analysis_plan_sha256": "ce69216c832332230302e2d89c5ff0380267ba48fc343d74ed8b030522795e14",
+  "analysis_rng_seed": 99111,
+  "analysis_source_sha256": "e9a5f040d3d90ff57c51194519f2cc446e3ae3dfccdacb9add3c51da8d649641",
+  "arm_summary": {
+    "A0_full": {
+      "between_training_seed_sd_late_tps": 16.304696324825372,
+      "checkpoint_labels": [
+        "A0 full / 657111",
+        "A0 full / 657112",
+        "A0 full / 657113"
+      ],
+      "equal_weight_late_tps": 303.26484940289555,
+      "individual_checkpoint_late_tps": [
+        312.7250799199083,
+        312.6315831245164,
+        284.4378851642622
+      ]
+    },
+    "A1_no_history": {
+      "between_training_seed_sd_late_tps": 13.267291769428907,
+      "checkpoint_labels": [
+        "A1 no history / 657121",
+        "A1 no history / 657122",
+        "A1 no history / 657123"
+      ],
+      "equal_weight_late_tps": 309.6467292207829,
+      "individual_checkpoint_late_tps": [
+        296.49884988057835,
+        323.03029314900124,
+        309.4110446327692
+      ]
+    },
+    "A2_no_admission": {
+      "between_training_seed_sd_late_tps": 4.730993840034268,
+      "checkpoint_labels": [
+        "A2 no admission / 657131",
+        "A2 no admission / 657132",
+        "A2 no admission / 657133"
+      ],
+      "equal_weight_late_tps": 305.78851959284054,
+      "individual_checkpoint_late_tps": [
+        300.37811396033914,
+        309.1478904939819,
+        307.83955432420083
+      ]
+    },
+    "A3_no_security_critic": {
+      "between_training_seed_sd_late_tps": 20.873055125504536,
+      "checkpoint_labels": [
+        "A3 no security critic / 657141",
+        "A3 no security critic / 657142",
+        "A3 no security critic / 657143"
+      ],
+      "equal_weight_late_tps": 304.80623591491286,
+      "individual_checkpoint_late_tps": [
+        282.7627105013781,
+        324.2687729214401,
+        307.38722432192037
+      ]
+    }
+  },
+  "bootstrap_replicates": 10000,
+  "checks": {
+    "all_four_arms_exact_three_checkpoints_twenty_paired_environments": true,
+    "bootstrap_10000_exact_signflip_Holm_finite": true,
+    "equal_weight_means_match_sealed_aggregates": true,
+    "finite_complete_panels_no_seed_filtering": true,
+    "registered_three_primary_contrasts_only": true
+  },
+  "environment_scenarios": 20,
+  "evaluation_sha256": "8c1c64db538bfdbef817be37eb09b5fc2853baf4181c9dcfced98cbdebf073c9",
+  "interpretation": "Exploratory extension on an already observed shared panel, only3 independent checkpoints per arm. Conditional scenario p-values are not tests over a population of training seeds; no guaranteed or population significance claim.",
+  "primary_contrasts": [
+    {
+      "conditional_environment_Holm_p": 0.1490306854248047,
+      "conditional_environment_exact_signflip_p": 0.04967689514160156,
+      "contrast": "A1_no_history minus A0_full",
+      "hierarchical_percentile95_lower": -15.113907754721088,
+      "hierarchical_percentile95_upper": 28.225896710936514,
+      "late_tps_difference": 6.381879817887283,
+      "paired_environment_differences": [
+        12.331134466295225,
+        -17.689395838921484,
+        4.336493427373171,
+        -1.1689930723063071,
+        21.77776699904041,
+        7.083090137910915,
+        -21.4986527558396,
+        2.3913380058230587,
+        18.107019940521184,
+        11.815831189269318,
+        11.746287187549797,
+        7.603569538671763,
+        28.643010881835608,
+        5.687880777068813,
+        7.958977369709032,
+        7.082802387138088,
+        2.816192459176591,
+        -13.869225859883954,
+        0.6368187834419246,
+        31.8456503338721
+      ]
+    },
+    {
+      "conditional_environment_Holm_p": 0.8846588134765625,
+      "conditional_environment_exact_signflip_p": 0.44232940673828125,
+      "contrast": "A2_no_admission minus A0_full",
+      "hierarchical_percentile95_lower": -13.260266589212998,
+      "hierarchical_percentile95_upper": 22.174537346454965,
+      "late_tps_difference": 2.5236701899449896,
+      "paired_environment_differences": [
+        21.054724731619643,
+        -13.202567965082437,
+        18.772882814945433,
+        33.084398635495745,
+        -19.01318881595455,
+        -11.388756966872336,
+        7.939886521175737,
+        4.671048630011853,
+        -3.88935061087966,
+        -4.161625134537616,
+        11.492337495242282,
+        -10.141197460266085,
+        0.8274913245189737,
+        0.24688513534235312,
+        -11.166021464462233,
+        12.85025074162499,
+        -4.213892844620091,
+        14.792298006569467,
+        18.965024329703624,
+        -17.0472233046753
+      ]
+    },
+    {
+      "conditional_environment_Holm_p": 0.8846588134765625,
+      "conditional_environment_exact_signflip_p": 0.7040386199951172,
+      "contrast": "A3_no_security_critic minus A0_full",
+      "hierarchical_percentile95_lower": -24.461507504977593,
+      "hierarchical_percentile95_upper": 28.65042294447123,
+      "late_tps_difference": 1.5413865120172603,
+      "paired_environment_differences": [
+        23.661043031009655,
+        -19.27519113733331,
+        18.40944838309423,
+        -12.34299601722853,
+        7.626828240663713,
+        11.663325997598236,
+        -0.860662086850283,
+        -3.8555814081419157,
+        -8.138890696557041,
+        -3.2777885962060793,
+        12.670350543382426,
+        -5.38658274942992,
+        12.469088055995712,
+        -44.02949038469967,
+        32.65478508584238,
+        4.259470640027615,
+        -2.9770289148210622,
+        25.93256700239499,
+        -3.404841801036582,
+        -14.970122947359357
+      ]
+    }
+  ],
+  "receipt_hash": "b7ae6f9b46d89e8c9ea2e4825410e272d397a4ba7974c1123318533c096c3097",
+  "reference_hashes": {
+    "a0_657112": "cff3c5fe2dce025d39af8e1ff493dd35d2d85a0e0b18a3f5da43999cb7948fc5",
+    "a0_657113": "253a79c889bf9d605adecba53181e7754e6bde99a479d52857aa91e7bc9a69cd",
+    "a1_657121": "bf486ce100b90fa2cb52d39a7074a9be335edf264a57ef7f6e6ade0e9e158d05",
+    "a1_657122": "fdd8d850abd854df4ebefaad851ca648369cc7eb29f5ca20647748d486b4647a",
+    "a2_657131": "b45598ea92a353cd1999f22d72d64ca9b15e629133731ebbf8cbb820029b420e",
+    "a2_657132": "f74c5cb8a3aa9e0fa413d9305bb31af5c3addc6f55a471807d0f03d530e1f250",
+    "a2_657133": "af019cfc6a59b6bb3d47bed2ece3c7360056a3cd89e1119b37eb424221352ced",
+    "a3_657141": "0565c6396df1f0226b1793a66fcb262faf9396e2161b079b2acd234a06822363",
+    "a3_657142": "5c8c5ef03d7c320e76b7caa3594b26f823db8709642c5fcfa3480000406bb8fd",
+    "a3_657143": "884681aa2075ee0cf16b9ac79f5678c36042694e73d086ffdb9486898ffd732c",
+    "parent": "60cba893a83a4ab6726d0252fee651d1e91fa2999862ce5c68e73dace00b717b"
+  },
+  "schema": "qrelay-batch11-exploratory-campaign-analysis-1",
+  "secondary_significance_tests": false,
+  "shared_panel_previously_observed": true,
+  "status": "PASS",
+  "training_checkpoints_per_arm": 3,
+  "training_replicate_unit": "independent training checkpoint (3 per arm), NOT scenario/trajectory"
+}

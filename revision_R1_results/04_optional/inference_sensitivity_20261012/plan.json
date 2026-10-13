@@ -1,0 +1,99 @@
+{
+  "base_evaluation_sha256": "60cba893a83a4ab6726d0252fee651d1e91fa2999862ce5c68e73dace00b717b",
+  "checkpoint_sha256": "eabcd94a6c1a86c67a78241f894c3e9580905f04f71f8518bb32a1a45d40467b",
+  "decoder": "deterministic sequential prefix-conditioned argmax",
+  "default_reused_not_rerun": true,
+  "environment_seeds": [
+    657201,
+    657202,
+    657203,
+    657204,
+    657205,
+    657206,
+    657207,
+    657208,
+    657209,
+    657210,
+    657211,
+    657212,
+    657213,
+    657214,
+    657215,
+    657216,
+    657217,
+    657218,
+    657219,
+    657220
+  ],
+  "event_step": 1000,
+  "fault_budget": 6,
+  "frozen_at": "2026-10-12T04:18:06.683756+00:00",
+  "horizon_steps": 2000,
+  "interpretation": "Exploratory inference-only OOD sensitivity on previously observed scenarios and one fixed checkpoint, not training-seed inference; report negative outcomes.",
+  "joint_partition_semantics": "For kill changes keep20 compromised identities and prevalence20% before/after event; for compromise changes retainkill30 and set killed/surviving prevalence10% or30%. Counts are defined before execution.",
+  "new_trajectories": 360,
+  "receipt_hash": "06c9e4511f9782d275b27a88cd7c225e7c1a216e74ce5f8ef5fdaf0e2ab5d365",
+  "retrain": false,
+  "retry": false,
+  "schema": "qrelay-B3-frozen-inference-sensitivity-20261012-1",
+  "settings": [
+    [
+      "admission_035",
+      "admission",
+      0.35
+    ],
+    [
+      "admission_055",
+      "admission",
+      0.55
+    ],
+    [
+      "telemetry_half",
+      "telemetry",
+      0.5
+    ],
+    [
+      "telemetry_double",
+      "telemetry",
+      2.0
+    ],
+    [
+      "kill_10",
+      "kill",
+      10
+    ],
+    [
+      "kill_20",
+      "kill",
+      20
+    ],
+    [
+      "kill_40",
+      "kill",
+      40
+    ],
+    [
+      "compromise_10",
+      "compromise",
+      10
+    ],
+    [
+      "compromise_30",
+      "compromise",
+      30
+    ]
+  ],
+  "sources": {
+    "drl/paper_recovery_hardcore_v5/baselines.py": "a119cf4fab6e8d023e1997784b87e8b3d929c95bae1612d85c56e3c9c87803fa",
+    "drl/paper_recovery_hardcore_v5/config.py": "b932b1f4cf282a1ef04f37885376ed5c2c241aea18c3f945e644665dfcfe9772",
+    "drl/paper_recovery_hardcore_v5/env.py": "a6cd36c66e3ed289a9db3d7ca48a69b887b8f1396aa53ce33a90d7eae3425306",
+    "drl/paper_recovery_security_v4/config.py": "bb2783690ac798bfcefc8f065075e90c4f05b42ebf7e692f72c9f73477ae2b61",
+    "drl/paper_recovery_security_v4/policy.py": "57e3a9e32071a10645deb192637e82276db6eb6d88b51c88984b3e9ee2a36c7d",
+    "drl/paper_recovery_security_v4/trainer.py": "577dd0010cdbcd4cb8ebe5fef39b280be8efec9ef88d1e2c928c7eba63c6340e",
+    "experiments/minor_revision_completion_20261012/run_inference_sensitivity.py": "1cce771e04f548266394844f87d2d5730da5feaf39ab3f807b48d6918d6220fc",
+    "experiments/paper_recovery_security_speed_v5/disaster_protocol.json": "a8aad6dd4d81b9114cd2a9af1acc5804b9ce80cb87fc0aa55ed7f016ed9c3d3d",
+    "experiments/paper_recovery_security_speed_v5/evaluate_disaster.py": "93936a97a2608714b651698f39e40923efd02af823927ac128cda9eaae216d25"
+  },
+  "telemetry_semantics": "Scale every existing family delay by half or double. The frozen heldout family uses20 steps: NEW exact10 and40 steps, within requested6-11 and24-44 ranges; default20 lies in12-22. No random delay-distribution replacement.",
+  "training_seed": 657111
+}

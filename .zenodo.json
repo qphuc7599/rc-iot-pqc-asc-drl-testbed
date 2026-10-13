@@ -1,0 +1,17 @@
+{
+  "title": "Q-Relay virtualised emulation artifact - minor revision R1",
+  "version": "1.1.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "mit",
+  "language": "eng",
+  "creators": [
+    {"name": "Hoang-Phuc, Quang-Dai"},
+    {"name": "Tran, Tuan-Dung"}
+  ],
+  "description": "Versioned research software and data artifact for Q-Relay minor revision R1. Source/scripts/configuration/formal models are MIT. Checkpoints, generated data, plots, reports and technical documentation are CC BY 4.0, as explicitly mapped in LICENSE_ASSIGNMENTS.json; the primary software license does not relicense data. Includes three independent fixed-final checkpoints per A0-A3 arm, paired controller outcomes, B3 inference sensitivity with negative outcomes, frozen stochastic streams and local-EVM evidence. All primary ablation intervals include zero; none is Holm-significant. Shared scenarios are not independent training replicates. Node-count scaling is analytical only; withdrawn B4 sweeps and manuscripts/author portraits are excluded. No A4/A5, board SRAM/stack, enclave execution, native on-chain ML-DSA or public finality measurement is claimed. Scientific source/checkpoint bytes are preserved; privacy-redacted metadata copies have explicit original/candidate/published provenance and are not falsely represented as retaining original canonical receipt hashes.",
+  "keywords": ["Q-Relay", "IoT", "ML-DSA", "state channels", "reinforcement learning", "reproducibility", "ablation"],
+  "related_identifiers": [
+    {"identifier": "https://github.com/qphuc7599/rc-iot-pqc-asc-drl-testbed/releases/tag/v1.1.0", "relation": "isSupplementTo", "resource_type": "software"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "seed": 657201,
+  "steps": 2000,
+  "expected_late_tps": 231.47056412218697,
+  "actual_late_tps": 231.47056412218697,
+  "paired_exogenous_hash": "5574c0ccb56458dcfddd51ad8c71113cb78174dec169e24707c080b7db9a834d",
+  "checkpoint_sha256": "eabcd94a6c1a86c67a78241f894c3e9580905f04f71f8518bb32a1a45d40467b",
+  "source_hash": "deea99ec144f036d4d26b6089b02470bf209d66b3dd9553db6d44ffaba669165",
+  "runtime": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "numpy": "2.4.4",
+    "torch": "2.6.0+cu124"
+  },
+  "formal_campaign_untouched": true,
+  "scope": "Candidate overlaid on a fresh old public checkout; not a public release download and not new statistical evidence"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "rendered_visual_QA_pending",
+  "repair": "Unicode minus glyphs embedded with Arial; initial render preserved, no metrics recomputed",
+  "pages": 2,
+  "sha256": "b1ff4383fb306f78224b87cd72f2bb5f0d024bbababb021766cfd754a4ec9ac0",
+  "inputs": {
+    "checkpoint_results.csv": "83925540db1ba656fd74c4d70a9ec025e043183416c4ff43a574545e84b324ef",
+    "ablation_summary.csv": "89d849323eb32024bd9df260afd39a9ffb00349f9c10cee79ec0d4ee665bc091"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "all_checks_pass": true,
+  "evidence_status": "executed_tlc_bounded_model",
+  "safe": {
+    "config": "formal/QRelayQuorumSmallSafe.cfg",
+    "distinct_states": 7,
+    "invariant_violation": false,
+    "output_tail": "TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)\nRunning breadth-first search Model-Checking with fp 65 and seed -7039789503061353092 with 12 workers on 12 cores with 3577MB heap and 64MB offheap memory [pid: 33432] (Windows 11 10.0 amd64, Oracle Corporation 24 x86_64, MSBDiskFPSet, DiskStateQueue).\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nSemantic processing of module Naturals\nSemantic processing of module Sequences\nSemantic processing of module FiniteSets\nSemantic processing of module Integers\nSemantic processing of module TLC\nSemantic processing of module QRelayQuorum\nStarting... (2026-08-04 02:55:26)\nComputing initial states...\nFinished computing initial states: 1 distinct state generated at 2026-08-04 02:55:26.\nModel checking completed. No error has been found.\n  Estimates of the probability that TLC did not check all reachable states\n  because two distinct states had the same fingerprint:\n  calculated (optimistic):  val = 4.6E-18\n19 states generated, 7 distinct states found, 0 states left on queue.\nThe depth of the complete state graph search is 2.\nThe average outdegree of the complete state graph is 1 (minimum is 0, the maximum 6 and the 95th percentile is 6).\nFinished in 00s at (2026-08-04 02:55:26)\n\n",
+    "returncode": 0,
+    "states_generated": 19
+  },
+  "schema": "qrelay-stage-c-tlc-model-check-1",
+  "scope": "TLC exhaustively checks the tractable homologous boundary n=7,f=2 (Q=5 safe, Q=4 counterexample). The separate exact combinatorial checker evaluates the manuscript instance n=21,f=6,Q=13/14.",
+  "source_sha256": {
+    "analysis/stage_bc_tlc_model_check.py": "d0b7fbb9efa50880cf0cbe6c4b6a541649b618a3274ae8b986bcc615362844fa",
+    "formal/QRelayQuorum.tla": "d3bbf2a029b2642888b23a4db73ea840cc15758321b1dd3da0843eef82b7f519",
+    "formal/QRelayQuorumSmallSafe.cfg": "f13868de35f126427b0be691e86509d536e7f5d18686a5a41010e0853c6fe873",
+    "formal/QRelayQuorumSmallUnsafe.cfg": "2b0478fefb4a16b2352a12f49c4126f680dc39d236bde195bd86b1e748367cc7"
+  },
+  "tla2tools_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+  "tlc_version": "TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)",
+  "unsafe": {
+    "config": "formal/QRelayQuorumSmallUnsafe.cfg",
+    "distinct_states": null,
+    "invariant_violation": true,
+    "output_tail": "TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)\nRunning breadth-first search Model-Checking with fp 46 and seed -8083391831408523230 with 12 workers on 12 cores with 3577MB heap and 64MB offheap memory [pid: 30576] (Windows 11 10.0 amd64, Oracle Corporation 24 x86_64, MSBDiskFPSet, DiskStateQueue).\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nParsing file ${PRIVATE_HOST_PATH_REDACTED}\nSemantic processing of module Naturals\nSemantic processing of module Sequences\nSemantic processing of module FiniteSets\nSemantic processing of module Integers\nSemantic processing of module TLC\nSemantic processing of module QRelayQuorum\nStarting... (2026-08-04 02:55:27)\nError: The invariant of NoConflictingCertificates is equal to FALSE\nFinished in 00s at (2026-08-04 02:55:27)\n\n",
+    "returncode": 151,
+    "states_generated": null
+  }
+}

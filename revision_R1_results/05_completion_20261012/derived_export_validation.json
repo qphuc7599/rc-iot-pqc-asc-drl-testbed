@@ -1,0 +1,38 @@
+{
+  "campaign_analysis_hash": "b7ae6f9b46d89e8c9ea2e4825410e272d397a4ba7974c1123318533c096c3097",
+  "checks": {
+    "240_paired_rows_12_checkpoints_four_arms": true,
+    "all_checkpoint_and_training_receipt_hashes_verified": true,
+    "all_raw_zero_TPS_fraction_and_integer_violations": true,
+    "nine_policy_exact_values_and_difference_sign": true,
+    "stochastic60_streams20_paired_rows_no_rerun": true,
+    "ten_local_EVM_repeats_only_no_native_verification": true
+  },
+  "export_hashes": {
+    "revision_R1_results/02_verification/completion_20261012/heldout_all_policies.csv": "76668e0d22a2f1040758d3a13cfa798fe489093806623cdcd3ade7e77d96a25b",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/A0_full_config.json": "a03b55a76d5994b1a36f3c9591c364b908c2b9a2d30f0492417db5076f25424a",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/A1_no_history_config.json": "0b1884390363eec76d086dac2cd7d8b6d3d97129debb254cfb6853ee32b1858e",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/A2_no_admission_config.json": "cde13d889f9dc928dd749d439c7d800d582696a6c894a3420292255bc4ad99e1",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/A3_no_security_critic_config.json": "2d6d9e7e57ef16da932b79a49cc1bca5784ea50c04e7e6cac5b9396a15dad2f1",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/ablation_results.csv": "1e1dc9d106e9431b40d392e87a43eba58b1f995e15edde78c92eb2d1eaa82260",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/ablation_summary.csv": "89d849323eb32024bd9df260afd39a9ffb00349f9c10cee79ec0d4ee665bc091",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/checkpoint_manifest.csv": "fd5563787f8727b6519e7e1f6675a633cfe502e4ca9334d70e42adc367de9160",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/checkpoint_results.csv": "83925540db1ba656fd74c4d70a9ec025e043183416c4ff43a574545e84b324ef",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/config_diff_A1_no_history.patch": "454391f4149e5b6b3e618693a41b9e59e556222e66b7a91e83190f2c77f68721",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/config_diff_A2_no_admission.patch": "f5aa6dd5b3e966b1a079ab6b1759df436ca4aebf0ea9f7feeeb64a96b97cbd23",
+    "revision_R1_results/03_ablation/final_campaign_export_20261012/config_diff_A3_no_security_critic.patch": "527575a43baa2dc3db00f37fe56d1dfab00ae8e6917bc03ebc3b76a2a2bced6a",
+    "revision_R1_results/04_optional/ledger_export_20261012/evm_gas.csv": "87acfdf2f3c62ee3a573ec75d4c40f225cb1bf4c4c037b62c91dc3e8946ccc4e",
+    "revision_R1_results/04_optional/ledger_export_20261012/evm_gas_detail.csv": "1afacb0a4e56f3c8cf323c3ef2f1294375eecd2f721181fbe95b657710fd5c27",
+    "revision_R1_results/04_optional/ledger_export_20261012/stochastic_per_stream.csv": "45eea7f33186178ade57f4b4cd47f01ad3bd6a1333879fb7bad3b01302532d01",
+    "revision_R1_results/04_optional/ledger_export_20261012/stochastic_summary.json": "5f6297bbdb7fac9ebfb4a039a0802163d94be3cbf65fb167cc6cabb1d3b7b8e7",
+    "revision_R1_results/04_optional/ledger_export_20261012/stochastic_vs_deterministic.csv": "132ab5334af49190e9e6c651f07969ce020c56223ba13693228b1e47ae6da878"
+  },
+  "no_simulator_or_training_or_old_audit_rerun": true,
+  "source_hashes": {
+    "results/paper_recovery_security_speed_v5/heldout_disaster_seed_657111/evaluation.json": "60cba893a83a4ab6726d0252fee651d1e91fa2999862ce5c68e73dace00b717b",
+    "revision_R1_results/03_ablation/disaster_A1_no_history_seed_657123/campaign_analysis.json": "fe78ad26ff48f312190d8b343b6635f2b2153431d80cf4467e074f99a5e3eef0",
+    "revision_R1_results/03_ablation/disaster_A1_no_history_seed_657123/evaluation.json": "8c1c64db538bfdbef817be37eb09b5fc2853baf4181c9dcfced98cbdebf073c9",
+    "revision_R1_results/03_ablation/monitor_batch_11/final_delivery_validation.json": "dbb2138b961609a5af48e82e8a7f03d149083065ac729acaecb5b4833e890172"
+  },
+  "status": "PASS"
+}

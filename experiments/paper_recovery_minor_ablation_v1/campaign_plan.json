@@ -1,0 +1,32 @@
+{
+  "schema": "qrelay-minor-revision-ablation-campaign-plan-1",
+  "status": "frozen_by_user_before_any_formal_ablation_run",
+  "amended_on": "2026-10-05",
+  "reason": "User selected A0+A2+A3, two training seeds per arm, in three separately started sessions due to machine time constraints.",
+  "original_protocol_sha256": "9548b353f0dd5ced2d124e94b1ae51bf4eda28c591736664fe7168704cf87cf6",
+  "selected_arms": ["A0_full", "A2_no_admission", "A3_no_security_critic"],
+  "formal_seeds": {
+    "A0_full": [657111, 657112],
+    "A2_no_admission": [657131, 657132],
+    "A3_no_security_critic": [657141, 657142]
+  },
+  "training_seeds_per_arm": 2,
+  "updates_per_seed": 3000,
+  "transitions_per_update": 3000,
+  "sessions": {
+    "1": {"arm": "A0_full", "reuse_completed_seeds": [657111], "new_training_seeds": [657112], "estimated_training_hours": 5.41},
+    "2": {"arm": "A2_no_admission", "reuse_completed_seeds": [], "new_training_seeds": [657131, 657132], "estimated_training_hours": 10.80},
+    "3": {"arm": "A3_no_security_critic", "reuse_completed_seeds": [], "new_training_seeds": [657141, 657142], "estimated_training_hours": 10.39}
+  },
+  "session_launch": "Each session requires its own explicit launch; no automatic next session. New seeds within a session run sequentially.",
+  "interruptions": "Pause only between completed seeds. Failed or interrupted seeds are spent and cannot be resumed.",
+  "inference": {
+    "hierarchical_bootstrap_replicates": 10000,
+    "exact_sign_flip_environment_seeds": 20,
+    "holm_family": "all_predeclared_ablation_metric_contrasts",
+    "interpretation": "Exploratory component ablation with two training seeds per arm; limited estimation of between-training-seed variability. Environment-seed sign-flip inference is conditional on these trained checkpoints."
+  },
+  "evaluation_panel_note": "657201-657220 remain shared evaluation seeds outside training. Their A0-parent and baseline outcomes were already observed; they are not a newly sealed or unseen qualification panel.",
+  "excluded_arms": ["A1_no_history", "A4_no_cell_diversity", "A5_single_critic"],
+  "formal_implementation_note": "Before formal runs, A0 initialization is corrected to exactly match the original security-v4 parent under the same Torch seed; ablation act uses the parent's six-output decoder. Earlier pilot receipts are preserved as implementation/throughput checks for their recorded source versions."
+}

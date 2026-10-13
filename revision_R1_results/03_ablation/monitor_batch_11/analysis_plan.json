@@ -1,0 +1,16 @@
+{
+  "schema": "qrelay-batch11-operational-analysis-registration-1",
+  "frozen_before_training": true,
+  "extension_plan_sha256": "9de551af7ef65e14bc1d38dc81afa920af87e4f7964edec89b9ac78d5690a90c",
+  "primary_metric": "late_window_tps_steps_1500_through_1999",
+  "primary_contrasts": ["A1_no_history minus A0_full", "A2_no_admission minus A0_full", "A3_no_security_critic minus A0_full"],
+  "training_checkpoints_per_arm": 3,
+  "environment_seeds": [657201,657202,657203,657204,657205,657206,657207,657208,657209,657210,657211,657212,657213,657214,657215,657216,657217,657218,657219,657220],
+  "hierarchical_bootstrap_replicates": 10000,
+  "analysis_rng_seed": 99111,
+  "hierarchical_bootstrap": "Resample three independent training checkpoints within each arm independently. Resample shared20 environment IDs with replacement identically across both arms for each replicate. Percentile95CI; no filtering or scenario-as-training pseudoreplication.",
+  "environment_seed_test": "Exact two-sided sign flip over20 training-seed-averaged paired environment differences, all1048576 assignments, tolerance1e-12.",
+  "holm_family": "Three primary lateTPS contrasts only; no secondary metric significance tests.",
+  "interpretation": "Exploratory extension on an already observed shared panel, only3 independent checkpoints per arm. Conditional scenario p-values are not tests over a population of training seeds; no guaranteed or population significance claim.",
+  "no_outcome_dependent_stopping_or_seed_filtering": true
+}

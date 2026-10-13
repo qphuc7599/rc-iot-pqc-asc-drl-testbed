@@ -1,0 +1,16 @@
+{
+  "analysis_rng": 99113,
+  "bootstrap_replicates": 10000,
+  "late_tps_difference": [
+    -25.30822859370571,
+    -39.13664237783222,
+    -11.928760406288093
+  ],
+  "new_simulations": 0,
+  "scope": "Conditional paired environment bootstrap on fixed checkpoint657111; three action streams are not training replicates.",
+  "zero_service_percentage_point_difference": [
+    2.333333333333334,
+    0.428333333333334,
+    4.4850416666666675
+  ]
+}

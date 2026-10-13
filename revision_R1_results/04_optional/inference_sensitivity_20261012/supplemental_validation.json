@@ -1,0 +1,41 @@
+{
+  "all20_summaries_and_CIs_recomputed": true,
+  "canonical_raw_receipts": 360,
+  "failure_exposure_violations_consistent": true,
+  "host_logs": {
+    "foreground_host_state_v2.json": "b7c872f1c665ed78fca4f131b5e6a528714d7f7f623297b62add34d058c1459f",
+    "host.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "host.stdout": "6da2620c49e0ef5eedd121a4c31bb8f0cf799a9097181b1312d2bfc190bb0246"
+  },
+  "interpretation": "One fixed training checkpoint, inference-only exploratory conditional scenario contrasts. No multiplicity-adjusted or population claim.",
+  "lifecycle_note": "Historical machine file_hashes include running progress; final complete progress is a later expected lifecycle transition, not a frozen artifact mismatch",
+  "negative_guard_trajectories_retained": [
+    [
+      "kill_40",
+      "CMAB",
+      657213
+    ],
+    [
+      "kill_40",
+      "CMAB",
+      657216
+    ],
+    [
+      "compromise_30",
+      "CMAB",
+      657201
+    ],
+    [
+      "compromise_30",
+      "CMAB",
+      657202
+    ]
+  ],
+  "new_trajectories": 360,
+  "paired_exogenous_checks": 180,
+  "plan_sha256": "bfa57d9322c744879a56b87a7582eebe82db688fdb668e1556ff8afd9fc92c85",
+  "raw_late_and_zero_TPS_recomputed": true,
+  "reused_default_rows": 40,
+  "sealed_validation_sha256": "8236680fe7b0e8f8f00e783c31096e2dae8b2dbb7b98ad100120233447366c19",
+  "status": "PASS"
+}

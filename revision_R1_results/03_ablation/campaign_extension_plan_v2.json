@@ -1,0 +1,83 @@
+{
+  "schema": "qrelay-minor-revision-ablation-extension-plan-2",
+  "decided_on": "2026-10-08",
+  "timezone": "Asia/Saigon",
+  "status": "plan_finalized_no_new_run_launched",
+  "user_decision": "Option 2: one additional seed for A0/A2/A3 and three A1 seeds, in six separately started batches. Run two A1 seeds first, then A0, A2, A3, and finally the third A1 seed.",
+  "parent_campaign": {
+    "path": "experiments/paper_recovery_minor_ablation_v1/campaign_plan.json",
+    "sha256": "160bf6e79d40682daa04d0285e1198a4eaeaac7a177d1f28ea7ac2b934df7f80",
+    "preserve_unchanged": true
+  },
+  "original_protocol": {
+    "path": "experiments/paper_recovery_minor_ablation_v1/protocol.json",
+    "sha256": "9548b353f0dd5ced2d124e94b1ae51bf4eda28c591736664fe7168704cf87cf6",
+    "seed_selection": "Use the existing per-arm formal seed lists; no seed selected from performance."
+  },
+  "parent_schedule_sha256": "4e6db55f495289ed6528ac3d97e6c33e565e16d50b4b3ac07575b33fad6eaa5b",
+  "selected_arms": ["A0_full", "A1_no_history", "A2_no_admission", "A3_no_security_critic"],
+  "completed_training_seeds": {
+    "A0_full": [657111, 657112],
+    "A1_no_history": [],
+    "A2_no_admission": [657131, 657132],
+    "A3_no_security_critic": [657141, 657142]
+  },
+  "new_training_seeds_in_execution_order": [657121, 657122, 657113, 657133, 657143, 657123],
+  "final_training_seeds": {
+    "A0_full": [657111, 657112, 657113],
+    "A1_no_history": [657121, 657122, 657123],
+    "A2_no_admission": [657131, 657132, 657133],
+    "A3_no_security_critic": [657141, 657142, 657143]
+  },
+  "excluded_arms": ["A4_no_cell_diversity", "A5_single_critic"],
+  "new_training_runs": 6,
+  "final_training_seeds_per_arm": 3,
+  "training": {
+    "updates_per_seed": 3000,
+    "transitions_per_update": 3000,
+    "transitions_per_seed": 9000000,
+    "additional_transitions_total": 54000000,
+    "physical_workers": 11,
+    "logical_environments": 33,
+    "checkpoint_selection": "fixed_budget_final_only",
+    "scientific_config_sha256": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21",
+    "resume": false,
+    "early_stop": false,
+    "best_checkpoint_selection": false,
+    "failed_seed_retry": false
+  },
+  "evaluation": {
+    "environment_seeds": [657201, 657202, 657203, 657204, 657205, 657206, 657207, 657208, 657209, 657210, 657211, 657212, 657213, 657214, 657215, 657216, 657217, 657218, 657219, 657220],
+    "decoder": "deterministic_sequential_prefix_conditioned_argmax",
+    "horizon_steps": 2000,
+    "permanent_kill_count": 30,
+    "kill_step": 1000,
+    "cascading_stress": true,
+    "fault_budget": 6,
+    "stochastic_streams": 0,
+    "new_trajectories_per_checkpoint": 20,
+    "additional_trajectories_total": 120,
+    "reference_panels": "Reuse verified completed A0/A2/A3 and eight baseline panels without rerunning them.",
+    "panel_status": "The shared evaluation panel has already been observed. This extension is specified after reviewing the parent campaign; do not describe it as a new unseen qualification panel."
+  },
+  "analysis": {
+    "primary_metric": "late_window_tps_steps_1500_through_1999",
+    "other_metrics": ["post_event_zero_service_fraction", "maximum_actual_exposure", "exposure_violation_steps"],
+    "primary_contrasts": ["A1_no_history minus A0_full", "A2_no_admission minus A0_full", "A3_no_security_critic minus A0_full"],
+    "aggregation": "Equal weight for all three completed training checkpoints per arm; show individual seed results and between-seed variability.",
+    "hierarchical_bootstrap_replicates": 10000,
+    "environment_seed_test": "exact_sign_flip_on_training_seed_averaged_paired_environment_differences",
+    "holm_family": "The three primary metric contrasts listed above; secondary metric analyses must identify any separate multiplicity families.",
+    "interpretation": "Exploratory component ablation with three independent training seeds per arm. Shared environment scenarios do not constitute independent training replicates. No seed filtering, outcome-dependent stopping or guaranteed significance."
+  },
+  "launch_policy": {
+    "current_request": "Finalize the plan only.",
+    "launch_authorized_now": false,
+    "automatic_next_batch": false,
+    "one_training_seed_per_batch": true,
+    "batch_finished_after": "Fixed-budget training, checkpoint audit, 20 deterministic disaster scenarios, evidence validation, synchronization, comparison figures and report.",
+    "monitoring_after_launch": "One snapshot every 30 minutes, quiet while healthy.",
+    "launch_preparation": "Create an extension-aware runner/registration path and freeze its manifest before the first extension seed. The old runner recognizes only the original two-seed campaign and batches2-5; it cannot launch this extension directly."
+  },
+  "manuscript_changes_authorized": false
+}

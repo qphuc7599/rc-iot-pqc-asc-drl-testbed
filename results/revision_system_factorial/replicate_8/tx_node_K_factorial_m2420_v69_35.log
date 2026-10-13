@@ -1,0 +1,11 @@
+[TX-GEN 35] Device=ESP32-S3, mean_sign_delay=21359us, power=170mW
+[TX-GEN 35] Emulated signature mode: sig=2420B, sign_delay=27us
+[TX-GEN 35] Ready. Rate=100 tx/s, Duration=45s, Gateway=10.1.1.100:9013
+[TX-GEN 35] State Channel mode: batch=50, timeout=2000ms
+
+[TX-GEN 35] STATE CHANNEL DONE:
+  Total TX (off-chain): 4457 in 45.0s (99.0 TPS)
+  Channel updates sent: 90 (avg 49.5 TX/channel)
+  Device=ESP32-S3, mean sign: 21359 us, Avg injected: 27.0 us (1 per channel)
+  Avg hash/TX: 0.6 us (off-chain, no crypto)
+  Energy/sign: 3.6310 mJ (mean latency x device power)

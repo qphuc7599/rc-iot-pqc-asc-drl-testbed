@@ -1,0 +1,11 @@
+[TX-GEN 53] Device=STM32F4-M4, mean_sign_delay=23471us, power=50mW
+[TX-GEN 53] Emulated signature mode: sig=2420B, sign_delay=27us
+[TX-GEN 53] Ready. Rate=100 tx/s, Duration=45s, Gateway=10.1.1.100:9013
+[TX-GEN 53] State Channel mode: batch=50, timeout=2000ms
+
+[TX-GEN 53] STATE CHANNEL DONE:
+  Total TX (off-chain): 4457 in 45.0s (99.0 TPS)
+  Channel updates sent: 90 (avg 49.5 TX/channel)
+  Device=STM32F4-M4, mean sign: 23471 us, Avg injected: 27.0 us (1 per channel)
+  Avg hash/TX: 0.6 us (off-chain, no crypto)
+  Energy/sign: 1.1735 mJ (mean latency x device power)

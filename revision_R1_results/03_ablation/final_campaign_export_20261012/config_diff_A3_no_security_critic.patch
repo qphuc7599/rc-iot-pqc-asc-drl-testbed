@@ -1,0 +1,11 @@
+--- a/A0_full_config.json
++++ b/A3_no_security_critic_config.json
+@@ -2,7 +2,7 @@
+   "architecture_switches": {
+     "history_lag_differences_zeroed": false,
+     "public_admission_removed": false,
+-    "security_critic_removed_and_lambda_s_fixed_zero": false
++    "security_critic_removed_and_lambda_s_fixed_zero": true
+   },
+   "scientific_config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21",
+   "shared_contract": {

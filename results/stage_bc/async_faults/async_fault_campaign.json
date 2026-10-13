@@ -1,0 +1,21 @@
+{
+  "schema": "qrelay-stage-b-async-fault-campaign-1",
+  "evidence_status": "executed_durable_state_machine_fault_injection",
+  "replicates": 5000,
+  "seed": 85001,
+  "checks": {
+    "reorder": 5000,
+    "duplicate": 5000,
+    "delayed_stale": 5000,
+    "partition_missing_gateway": 5000,
+    "conflict_same_sequence": 5000,
+    "force_close_before_deadline": 5000,
+    "crash_recovery": 5000
+  },
+  "all_checks_pass": true,
+  "limitations": "Approval flags represent already-verified cryptographic layers; this campaign isolates asynchronous ordering and persistence.",
+  "source_sha256": {
+    "stage_bc_async_fault_campaign.py": "66c454b89c933848536dc0394f0021cccdd86f4a6d307a578ab6bc49e26e9626",
+    "async_channel_admission.py": "60275ca5d0c2bb6cbf63bf0fe8d4ae9d7d2c9b4076f3fab073fc5b9db04c9111"
+  }
+}

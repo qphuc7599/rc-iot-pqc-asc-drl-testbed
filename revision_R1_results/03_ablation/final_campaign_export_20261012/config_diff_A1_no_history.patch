@@ -1,0 +1,10 @@
+--- a/A0_full_config.json
++++ b/A1_no_history_config.json
+@@ -1,6 +1,6 @@
+ {
+   "architecture_switches": {
+-    "history_lag_differences_zeroed": false,
++    "history_lag_differences_zeroed": true,
+     "public_admission_removed": false,
+     "security_critic_removed_and_lambda_s_fixed_zero": false
+   },

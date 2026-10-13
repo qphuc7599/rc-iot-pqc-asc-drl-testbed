@@ -1,0 +1,65 @@
+{
+  "schema": "qrelay-security-speed-v5-heldout-disaster-protocol-1",
+  "status": "frozen_after_training_completion_before_any_6572xx_evaluation_seed_was_opened",
+  "role": "single_training_seed_heldout_diagnostic_not_confirmatory_paper_evidence",
+  "paper_evidence_eligible": false,
+  "training_seed": 657111,
+  "checkpoint": {
+    "path": "results/paper_recovery_security_speed_v5/seed_657111/ppo_final.pt",
+    "sha256": "eabcd94a6c1a86c67a78241f894c3e9580905f04f71f8518bb32a1a45d40467b",
+    "updates": 3000,
+    "transitions": 9000000,
+    "selection": "fixed_budget_final_only"
+  },
+  "training_source_hash": "deea99ec144f036d4d26b6089b02470bf209d66b3dd9553db6d44ffaba669165",
+  "config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21",
+  "environment": {
+    "implementation": "paper_recovery_hardcore_v5_unchanged",
+    "scenario_profile": "multihazard_evaluation",
+    "horizon_steps": 2000,
+    "original_event_step": 1000,
+    "permanent_kill_count": 30,
+    "committee": {"N": 100, "k": 21, "f": 6, "Q": 14},
+    "action_dependent_future": true,
+    "delayed_public_telemetry": true,
+    "persistent_backlog_recovery_cost_and_recurrent_failures": true
+  },
+  "deployment": {
+    "primary": "deterministic_public_risk_top_k",
+    "stochastic_audit": "exact_prefix_conditioned_Plackett_Luce_at_training_temperature",
+    "stochastic_replicas_per_environment_seed": 3,
+    "action_seed_formula": "9200000 + 10 * environment_seed + replica",
+    "public_action_rng": true,
+    "hidden_labels_event_time_or_future_in_seed": false
+  },
+  "evaluation_seeds": [
+    657201, 657202, 657203, 657204, 657205,
+    657206, 657207, 657208, 657209, 657210,
+    657211, 657212, 657213, 657214, 657215,
+    657216, 657217, 657218, 657219, 657220
+  ],
+  "baselines": [
+    "Risk-Prior", "FMG", "CMAB", "SA", "GBA", "OCD-inspired",
+    "Random", "Static-with-valid-refill"
+  ],
+  "security_guard": {
+    "fault_budget": 6,
+    "strict_offline_audit": "total_compromised_in_committee <= f at every step",
+    "public_online_signal": "posterior_predictive_P_X_gt_f",
+    "public_tail_training_limit": 0.05
+  },
+  "validation": {
+    "all_trajectories_exactly_2000_steps": true,
+    "all_exogenous_streams_paired": true,
+    "candidate_executed_action_parity": true,
+    "hidden_labels_excluded_from_control": true,
+    "all_values_finite": true,
+    "no_forced_zero_tps_injected": true
+  },
+  "forbidden": [
+    "changing checkpoint environment baselines seeds or action seed formula after evaluation starts",
+    "using hidden Byzantine labels disaster flag event time or future realization",
+    "rerunning evaluation seeds after seeing results",
+    "claiming multi-training-seed inference from this single-seed diagnostic"
+  ]
+}

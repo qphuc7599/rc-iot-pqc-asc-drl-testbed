@@ -1,0 +1,11 @@
+[TX-GEN 11] Device=ESP32, mean_sign_delay=24645us, power=160mW
+[TX-GEN 11] Emulated signature mode: sig=72B, sign_delay=27us
+[TX-GEN 11] Ready. Rate=100 tx/s, Duration=45s, Gateway=10.1.1.100:9011
+[TX-GEN 11] State Channel mode: batch=50, timeout=2000ms
+
+[TX-GEN 11] STATE CHANNEL DONE:
+  Total TX (off-chain): 4427 in 45.0s (98.4 TPS)
+  Channel updates sent: 89 (avg 49.7 TX/channel)
+  Device=ESP32, mean sign: 24645 us, Avg injected: 27.0 us (1 per channel)
+  Avg hash/TX: 0.8 us (off-chain, no crypto)
+  Energy/sign: 3.9432 mJ (mean latency x device power)

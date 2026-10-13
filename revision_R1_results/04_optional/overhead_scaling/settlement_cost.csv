@@ -1,0 +1,4 @@
+certificate,compact_calldata_bytes,gas_at_16_per_byte,gas_at_40_per_byte,bytes_per_record
+threshold_sigma,2492,39872,99680,8.279069767441861
+fallback_14_signatures,34066,545056,1362640,113.17607973421927
+ecdsa_reference,137,2192,5480,0.45514950166112955

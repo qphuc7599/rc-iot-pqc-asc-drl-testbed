@@ -1,0 +1,4 @@
+* -text
+
+# Preserve frozen source/config/checkpoint/receipt byte hashes on all platforms.
+# Text editors may still display text normally; Git must not rewrite newlines.

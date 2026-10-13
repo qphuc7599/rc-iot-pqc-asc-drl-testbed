@@ -1,0 +1,18 @@
+{
+  "schema": "qrelay-stage-bc-fanout-campaign-1",
+  "evidence_status": "executed_functional_admission_campaign",
+  "seed": 83001,
+  "epochs": 10000,
+  "single_domain_compromise_checks": 30000,
+  "unique_manifest_digests": 10000,
+  "maximum_exposed_credentials": 7,
+  "quorum": 14,
+  "q_minus_f": 8,
+  "enforced_per_domain_cap": 7,
+  "overloaded_manifests_rejected": 14,
+  "all_checks_pass": true,
+  "source_sha256": {
+    "stage_bc_fanout_campaign.py": "b28eb7605ccbde61f51da58fded22d5a9f09b89966aa1495dedd11378cb7e513",
+    "fanout_admission.py": "dcd5f8d3f9ac17c50d8f743c765173d93f776951d0534b126154550a951e0652"
+  }
+}

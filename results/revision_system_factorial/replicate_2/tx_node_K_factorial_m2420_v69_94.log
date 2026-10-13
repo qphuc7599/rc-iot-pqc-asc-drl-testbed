@@ -1,0 +1,11 @@
+[TX-GEN 94] Device=RP2040, mean_sign_delay=158907us, power=45mW
+[TX-GEN 94] Emulated signature mode: sig=2420B, sign_delay=27us
+[TX-GEN 94] Ready. Rate=100 tx/s, Duration=45s, Gateway=10.1.1.100:9013
+[TX-GEN 94] State Channel mode: batch=50, timeout=2000ms
+
+[TX-GEN 94] STATE CHANNEL DONE:
+  Total TX (off-chain): 4467 in 45.0s (99.2 TPS)
+  Channel updates sent: 90 (avg 49.6 TX/channel)
+  Device=RP2040, mean sign: 158907 us, Avg injected: 27.0 us (1 per channel)
+  Avg hash/TX: 0.6 us (off-chain, no crypto)
+  Energy/sign: 7.1508 mJ (mean latency x device power)

@@ -1,0 +1,126 @@
+{
+  "port": 9013,
+  "duration_s": 60.00339995600007,
+  "total_updates": 5350,
+  "received_tx": 264679,
+  "total_tx": 264679,
+  "avg_tps": 4411.066709454575,
+  "total_batches": 107,
+  "batch_size": 50,
+  "verified": 264679,
+  "accepted_updates": 5350,
+  "failed": 0,
+  "failure_reasons": {},
+  "pbft_delay_s": 0.0,
+  "verification_mode": "injected",
+  "cryptographic_verification_executed": false,
+  "verify_delay_us": 69.0,
+  "expected_sig_len": 2420,
+  "observed_sig_lens": {
+    "2420": 5350
+  },
+  "failed_sig_lens": {},
+  "rx_latency_ms": {
+    "count": 5350,
+    "mean": 2816.629151699628,
+    "p50": 2972.803317000057,
+    "p95": 4922.937707449978,
+    "p99": 5358.484369389929,
+    "max": 7862.7490880001005
+  },
+  "gateway_queue_ms": {
+    "count": 5350,
+    "mean": 245.42164539383484,
+    "p50": 238.819873500006,
+    "p95": 489.1483469000377,
+    "p99": 616.3177389799384,
+    "max": 1050.0429999999596
+  },
+  "settlement_latency_ms": {
+    "count": 5350,
+    "mean": 3069.50389754206,
+    "p50": 3240.0102599999627,
+    "p95": 5220.774096100047,
+    "p99": 5640.606917999994,
+    "max": 8041.727647000016
+  },
+  "transaction_e2e_latency_ms": {
+    "count": 264679,
+    "mean": 3298.1983447830858,
+    "p50": 3466.137798796126,
+    "p95": 5479.372623326481,
+    "p99": 5905.405664959176,
+    "max": 8536.527646999957
+  },
+  "transaction_deadline_success": {
+    "500": {
+      "deadline_ms": 500,
+      "success_count": 7158,
+      "total_count": 264679,
+      "success_rate": 0.027044079809882916
+    },
+    "1000": {
+      "deadline_ms": 1000,
+      "success_count": 27188,
+      "total_count": 264679,
+      "success_rate": 0.10272065407531387
+    },
+    "2000": {
+      "deadline_ms": 2000,
+      "success_count": 54834,
+      "total_count": 264679,
+      "success_rate": 0.2071717061043755
+    },
+    "5000": {
+      "deadline_ms": 5000,
+      "success_count": 229930,
+      "total_count": 264679,
+      "success_rate": 0.868712667041964
+    }
+  },
+  "protocol_mode": "none",
+  "protocol": {
+    "mode": "none",
+    "participants": 21,
+    "fault_tolerance": 6,
+    "quorum": 13,
+    "commits": 107,
+    "total_messages": 0,
+    "total_bytes": 0,
+    "total_service_delay_s": 0.0,
+    "total_finality_delay_s": 0.0,
+    "rtt_ms": 4.0,
+    "bandwidth_mbps": 1000.0,
+    "signature_bytes": 2420,
+    "last_commit": {
+      "mode": "none",
+      "sequence": 106,
+      "leader": 0,
+      "service_delay_s": 0.0,
+      "finality_delay_s": 0.0,
+      "messages_total": 0,
+      "bytes_total": 0,
+      "phases": [],
+      "notes": "no validator-side finality protocol"
+    }
+  },
+  "protocol_service_latency_ms": {
+    "count": 107,
+    "mean": 0.0,
+    "p50": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0
+  },
+  "protocol_finality_latency_ms": {
+    "count": 107,
+    "mean": 0.0,
+    "p50": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0
+  },
+  "protocol_messages": 0,
+  "protocol_bytes": 0,
+  "canonical_registry": null
+}

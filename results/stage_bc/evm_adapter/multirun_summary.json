@@ -1,0 +1,49 @@
+{
+  "all_checks_passed": true,
+  "artifact_and_source_hashes_verified": 240,
+  "bundle_bytes": 33994,
+  "checks_per_replicate": 20,
+  "checks_total": 200,
+  "exact_decision_state_and_gas_reproduced": true,
+  "gas_used": {
+    "cooperative_sequence_1": 680922,
+    "cooperative_sequence_2": 630330,
+    "finalize_force_close": 57714,
+    "request_force_close": 722535
+  },
+  "interpretation": "10 deterministic local-EVM repetitions reproduce the same functional decisions and gas. They are reproducibility repeats, not independent public-chain samples; native ML-DSA, TEE attestation, and economic finality remain unexecuted.",
+  "replicate_count": 10,
+  "run_ids": [
+    "replicate_01",
+    "replicate_02",
+    "replicate_03",
+    "replicate_04",
+    "replicate_05",
+    "replicate_06",
+    "replicate_07",
+    "replicate_08",
+    "replicate_09",
+    "replicate_10"
+  ],
+  "schema_version": 1,
+  "scope": {
+    "executed": [
+      "deployment of verifier adapter and settlement contract on two persisted local EVM chains",
+      "exact 33,994-byte committee bundles from the prior OpenSSL ML-DSA fallback campaign supplied as calldata",
+      "bundle hashing and tuple binding inside the verifier adapter",
+      "two monotone cooperative states",
+      "relayer authorisation, replay, stale-state, bundle-tamper, and tuple-tamper rejection",
+      "deadline-gated highest-valid-state force close",
+      "gas and calldata measurement for each transaction",
+      "chain database restart and state re-read"
+    ],
+    "not_executed": [
+      "native or precompiled EVM ML-DSA verification",
+      "threshold or aggregate ML-DSA",
+      "TEE isolation or attestation verification",
+      "public-network consensus, block inclusion latency, reorganisation, or economic finality",
+      "production gas price or fiat cost"
+    ]
+  },
+  "transaction_calldata_bytes": 34244
+}

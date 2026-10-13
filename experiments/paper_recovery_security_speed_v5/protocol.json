@@ -1,0 +1,51 @@
+{
+  "schema": "qrelay-security-speed-formal-protocol-5",
+  "status": "prospectively_frozen_before_speed_benchmark",
+  "objective": "Finish the unchanged security-v4 9M-transition optimization in at most 6.5 hours by vectorizing rollout collection only.",
+  "scientific_contract": {
+    "environment": "unchanged drl/paper_recovery_hardcore_v5/env.py",
+    "reward": "unchanged security-v4 reward",
+    "policy": "unchanged SecurityConstrainedPPO",
+    "critics": "unchanged reward/failure/depletion/public-security critics",
+    "optimizer": "unchanged security-v4 optimizer and hyperparameters",
+    "decoder": "unchanged exact prefix-conditioned Plackett-Luce",
+    "hidden_inputs": false
+  },
+  "runtime_change": {
+    "physical_workers": 11,
+    "logical_environments": 33,
+    "logical_environments_per_process": 3,
+    "transitions_per_update": 3000,
+    "rationale": "Increase policy batch size and amortize Python, CUDA-launch, and pipe overhead without altering a transition kernel."
+  },
+  "qualification_gate": {
+    "benchmark_updates": 20,
+    "benchmark_transitions": 60000,
+    "minimum_steady_steps_per_second": 400.0,
+    "maximum_projected_formal_hours": 6.5,
+    "must_cross_original_step_1000_kill": true,
+    "launch_formal_only_if_all_checks_pass": true
+  },
+  "formal": {
+    "updates": 3000,
+    "transitions": 9000000,
+    "cold_start": true,
+    "resume": false,
+    "early_stop": false,
+    "fixed_final_checkpoint_only": true,
+    "monitor_interval_minutes": 15
+  },
+  "seeds": {
+    "benchmark": 657011,
+    "formal_training": 657111,
+    "replacement_if_infrastructure_failure": 657112
+  },
+  "frozen_contract": {
+    "config_hash": "e7607146758b3f25e381427b75c1c564b4164833e7a6ca9e6ce636e44eef0f21"
+  },
+  "provenance": {
+    "spent_predecessor_seed": 657101,
+    "spent_reason": "309 step/s below the user deadline threshold",
+    "predecessor_resume_forbidden": true
+  }
+}
